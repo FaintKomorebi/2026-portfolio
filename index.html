@@ -76,8 +76,24 @@
     text-decoration: none;
     letter-spacing: 0.04em;
     transition: color 0.18s;
+    position: relative;
   }
   .nav-links a:hover { color: var(--ink); }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a.active { color: var(--ink); }
+  .nav-links a.active::after { transform: scaleX(1); }
 
   /* ─── HERO ────────────────────────────── */
   .hero {
@@ -196,8 +212,8 @@
   /* Each case study */
   .case {
     display: grid;
-    grid-template-columns: 48px 1fr auto;
-    gap: var(--s4);
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
     align-items: center;
     cursor: pointer;
     position: relative;
@@ -232,6 +248,7 @@
   .work-list:has(.case:hover) .case:hover::before { opacity: 0.18; }
 
   .case-num {
+    grid-column: 1 / 2;
     font-family: var(--mono);
     font-size: 10px;
     color: var(--mid);
@@ -241,9 +258,10 @@
   }
 
   .case-body {
+    grid-column: 2 / 12;
     min-width: 0;
-    width: 100%;
   }
+
 
   .case-type {
     font-family: var(--mono);
@@ -318,13 +336,15 @@
   }
 
   .case-cta {
+    grid-column: 12 / 13;
+    align-self: center;
+    justify-self: end;
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--mid);
     white-space: nowrap;
-    flex-shrink: 0;
     border-bottom: 1px solid var(--faint);
     padding-bottom: 1px;
     transition: color 0.2s, border-color 0.2s;
@@ -466,6 +486,22 @@
     align-items: end;
   }
 
+  .contact-label {
+    grid-column: 1 / 2;
+    align-self: end;
+    padding-bottom: 6px;
+  }
+
+  .contact-label span {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
   .contact-hed {
     grid-column: 2 / 8;
     font-family: var(--serif);
@@ -593,19 +629,23 @@
     .hero-headline { grid-column: 1; }
     .hero-right { grid-column: 1; flex-direction: row; flex-wrap: wrap; gap: var(--s3); }
 
-    .case { grid-template-columns: 40px 1fr; }
+    .case { grid-template-columns: 1fr; }
+    .case-num { display: none; }
+    .case-body { grid-column: 1; }
     .case-cta { display: none; }
 
     .thinking { grid-template-columns: 1fr; }
-    .thinking-label { display: none; }
+    .thinking-label { grid-column: 1; }
+    .thinking-label span { writing-mode: horizontal-tb; transform: none; }
     .thinking-content { grid-column: 1; }
     .thinking-aside { grid-column: 1; flex-direction: row; flex-wrap: wrap; }
 
     .capabilities { grid-template-columns: 1fr; }
-    .cap-label { display: none; }
+    .cap-label span { writing-mode: horizontal-tb; transform: none; }
     .cap-grid { grid-column: 1; grid-template-columns: 1fr 1fr; }
 
     .contact { grid-template-columns: 1fr; gap: var(--s5); }
+    .contact-label span { writing-mode: horizontal-tb; transform: none; }
     .contact-hed { grid-column: 1; }
     .contact-links { grid-column: 1; }
   }
@@ -783,6 +823,7 @@
 
 <!-- ─── CONTACT ───────────────────────────── -->
 <section class="contact" id="contact">
+  <div class="contact-label"><span>Contact</span></div>
   <h2 class="contact-hed reveal">
     Open to<br>the right<br><em>opportunity.</em>
   </h2>
@@ -846,6 +887,33 @@
 
   updateCSTTime();
   setInterval(updateCSTTime, 60000);
+
+  // Active nav on scroll
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+
+  function updateNav() {
+    const scrollY = window.scrollY;
+    const atBottom = scrollY + window.innerHeight >= document.body.scrollHeight - 40;
+    let current = '';
+
+    if (atBottom) {
+      current = sections[sections.length - 1].id;
+    } else {
+      sections.forEach(section => {
+        if (scrollY >= section.offsetTop - 120) current = section.id;
+      });
+    }
+
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('touchmove', updateNav, { passive: true });
+  window.addEventListener('touchend', updateNav, { passive: true });
+  updateNav();
 
   // Scroll reveals
   const reveals = document.querySelectorAll('.reveal');
