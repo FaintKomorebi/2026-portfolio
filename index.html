@@ -267,15 +267,11 @@
 
 
   .case-type {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s2);
     display: flex;
     align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--s2);
   }
 
   /* "Passion project" badge — honest, not hidden */
@@ -324,19 +320,6 @@
     margin-bottom: var(--s3);
   }
 
-  .case-tags {
-    display: flex;
-    gap: var(--s3);
-    flex-wrap: wrap;
-  }
-
-  .case-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
 
   .case-cta {
     grid-column: 9 / 13;
@@ -717,17 +700,16 @@
     <a class="case reveal" href="cs-acro.html">
       <span class="case-num">01</span>
       <div class="case-body">
-        <div class="case-type">Shipped · Industrial · 2025</div>
+        <div class="case-type">
+          <span class="badge">Lead Designer</span>
+          <span class="badge">Figma</span>
+          <span class="badge">Framer</span>
+        </div>
         <h2 class="case-title">Redesigning a legacy brand for modern buyers</h2>
         <p class="case-desc">
           ACRO's website had grown to 29 deeply nested pages of outdated content that buried a 90-year manufacturing reputation. Buyers couldn't find what they needed — condensing to 17 pages increased dwell time by 28% and drove a 1.4x lift in CRM inquiries.
         </p>
         <p class="case-result">Result: +28% dwell time · 1.4× CRM inquiries</p>
-        <div class="case-tags">
-          <span class="case-tag">Lead Designer</span>
-          <span class="case-tag">Figma</span>
-          <span class="case-tag">Framer</span>
-        </div>
       </div>
       <span class="case-cta">View case study →</span>
     </a>
@@ -736,17 +718,16 @@
     <a class="case reveal d1" href="cs-lincoln.html">
       <span class="case-num">02</span>
       <div class="case-body">
-        <div class="case-type">Shipped · [Industry] · [Year]</div>
+        <div class="case-type">
+          <span class="badge">Your Role</span>
+          <span class="badge">Key Skill</span>
+          <span class="badge">Another Skill</span>
+        </div>
         <h2 class="case-title">Lincoln</h2>
         <p class="case-desc">
           Different problem, different context. Shows range. Again — lead with the problem, not the deliverable. What did users struggle with?
         </p>
         <p class="case-result">Result: —</p>
-        <div class="case-tags">
-          <span class="case-tag">Your Role</span>
-          <span class="case-tag">Key Skill</span>
-          <span class="case-tag">Another Skill</span>
-        </div>
       </div>
       <span class="case-cta">View case study →</span>
     </a>
@@ -756,18 +737,15 @@
       <span class="case-num">03</span>
       <div class="case-body">
         <div class="case-type">
-          <span>Passion Project · [Domain] · [Year]</span>
           <span class="badge">Homelab</span>
+          <span class="badge">Concept</span>
+          <span class="badge">What You Explored</span>
         </div>
         <h2 class="case-title">Your Spec or Side Project</h2>
         <p class="case-desc">
           Be upfront that this is self-initiated — it reads as ambition and range, not deception. Describe what gap or frustration prompted it and what you explored.
         </p>
         <p class="case-result">Result: Self-initiated exploration</p>
-        <div class="case-tags">
-          <span class="case-tag">Concept</span>
-          <span class="case-tag">What You Explored</span>
-        </div>
       </div>
       <span class="case-cta">View case study →</span>
     </a>
