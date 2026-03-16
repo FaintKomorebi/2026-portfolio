@@ -9,7 +9,7 @@
   :root {
     --bg: #f0ece6;
     --ink: #131313;
-    --mid: #9c9890;
+    --mid: #6e6b65;
     --faint: #e2ddd7;
     --sans: 'IBM Plex Sans', Helvetica Neue, sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
@@ -193,30 +193,67 @@
     gap: var(--s7);
   }
 
+  @keyframes rainbow-drift {
+    0%   { filter: hue-rotate(0deg)   blur(28px); }
+    100% { filter: hue-rotate(360deg) blur(28px); }
+  }
+
   /* Each case study */
   .case {
     display: grid;
-    grid-template-columns: 48px 1fr 260px;
+    grid-template-columns: 48px 1fr auto;
     gap: var(--s4);
-    align-items: start;
+    align-items: center;
     cursor: pointer;
     position: relative;
+    isolation: isolate;
+    border-left: 2px solid var(--faint);
+    padding-left: 20px;
+    transition: opacity 0.25s ease, border-left-color 0.25s ease;
+    text-decoration: none;
+    color: inherit;
   }
 
-  /* Hover: entire list dims, hovered item stays full */
-  .case { transition: opacity 0.25s ease; text-decoration: none; color: inherit; }
+  .case::before {
+    content: '';
+    position: absolute;
+    inset: -16px;
+    background: conic-gradient(from 0deg,
+      rgba(255, 110, 110, 0.6),
+      rgba(255, 195, 80,  0.6),
+      rgba(90,  210, 150, 0.6),
+      rgba(80,  155, 255, 0.6),
+      rgba(185, 115, 255, 0.6),
+      rgba(255, 110, 110, 0.6)
+    );
+    filter: blur(28px);
+    opacity: 0;
+    z-index: -1;
+    border-radius: 8px;
+    transition: opacity 0.6s ease;
+  }
+
+  /* Hover: entire list dims, hovered item stays full + left rail + glow activates */
   .work-list:has(.case:hover) .case { opacity: 0.3; }
-  .work-list:has(.case:hover) .case:hover { opacity: 1; }
+  .work-list:has(.case:hover) .case:hover { opacity: 1; border-left-color: var(--ink); }
+  .work-list:has(.case:hover) .case:hover::before {
+    opacity: 0.18;
+    animation: rainbow-drift 8s linear infinite;
+  }
 
   .case-num {
     font-family: var(--mono);
     font-size: 10px;
     color: var(--mid);
     letter-spacing: 0.1em;
+    align-self: start;
     padding-top: 6px;
   }
 
-  .case-body {}
+  .case-body {
+    min-width: 0;
+    width: 100%;
+  }
 
   .case-type {
     font-family: var(--mono);
@@ -263,8 +300,17 @@
     color: var(--mid);
     line-height: 1.65;
     max-width: 520px;
-    margin-bottom: var(--s3);
+    margin-bottom: var(--s2);
     letter-spacing: -0.003em;
+  }
+
+  .case-result {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: var(--s3);
   }
 
   .case-tags {
@@ -281,51 +327,20 @@
     color: var(--mid);
   }
 
-  /* Right column: outcome — the only number on the page */
-  .case-outcome {
-    padding-top: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  .case-outcome-num {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 52px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-  }
-
-  .case-outcome-label {
+  .case-cta {
     font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
+    font-size: 11px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--mid);
-    line-height: 1.4;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .case-arrow {
-    display: block;
-    margin-top: auto;
-    padding-top: var(--s4);
-    font-size: 18px;
-    color: var(--mid);
-    transition: transform 0.2s, color 0.2s;
-    text-align: right;
-  }
-
-  .case:hover .case-arrow { transform: translateX(5px); color: var(--ink); }
-
-  /* Spec/passion project — visually identical structure, just labeled */
-  .case.spec .case-outcome-num {
-    color: var(--mid);
-    font-size: clamp(26px, 3vw, 38px);
-  }
+  .case:hover .case-cta { color: var(--ink); border-bottom-color: var(--ink); }
 
   /* ─── THINKING (philosophy section, replaces awards) ── */
   .thinking {
@@ -589,7 +604,7 @@
     .hero-right { grid-column: 1; flex-direction: row; flex-wrap: wrap; gap: var(--s3); }
 
     .case { grid-template-columns: 40px 1fr; }
-    .case-outcome { display: none; }
+    .case-cta { display: none; }
 
     .thinking { grid-template-columns: 1fr; }
     .thinking-label { display: none; }
@@ -657,48 +672,38 @@
     <a class="case reveal" href="cs-acro.html">
       <span class="case-num">01</span>
       <div class="case-body">
-        <div class="case-type">
-          Shipped · Industrial · 2025
-        </div>
+        <div class="case-type">Shipped · Industrial · 2025</div>
         <h2 class="case-title">Redesigning a legacy brand for modern buyers</h2>
         <p class="case-desc">
           ACRO's website had grown to 29 deeply nested pages of outdated content that buried a 90-year manufacturing reputation. Buyers couldn't find what they needed — condensing to 17 pages increased dwell time by 28% and drove a 1.4x lift in CRM inquiries.
         </p>
+        <p class="case-result">Result: +28% dwell time · 1.4× CRM inquiries</p>
         <div class="case-tags">
           <span class="case-tag">Lead Designer</span>
           <span class="case-tag">Figma</span>
           <span class="case-tag">Framer</span>
         </div>
       </div>
-      <div class="case-outcome">
-        <span class="case-outcome-num">+28%</span>
-        <span class="case-outcome-label">Dwell time<br>1.4x CRM inquiries</span>
-        <span class="case-arrow">→</span>
-      </div>
+      <span class="case-cta">View case study →</span>
     </a>
 
     <!-- Case study 2: Shipped, different angle -->
     <a class="case reveal d1" href="cs-lincoln.html">
       <span class="case-num">02</span>
       <div class="case-body">
-        <div class="case-type">
-          Shipped · [Industry] · [Year]
-        </div>
+        <div class="case-type">Shipped · [Industry] · [Year]</div>
         <h2 class="case-title">Lincoln</h2>
         <p class="case-desc">
           Different problem, different context. Shows range. Again — lead with the problem, not the deliverable. What did users struggle with?
         </p>
+        <p class="case-result">Result: —</p>
         <div class="case-tags">
           <span class="case-tag">Your Role</span>
           <span class="case-tag">Key Skill</span>
           <span class="case-tag">Another Skill</span>
         </div>
       </div>
-      <div class="case-outcome">
-        <span class="case-outcome-num">XXk</span>
-        <span class="case-outcome-label">Users impacted<br>or another metric</span>
-        <span class="case-arrow">→</span>
-      </div>
+      <span class="case-cta">View case study →</span>
     </a>
 
     <!-- Passion project — labeled honestly, no pretense -->
@@ -713,16 +718,13 @@
         <p class="case-desc">
           Be upfront that this is self-initiated — it reads as ambition and range, not deception. Describe what gap or frustration prompted it and what you explored.
         </p>
+        <p class="case-result">Result: Self-initiated exploration</p>
         <div class="case-tags">
           <span class="case-tag">Concept</span>
           <span class="case-tag">What You Explored</span>
         </div>
       </div>
-      <div class="case-outcome">
-        <span class="case-outcome-num">Concept</span>
-        <span class="case-outcome-label">Self-initiated<br>exploration</span>
-        <span class="case-arrow">→</span>
-      </div>
+      <span class="case-cta">View case study →</span>
     </a>
 
   </div>
