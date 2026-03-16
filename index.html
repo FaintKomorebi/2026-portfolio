@@ -872,19 +872,22 @@
     let months = now.getMonth()    - start.getMonth();
     let days   = now.getDate()     - start.getDate();
 
-    if (days   < 0) {
+    if (days < 0) {
       const prevMonthDays = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
       days += prevMonthDays;
       months--;
     }
     if (months < 0) { months += 12; years--; }
 
+    const yearsDecimal = (years + months / 12).toFixed(1);
+    const minutes = now.getMinutes();
+
     document.getElementById('exp-counter').textContent =
-      `${years} years, ${months} months, ${days} days`;
+      `${yearsDecimal} years, ${days} days, ${minutes} minutes`;
   }
 
   updateExpCounter();
-  setInterval(updateExpCounter, 86400000);
+  setInterval(updateExpCounter, 60000);
 
   // CST local time
   function updateCSTTime() {
