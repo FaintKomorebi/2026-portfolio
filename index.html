@@ -646,17 +646,21 @@
       letter-spacing: 0.12em;
     }
 
+    .work-label { margin-bottom: var(--s4); }
+
     .thinking { grid-template-columns: 1fr; }
-    .thinking-label { grid-column: 1; }
+    .thinking-label { grid-column: 1; margin-bottom: var(--s4); }
     .thinking-label span { writing-mode: horizontal-tb; transform: none; }
     .thinking-content { grid-column: 1; }
     .thinking-aside { grid-column: 1; flex-direction: row; flex-wrap: wrap; }
 
     .capabilities { grid-template-columns: 1fr; }
+    .cap-label { margin-bottom: var(--s4); }
     .cap-label span { writing-mode: horizontal-tb; transform: none; }
     .cap-grid { grid-column: 1; grid-template-columns: 1fr 1fr; }
 
     .contact { grid-template-columns: 1fr; gap: var(--s5); }
+    .contact-label { margin-bottom: 0; }
     .contact-label span { writing-mode: horizontal-tb; transform: none; }
     .contact-hed { grid-column: 1; }
     .contact-links { grid-column: 1; }
