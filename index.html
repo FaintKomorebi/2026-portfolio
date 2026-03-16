@@ -193,11 +193,6 @@
     gap: var(--s7);
   }
 
-  @keyframes rainbow-drift {
-    0%   { filter: hue-rotate(0deg)   blur(28px); }
-    100% { filter: hue-rotate(360deg) blur(28px); }
-  }
-
   /* Each case study */
   .case {
     display: grid;
@@ -207,9 +202,7 @@
     cursor: pointer;
     position: relative;
     isolation: isolate;
-    border-left: 2px solid var(--faint);
-    padding-left: 20px;
-    transition: opacity 0.25s ease, border-left-color 0.25s ease;
+    transition: opacity 0.25s ease;
     text-decoration: none;
     color: inherit;
   }
@@ -233,13 +226,10 @@
     transition: opacity 0.6s ease;
   }
 
-  /* Hover: entire list dims, hovered item stays full + left rail + glow activates */
+  /* Hover: entire list dims, hovered item stays full + glow activates */
   .work-list:has(.case:hover) .case { opacity: 0.3; }
-  .work-list:has(.case:hover) .case:hover { opacity: 1; border-left-color: var(--ink); }
-  .work-list:has(.case:hover) .case:hover::before {
-    opacity: 0.18;
-    animation: rainbow-drift 8s linear infinite;
-  }
+  .work-list:has(.case:hover) .case:hover { opacity: 1; }
+  .work-list:has(.case:hover) .case:hover::before { opacity: 0.18; }
 
   .case-num {
     font-family: var(--mono);
@@ -247,7 +237,7 @@
     color: var(--mid);
     letter-spacing: 0.1em;
     align-self: start;
-    padding-top: 6px;
+    padding-top: 4px;
   }
 
   .case-body {
