@@ -362,6 +362,7 @@
 
   .thinking-label {
     grid-column: 1 / 2;
+    align-self: start;
   }
 
   .thinking-label span {
@@ -632,7 +633,11 @@
     .case { grid-template-columns: 1fr; }
     .case-num { display: none; }
     .case-body { grid-column: 1; }
-    .case-cta { display: none; }
+    .case-cta {
+      grid-column: 1;
+      justify-self: start;
+      margin-top: var(--s2);
+    }
 
     .thinking { grid-template-columns: 1fr; }
     .thinking-label { grid-column: 1; }
