@@ -104,7 +104,7 @@
     gap: var(--s3);
     align-content: end;
     padding-bottom: var(--s7);
-    padding-top: 100px;
+    padding-top: 72px;
   }
 
   .hero-index {
@@ -242,10 +242,13 @@
     transition: opacity 0.6s ease;
   }
 
-  /* Hover: entire list dims, hovered item stays full + glow activates */
-  .work-list:has(.case:hover) .case { opacity: 0.3; }
-  .work-list:has(.case:hover) .case:hover { opacity: 1; }
-  .work-list:has(.case:hover) .case:hover::before { opacity: 0.18; }
+  /* Hover: entire list dims, hovered item stays full + glow activates — desktop only */
+  @media (hover: hover) {
+    .work-list:has(.case:hover) .case { opacity: 0.3; }
+    .work-list:has(.case:hover) .case:hover { opacity: 1; }
+    .work-list:has(.case:hover) .case:hover::before { opacity: 0.18; }
+    .case:hover .case-cta { color: var(--ink); border-color: var(--ink); }
+  }
 
   .case-num {
     grid-column: 1 / 2;
@@ -351,7 +354,6 @@
     transition: color 0.2s, border-color 0.2s;
   }
 
-  .case:hover .case-cta { color: var(--ink); border-color: var(--ink); }
 
   /* ─── THINKING (philosophy section, replaces awards) ── */
   .thinking {
