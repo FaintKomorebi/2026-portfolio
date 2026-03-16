@@ -124,7 +124,7 @@
   }
 
   .hero-headline {
-    grid-column: 2 / 10;
+    grid-column: 2 / 9;
     align-self: end;
   }
 
@@ -345,12 +345,13 @@
     text-transform: uppercase;
     color: var(--mid);
     white-space: nowrap;
-    border-bottom: 1px solid var(--faint);
-    padding-bottom: 1px;
+    border: 1px solid var(--faint);
+    padding: 4px 10px;
+    border-radius: 2px;
     transition: color 0.2s, border-color 0.2s;
   }
 
-  .case:hover .case-cta { color: var(--ink); border-bottom-color: var(--ink); }
+  .case:hover .case-cta { color: var(--ink); border-color: var(--ink); }
 
   /* ─── THINKING (philosophy section, replaces awards) ── */
   .thinking {
@@ -638,11 +639,11 @@
       justify-self: start;
       margin-top: var(--s2);
       color: var(--ink);
-      border-bottom-color: var(--ink);
+      border-color: var(--ink);
     }
     .case:hover .case-cta {
       color: var(--ink);
-      border-bottom-color: var(--ink);
+      border-color: var(--ink);
       letter-spacing: 0.12em;
     }
 
