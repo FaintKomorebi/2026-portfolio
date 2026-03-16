@@ -637,6 +637,13 @@
       grid-column: 1;
       justify-self: start;
       margin-top: var(--s2);
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+    .case:hover .case-cta {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+      letter-spacing: 0.12em;
     }
 
     .thinking { grid-template-columns: 1fr; }
@@ -906,7 +913,7 @@
       current = sections[sections.length - 1].id;
     } else {
       sections.forEach(section => {
-        if (scrollY >= section.offsetTop - 120) current = section.id;
+        if (section.getBoundingClientRect().top <= 160) current = section.id;
       });
     }
 
