@@ -154,7 +154,7 @@
   /* Full-bleed mockup placeholder — swap for real screenshot */
   .hero-image {
     width: 100%;
-    background: #1e1c19;
+    background: var(--bg);
     aspect-ratio: 16 / 8;
     display: flex;
     align-items: center;
@@ -309,12 +309,12 @@
     line-height: 1.5;
   }
 
-  /* ─── BEFORE / AFTER ─────────────────── */
-  .before-after {
+  /* ─── SITEMAP COMPARE ────────────────── */
+  .sitemap-compare {
     padding: 0 var(--pad) var(--s7);
   }
 
-  .ba-label {
+  .sitemap-label {
     font-family: var(--mono);
     font-size: 9px;
     letter-spacing: 0.2em;
@@ -324,19 +324,20 @@
     display: block;
   }
 
-  .ba-grid {
+  .sitemap-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: var(--s5);
+    align-items: start;
+  }
+
+  .sitemap-panel {
+    display: flex;
+    flex-direction: column;
     gap: var(--s3);
   }
 
-  .ba-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s2);
-  }
-
-  .ba-tag {
+  .sitemap-tag {
     font-family: var(--mono);
     font-size: 9px;
     letter-spacing: 0.18em;
@@ -345,9 +346,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: var(--s1);
   }
 
-  .ba-tag-dot {
+  .sitemap-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -355,121 +357,122 @@
     flex-shrink: 0;
   }
 
-  .ba-tag-dot.after { background: var(--ink); }
+  .sitemap-dot-after { background: var(--ink); }
 
-  .ba-screen {
-    aspect-ratio: 4 / 3;
-    background: #1e1c19;
+  /* Tree */
+  .tree {
+    border: 1px solid var(--faint);
     border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: var(--s3);
+  }
+
+  .tree-root {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding-bottom: var(--s2);
+    margin-bottom: var(--s2);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .tree ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Second level */
+  .tree > ul > li { padding: 2px 0; }
+
+  .tree ul ul {
+    padding-left: 14px;
+    margin: 2px 0 2px 8px;
     position: relative;
   }
 
-  /* Before: intentionally messier mock */
-  .ba-screen.before-screen {
-    background: #16181c;
+  .tree ul ul::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 8px;
+    border-left: 1px solid var(--faint);
   }
 
-  .before-mock {
-    width: 80%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 20px;
+  .tree ul ul > li {
+    position: relative;
+    padding: 2px 0 2px 14px;
   }
 
-  .bm-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
+  .tree ul ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 10px;
+    border-top: 1px solid var(--faint);
   }
 
-  .bm-block {
-    height: 10px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.06);
+  /* Third level */
+  .tree ul ul ul {
+    padding-left: 12px;
+    margin: 2px 0 2px 6px;
   }
 
-  /* Crowded, misaligned feel */
-  .bm-block.w40 { width: 40%; }
-  .bm-block.w25 { width: 25%; }
-  .bm-block.w55 { width: 55%; }
-  .bm-block.w70 { width: 70%; }
-  .bm-block.w15 { width: 15%; }
-  .bm-block.h20 { height: 20px; }
-  .bm-block.h32 { height: 32px; }
+  .tree ul ul ul > li { padding: 1px 0 1px 12px; }
 
-  .bm-cluster {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 3px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  .tree ul ul ul > li::before { top: 9px; width: 8px; }
+
+  .tree span {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
   }
 
-  /* After: clean, spacious */
-  .ba-screen.after-screen {
-    background: #1a1c20;
+  /* Intermediate landing pages — the problem */
+  .tree-landing { color: var(--mid) !important; }
+
+  /* Dropdown items — not landing pages, a feature */
+  .tree-dropdown {
+    color: var(--mid) !important;
+    font-style: italic;
   }
 
-  .after-mock {
-    width: 78%;
-    height: 72%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 24px;
+  /* Depth badge */
+  .tree-depth {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    margin-top: var(--s2);
+    padding-top: var(--s2);
+    border-top: 1px solid var(--faint);
+    display: block;
   }
 
-  .am-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .tree-depth mark {
+    background: #fef08a;
+    color: var(--ink);
+    padding: 1px 4px;
+    border-radius: 1px;
+    font-style: normal;
   }
 
-  .am-block {
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .am-block.w35 { width: 35%; }
-  .am-block.w20 { width: 20%; height: 24px; border-radius: 3px; background: rgba(255,255,255,0.12); }
-  .am-block.w100 { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
-  .am-block.w60 { width: 60%; }
-  .am-block.w45 { width: 45%; }
-  .am-block.accent { background: rgba(180,160,120,0.4); width: 30%; }
-
-  .am-card-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    flex: 1;
-  }
-
-  .am-card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .ba-annotation {
+  .sitemap-annotation {
     font-family: var(--sans);
     font-size: 13px;
     font-weight: 300;
     color: var(--mid);
     line-height: 1.6;
-    padding-top: var(--s2);
+  }
+
+  @media (max-width: 960px) {
+    .sitemap-grid { grid-template-columns: 1fr; }
   }
 
   /* ─── DECISION SECTION ───────────────── */
@@ -599,11 +602,12 @@
     gap: var(--s4);
     margin-bottom: var(--s5);
     align-items: start;
+    max-width: 80%;
   }
 
   .fs-screen {
-    background: #1a1c20;
-    aspect-ratio: 16 / 10;
+    background: var(--bg);
+    aspect-ratio: 16 / 9;
     border-radius: 4px;
     overflow: hidden;
     display: flex;
@@ -893,6 +897,119 @@
     letter-spacing: 0.1em;
   }
 
+  /* ─── VIEW TOGGLE ───────────────────── */
+  .vt-group {
+    display: flex;
+    background: var(--faint);
+    border-radius: 3px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .vt-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 11px;
+    border-radius: 2px;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .vt-time {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    opacity: 0.5;
+  }
+
+  .vt-btn.active {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .vt-btn.active .vt-time { opacity: 0.4; }
+  .vt-btn:not(.active):hover { color: var(--ink); }
+
+  /* Fade content on view switch */
+  .full-only, .tldr-only {
+    transition: opacity 0.3s ease;
+  }
+
+  body[data-view="tldr"] .full-only { display: none; }
+  body[data-view="full"] .tldr-only { display: none; }
+
+  /* TLDR summary block */
+  .tldr-block {
+    padding: var(--s6) var(--pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .tldr-content {
+    grid-column: 2 / 9;
+  }
+
+  .tldr-text {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .tldr-stats {
+    grid-column: 10 / 13;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+    padding-top: 6px;
+  }
+
+  .tldr-stat-num {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    display: block;
+  }
+
+  .tldr-stat-desc {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* Show / hide */
+  body[data-view="tldr"] .full-only { display: none; }
+  body[data-view="full"] .tldr-only { display: none; }
+
+  /* In full view, skip re-animating previously hidden reveals */
+  body[data-view="full"] .full-only .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* In TLDR, featured screen goes full width without annotation column */
+  body[data-view="tldr"] .fs-featured {
+    grid-template-columns: 1fr;
+  }
+
   /* ─── REVEALS ────────────────────────── */
   .reveal {
     opacity: 0;
@@ -935,7 +1052,7 @@
   }
 </style>
 </head>
-<body>
+<body data-view="full">
 
 <!-- NAV -->
 <nav>
@@ -943,6 +1060,10 @@
     <span class="nav-back-arrow">←</span>
     <span>All Work</span>
   </a>
+  <div class="vt-group">
+    <button class="vt-btn" data-view="tldr">TLDR <span class="vt-time">30s</span></button>
+    <button class="vt-btn active" data-view="full">Full <span class="vt-time">3m</span></button>
+  </div>
   <a href="index.html" class="nav-name">Noah Schilling</a>
 </nav>
 
@@ -950,7 +1071,7 @@
 <section class="hero">
   <div class="hero-left">
     <span class="hero-tag">Shipped · Industrial · 2025</span>
-    <h1 class="hero-title">Redesigning a legacy brand<br><em>for modern buyers</em></h1>
+    <h1 class="hero-title">Redesigning a legacy brand<br><em>for modern customers</em></h1>
     <p class="hero-summary">ACRO's 29-page website buried a 90-year manufacturing reputation under outdated content and broken navigation — costing them inquiries before a single conversation started.</p>
   </div>
   <div class="hero-right">
@@ -973,31 +1094,40 @@
   </div>
 </section>
 
+
 <!-- HERO IMAGE -->
 <div class="hero-image reveal">
-  <!-- Replace this entire div with your actual screenshot -->
-  <div class="hero-image-inner">
-    <div class="mock-bar w30"></div>
-    <div class="mock-bar w80"></div>
-    <div class="mock-bar w60"></div>
-    <div class="mock-bar w45"></div>
-    <div class="mock-grid">
-      <div class="mock-card"></div>
-      <div class="mock-card"></div>
-      <div class="mock-card"></div>
+  <video autoplay loop muted playsinline style="width:72%;height:auto;object-fit:contain;display:block;box-shadow:0 24px 80px rgba(0,0,0,0.18),0 6px 24px rgba(0,0,0,0.1);">
+    <source src="resources/acro-robot-index.webm" type="video/webm">
+  </video>
+</div>
+<p class="image-caption reveal">Fig. 1 — ACRO Automation Systems · Homepage redesign</p>
+
+<!-- TLDR BLOCK -->
+<div class="tldr-block tldr-only">
+  <div class="tldr-content">
+    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Buyers were already finding the solutions section — it was the most-visited content on the site — despite it sitting three clicks deep. I restructured the information architecture around where intent actually peaked: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content didn't disappear — the friction did.</p>
+  </div>
+  <div class="tldr-stats">
+    <div>
+      <span class="tldr-stat-num">+28%</span>
+      <span class="tldr-stat-desc">Avg. session duration</span>
+    </div>
+    <div>
+      <span class="tldr-stat-num">1.4×</span>
+      <span class="tldr-stat-desc">CRM inquiry volume</span>
     </div>
   </div>
 </div>
-<p class="image-caption reveal">Fig. 1 — Final state of [screen name]. Replace with your real screenshot.</p>
 
 <!-- OVERVIEW -->
-<section class="section">
+<section class="section full-only">
   <div class="section-index"><span>Overview</span></div>
   <div class="section-content reveal">
     <span class="section-label">01 — Context</span>
     <h2 class="section-hed">90 years of expertise, buried in the wrong structure.</h2>
-    <p class="section-body">ACRO Automation Systems is a family-owned automation company specializing in custom assembly line machinery for industries ranging from automotive and medical devices to heavy equipment. Despite a strong reputation built over decades, their website had grown into a sprawling 29-page structure — deeply nested, visually outdated, and misaligned with the company they'd become.</p>
-    <p class="section-body" style="margin-top: var(--s3); color: var(--mid);">The build had to live in WordPress, managed by ACRO's existing SEO team. The new design needed to honor the family-owned identity while meeting the expectations of modern industrial buyers — not a rebrand, a realignment.</p>
+    <p class="section-body">ACRO had built something real over 90 years — a reputation for precision manufacturing that larger competitors couldn't match on provenance alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer.</p>
+    <p class="section-body" style="margin-top: var(--s3); color: var(--mid);">The brief was a UI refresh within new brand guidelines. I pushed back on that framing early. The visual problems were symptoms — the structure was what was actually failing customers. A redesign that cleaned up the aesthetics without fixing the navigation would have looked better and performed the same. The build needed to live in WordPress, managed by ACRO's SEO team post-launch, which shaped every architectural decision I made.</p>
   </div>
   <div class="section-aside reveal d1">
     <div class="aside-block">
@@ -1007,80 +1137,120 @@
       </div>
       <div class="aside-item">
         <span class="aside-label">The real problem</span>
-        <span class="aside-value">The structure itself was the problem. 29 pages of nested, outdated content was actively hiding ACRO's credibility from the buyers they needed to reach.</span>
+        <span class="aside-value">I identified the structure as the core issue early. 29 pages of nested content wasn't a maintenance problem — it was actively destroying conversion by forcing customers to navigate to answers the site already had.</span>
       </div>
       <div class="aside-item">
         <span class="aside-label">Success looked like</span>
-        <span class="aside-value">A leaner site that felt as engineered as ACRO's machines — and measurably moved buyer engagement.</span>
+        <span class="aside-value">A site where a first-time visitor could confirm ACRO serves their industry, understand what ACRO builds, and find a path to contact — without a single wasted click.</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BEFORE / AFTER -->
-<div class="before-after reveal">
-  <span class="ba-label">Before & After</span>
-  <div class="ba-grid">
-    <div class="ba-panel">
-      <div class="ba-tag">
-        <div class="ba-tag-dot"></div>
-        Before
+<!-- SITE ARCHITECTURE -->
+<div class="sitemap-compare reveal full-only">
+  <span class="sitemap-label">Site Architecture</span>
+  <div class="sitemap-grid">
+
+    <div class="sitemap-panel">
+      <div class="sitemap-tag">
+        <div class="sitemap-dot"></div>
+        Before — 29 pages · 3 levels deep
       </div>
-      <div class="ba-screen before-screen">
-        <!-- Replace with your real before screenshot -->
-        <div class="before-mock">
-          <div class="bm-row">
-            <div class="bm-block w40"></div>
-            <div class="bm-block w25"></div>
-          </div>
-          <div class="bm-cluster">
-            <div class="bm-block w70"></div>
-            <div class="bm-block w55"></div>
-            <div class="bm-block w70"></div>
-          </div>
-          <div class="bm-row" style="gap:6px">
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w40 h20"></div>
-          </div>
-          <div class="bm-cluster" style="margin-top:4px">
-            <div class="bm-block w55"></div>
-            <div class="bm-block w40"></div>
-          </div>
-        </div>
+      <div class="tree">
+        <div class="tree-root">Navigation</div>
+        <ul>
+          <li><span>Index</span></li>
+          <li><span class="tree-landing">About Us</span>
+            <ul>
+              <li><span>About Us</span></li>
+              <li><span>Management</span></li>
+              <li><span class="tree-landing">Industries We Serve</span>
+                <ul>
+                  <li><span>Automotive</span></li>
+                  <li><span>Electric Vehicles</span></li>
+                  <li><span>Energy Storage</span></li>
+                  <li><span>Appliances</span></li>
+                  <li><span>Consumer Products</span></li>
+                  <li><span>Other Markets</span></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="tree-landing">Services Overview</span>
+            <ul>
+              <li><span>Customer Service</span></li>
+              <li><span>Design Process</span></li>
+              <li><span>Quality Assurance</span></li>
+              <li><span>Retool</span></li>
+              <li><span>Services We Offer</span></li>
+            </ul>
+          </li>
+          <li><span class="tree-landing">Solutions Overview</span>
+            <ul>
+              <li><span>Automated Assembly</span></li>
+              <li><span>Automated Welding</span></li>
+              <li><span>Dispensing Systems</span></li>
+              <li><span>Robotics</span></li>
+              <li><span>Solutions Overview</span></li>
+              <li><span>System Integration</span></li>
+              <li><span>Tool Polishing</span></li>
+            </ul>
+          </li>
+          <li><span>Spare &amp; Replacement Parts</span></li>
+          <li><span class="tree-landing">Media Center</span>
+            <ul>
+              <li><span>Case Studies</span></li>
+              <li><span>Media Center</span></li>
+              <li><span>Video Gallery</span></li>
+            </ul>
+          </li>
+          <li><span>Contact Us</span></li>
+          <li><span>Careers</span></li>
+        </ul>
+        <span class="tree-depth"><mark>Solutions required 3 clicks from homepage</mark></span>
       </div>
-      <p class="ba-annotation">Describe what was wrong here — not just visually, but functionally. What were users actually struggling to do? What did the data show?</p>
+      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching the solutions section — the most-visited content on the site by a wide margin — required finding the right nav item, landing on a landing page, navigating a dropdown, and then finding the relevant product. Most didn't. They left.</p>
     </div>
-    <div class="ba-panel">
-      <div class="ba-tag">
-        <div class="ba-tag-dot after"></div>
-        After
+
+    <div class="sitemap-panel">
+      <div class="sitemap-tag">
+        <div class="sitemap-dot sitemap-dot-after"></div>
+        After — 17 pages · 2 levels max
       </div>
-      <div class="ba-screen after-screen">
-        <!-- Replace with your real after screenshot -->
-        <div class="after-mock">
-          <div class="am-header">
-            <div class="am-block w35"></div>
-            <div class="am-block w20"></div>
-          </div>
-          <div class="am-block w100"></div>
-          <div class="am-block w60"></div>
-          <div class="am-block accent"></div>
-          <div class="am-card-row">
-            <div class="am-card">
-              <div class="am-block w60" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.1)"></div>
-              <div class="am-block w45" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.07)"></div>
-            </div>
-            <div class="am-card">
-              <div class="am-block w60" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.1)"></div>
-              <div class="am-block w45" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.07)"></div>
-            </div>
-          </div>
-        </div>
+      <div class="tree">
+        <div class="tree-root">Navigation</div>
+        <ul>
+          <li><span>Index <span style="color:var(--mid);font-style:italic;">· Solutions + Services require no click</span></span></li>
+          <li><span>Markets</span></li>
+          <li><span class="tree-dropdown">Solutions ↓</span>
+            <ul>
+              <li><span>Automated Assembly</span></li>
+              <li><span>Automated Welding</span></li>
+              <li><span>Dispensing Systems</span></li>
+              <li><span>Robotics</span></li>
+              <li><span>Solutions Overview</span></li>
+              <li><span>System Integration</span></li>
+              <li><span>Tool Polishing</span></li>
+            </ul>
+          </li>
+          <li><span>Services</span></li>
+          <li><span>Support</span></li>
+          <li><span>About Us</span></li>
+          <li><span class="tree-dropdown">Resources ↓</span>
+            <ul>
+              <li><span>Video Gallery</span></li>
+              <li><span>Case Studies</span></li>
+            </ul>
+          </li>
+          <li><span>Careers</span></li>
+          <li><span>Contact Us</span></li>
+        </ul>
+        <span class="tree-depth"><mark>Solutions visible on the homepage — zero clicks required</mark></span>
       </div>
-      <p class="ba-annotation">What changed and why it matters — in plain language. Focus on the user experience shift, not just the visual difference.</p>
+      <p class="sitemap-annotation">I eliminated every page that existed to route customers rather than serve them. The intermediate landing pages were organizational artifacts — they reflected ACRO's internal structure, not how a buyer thinks. Collapsing them into direct destinations cut the path to solutions from three clicks to one.</p>
     </div>
+
   </div>
 </div>
 
@@ -1090,16 +1260,18 @@
   <div class="decision-content reveal">
     <span class="section-label">02 — The Key Decision</span>
     <blockquote class="decision-pull">
-      "Analytics told us where buyers were going. We stopped making them work to get there."
+      "Analytics showed me where customers were going. I stopped making them work to get there."
     </blockquote>
+    <div class="full-only">
     <p class="decision-body">
-      Google Analytics showed ACRO's solutions section was the most visited part of the existing site — buyers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. Instead, we pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
+      Google Analytics showed ACRO's solutions section was the most visited part of the existing site — customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
     </p>
     <p class="decision-body" style="color: var(--mid);">
-      It was a deliberate structural break from how the old site was organized, and not everyone agreed with it immediately. But the data removed the debate — if we knew where buyers wanted to go, removing the steps between them and that content was the clearest call we could make.
+      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into a meeting and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it. If I knew where intent peaked, designing to meet it there wasn't a creative choice — it was the only defensible one.
     </p>
+    </div>
   </div>
-  <div class="decision-options reveal d1">
+  <div class="decision-options reveal d1 full-only">
     <div class="option">
       <span class="option-status">Considered</span>
       <span class="option-label">Keep solutions on a dedicated interior page</span>
@@ -1123,52 +1295,28 @@
   <span class="fs-label reveal">Final Solution</span>
 
   <div class="fs-featured reveal">
-    <div class="fs-screen">
-      <!-- Replace with primary final screen -->
-      <div class="fs-main-mock">
-        <div class="fmm-nav">
-          <div class="fmm-block w30"></div>
-          <div class="fmm-block accent"></div>
-        </div>
-        <div class="fmm-block w100"></div>
-        <div class="fmm-block w50"></div>
-        <div class="fmm-block w70"></div>
-        <div class="fmm-content">
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
-        </div>
-      </div>
+    <div class="fs-screen" style="overflow:hidden;padding:0;">
+      <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:contain;display:block;">
+        <source src="resources/acro-solutions-index.webm" type="video/webm">
+      </video>
     </div>
-    <div class="fs-annotations">
+    <div class="fs-annotations full-only">
       <div class="annotation">
-        <span class="ann-num">① Decision made here</span>
-        <span class="ann-text">Briefly call out a specific design choice visible in this screen and why it was made. Keep it to one insight per annotation.</span>
+        <span class="ann-num">① Industry-led entry point</span>
+        <span class="ann-text">I organized solutions by industry rather than product category because that's how a buyer frames their problem — not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that question before the customer has to ask it.</span>
       </div>
       <div class="annotation">
-        <span class="ann-num">② What you removed</span>
-        <span class="ann-text">Showing what you took out is often more powerful than what you added. What did you cut and what did that unlock?</span>
+        <span class="ann-num">② What was removed</span>
+        <span class="ann-text">Nothing was deleted — the content all still exists. What I removed was the segregation. Pages that were artificially split across multiple destinations got consolidated into single, scrollable layouts. The goal was to prefer scrolling over hunting: keep customers moving through information rather than forcing them to click their way to it.</span>
       </div>
       <div class="annotation">
-        <span class="ann-num">③ The constraint it solves</span>
-        <span class="ann-text">Connect the visual to the user problem from the top of the page. Close the loop.</span>
+        <span class="ann-num">③ Closing the loop</span>
+        <span class="ann-text">This case study opens with ACRO's credibility being buried. I designed this screen to be the specific moment that changes — the first view where a customer sees industry relevance, product capability, and a contact path simultaneously. No scroll required.</span>
       </div>
     </div>
   </div>
 
-  <div class="fs-secondary reveal d1">
+  <div class="fs-secondary reveal d1 full-only">
     <div class="fs-secondary-item">
       <div class="fs-secondary-screen">
         <div class="ss-mock">
@@ -1210,18 +1358,18 @@
   <div class="impact-index"><span>Impact</span></div>
   <div class="impact-numbers reveal">
     <div class="impact-stat">
-      <span class="impact-num">+XX%</span>
-      <span class="impact-desc">Your primary outcome metric — be specific about what it measures and over what timeframe.</span>
+      <span class="impact-num">+28%</span>
+      <span class="impact-desc">Average session duration — potential customers spending more time where it mattered: solutions pages, not on a scavenger hunt.</span>
     </div>
     <div class="impact-stat">
-      <span class="impact-num">XXk</span>
-      <span class="impact-desc">A second metric if you have one. Scale of users, another conversion point, support tickets reduced — whatever is real.</span>
+      <span class="impact-num">1.4×</span>
+      <span class="impact-desc">CRM inquiry volume in the 90 days post-launch vs. the prior baseline. Sales confirmed inquiry quality improved alongside volume — prospects were referencing specific solutions pages in their first emails.</span>
     </div>
   </div>
-  <div class="impact-reflection reveal d1">
+  <div class="impact-reflection reveal d1 full-only">
     <span class="impact-reflection-hed">What I'd do differently</span>
-    <p class="impact-reflection-body">One honest paragraph about what you learned or what you'd change with hindsight. This is the most underused section in portfolios — it signals maturity and self-awareness more than any credential.</p>
-    <p class="impact-reflection-body">What would you have done earlier? What did you get wrong before you got it right? Interviewers trust designers who can reflect honestly on their own work.</p>
+    <p class="impact-reflection-body">I'd push harder on the content strategy earlier. The structural decisions were sound, but several solution pages launched with copy that was holdover from the old site — accurate, but written for search bots rather than real humans. We solved the architecture problem. The content problem is ongoing, and I should have scoped it explicitly rather than treating it as out of scope.</p>
+    <p class="impact-reflection-body">I'd also pressure-test the IA with actual customers, not just analytics and internal stakeholders. We validated the structure with the sales team and with data, but never put an early prototype in front of a procurement lead before committing to the architecture. We got lucky that our read of the analytics matched actual site visitor behavior. It should have been confirmed, not assumed.</p>
   </div>
 </section>
 
@@ -1235,11 +1383,27 @@
 </div>
 
 <footer>
-  <span class="footer-t">© 2025 Your Name</span>
+  <span class="footer-t">© 2026 Noah Schilling</span>
   <span class="footer-t">Back to <a href="index.html" style="color:var(--mid);text-decoration:none;">all work</a></span>
 </footer>
 
 <script>
+  // View toggle
+  const vtBtns = document.querySelectorAll('.vt-btn');
+  vtBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      document.body.style.opacity = '0.6';
+      setTimeout(() => {
+        document.body.dataset.view = view;
+        document.body.style.opacity = '1';
+      }, 150);
+      vtBtns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
+    });
+  });
+  document.body.style.transition = 'opacity 0.15s ease';
+
+
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
