@@ -90,7 +90,7 @@
 
   .hero-tag {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -136,7 +136,7 @@
 
   .hm-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -224,7 +224,7 @@
 
   .section-index span {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -233,16 +233,16 @@
   }
 
   .section-content {
-    grid-column: 2 / 8;
+    grid-column: 2 / 7;
   }
 
   .section-aside {
-    grid-column: 9 / 13;
+    grid-column: 8 / 12;
   }
 
   .section-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -295,7 +295,7 @@
 
   .aside-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -316,7 +316,7 @@
 
   .sitemap-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -339,7 +339,7 @@
 
   .sitemap-tag {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--mid);
@@ -368,7 +368,7 @@
 
   .tree-root {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -446,7 +446,7 @@
   /* Depth badge */
   .tree-depth {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.1em;
     color: var(--mid);
     margin-top: var(--s2);
@@ -490,7 +490,7 @@
 
   .decision-index span {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -499,7 +499,7 @@
   }
 
   .decision-content {
-    grid-column: 2 / 9;
+    grid-column: 2 / 7;
   }
 
   /* The "what I didn't do" — pull quote style, shows thinking */
@@ -529,11 +529,20 @@
   }
 
   .decision-options {
-    grid-column: 10 / 13;
+    grid-column: 8 / 12;
     display: flex;
     flex-direction: column;
     gap: var(--s3);
     padding-top: 6px;
+  }
+
+  .decision-options-tldr {
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
   }
 
   /* Options considered — shows you explored, not just executed */
@@ -552,7 +561,7 @@
 
   .option-status {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -587,7 +596,7 @@
 
   .fs-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -598,11 +607,10 @@
   /* Single large screen with annotation sidebar */
   .fs-featured {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 3fr 2fr;
     gap: var(--s4);
     margin-bottom: var(--s5);
     align-items: start;
-    max-width: 80%;
   }
 
   .fs-screen {
@@ -687,7 +695,7 @@
 
   .ann-num {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.15em;
     color: var(--mid);
   }
@@ -703,8 +711,9 @@
   /* Secondary screens row */
   .fs-secondary {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: var(--s3);
+    padding: 0 var(--pad) var(--s7);
   }
 
   .fs-secondary-screen {
@@ -742,7 +751,7 @@
   .fs-secondary-label {
     padding-top: var(--s2);
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--mid);
@@ -768,7 +777,7 @@
 
   .impact-index span {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -778,15 +787,15 @@
 
   .impact-numbers {
     grid-column: 2 / 7;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s4);
   }
 
   .impact-stat {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .impact-num {
@@ -798,17 +807,25 @@
     color: var(--ink);
   }
 
-  .impact-desc {
+  .impact-label {
     font-family: var(--sans);
     font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .impact-desc {
+    font-family: var(--sans);
+    font-size: 14px;
     font-weight: 300;
     color: var(--mid);
     line-height: 1.55;
-    max-width: 340px;
+    margin-top: 4px;
   }
 
   .impact-reflection {
-    grid-column: 8 / 13;
+    grid-column: 8 / 12;
     display: flex;
     flex-direction: column;
     gap: var(--s4);
@@ -818,7 +835,7 @@
 
   .impact-reflection-hed {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -850,7 +867,7 @@
 
   .next-label {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mid);
@@ -925,7 +942,7 @@
   }
 
   .vt-time {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 0.06em;
     opacity: 0.5;
   }
@@ -987,17 +1004,13 @@
 
   .tldr-stat-desc {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--mid);
     display: block;
     margin-top: 6px;
   }
-
-  /* Show / hide */
-  body[data-view="tldr"] .full-only { display: none; }
-  body[data-view="full"] .tldr-only { display: none; }
 
   /* In full view, skip re-animating previously hidden reveals */
   body[data-view="full"] .full-only .reveal {
@@ -1007,7 +1020,15 @@
 
   /* In TLDR, featured screen goes full width without annotation column */
   body[data-view="tldr"] .fs-featured {
-    grid-template-columns: 1fr;
+    grid-template-columns: 3fr 2fr;
+  }
+
+  body[data-view="tldr"] .impact-numbers {
+    grid-column: 3 / 11;
+  }
+
+  body[data-view="tldr"] .impact-index {
+    display: none;
   }
 
   /* ─── REVEALS ────────────────────────── */
@@ -1018,8 +1039,6 @@
   }
   .reveal.visible { opacity: 1; transform: none; }
   .d1 { transition-delay: 0.08s; }
-  .d2 { transition-delay: 0.16s; }
-  .d3 { transition-delay: 0.24s; }
 
   .hero-tag   { animation: fadeUp 0.7s 0.1s both; }
   .hero-title { animation: fadeUp 0.7s 0.2s both; }
@@ -1040,15 +1059,100 @@
     .section-content { grid-column: 1 / 13; }
     .section-aside { grid-column: 1 / 13; }
     .section-index { display: none; }
-    .ba-grid { grid-template-columns: 1fr; }
-    .fs-featured { grid-template-columns: 1fr; }
-    .fs-secondary { grid-template-columns: 1fr 1fr; }
+    .fs-secondary { grid-template-columns: 1fr; }
     .decision-content { grid-column: 1 / 13; }
     .decision-options { grid-column: 1 / 13; flex-direction: row; flex-wrap: wrap; }
     .impact-numbers { grid-column: 1 / 13; }
     .impact-reflection { grid-column: 1 / 13; }
     .impact-index { display: none; }
     .decision-index { display: none; }
+  }
+
+  /* ─── 768px ──────────────────────────── */
+  @media (max-width: 768px) {
+    :root { --pad: 20px; }
+
+    /* Nav — give items room to breathe */
+    nav { gap: 10px; }
+    .nav-back, .nav-name { white-space: nowrap; }
+
+    /* Featured solution stays two-column but tighter gap */
+    .fs-featured { gap: var(--s3); }
+
+    /* Hero video slightly wider */
+    .hero-image video { width: 85%; }
+
+    /* Sitemap gap tighter */
+    .sitemap-grid { gap: var(--s4); }
+  }
+
+  /* ─── 640px ──────────────────────────── */
+  @media (max-width: 640px) {
+    :root { --pad: 18px; }
+
+    /* Hero */
+    .hero-right { flex-direction: column; gap: var(--s2); }
+    .hero-title { line-height: 1.0; }
+    .hero-summary { font-size: 16px; max-width: 100%; }
+
+    /* Featured solution collapses to single column */
+    .fs-featured { grid-template-columns: 1fr; }
+
+    /* Decision pull quote indent reduced */
+    .decision-pull { padding-left: var(--s3); }
+
+    /* Section gaps tighter */
+    .section { gap: var(--s2); }
+    .decision-section { gap: var(--s2); }
+
+    /* Impact numbers single column */
+    .impact-numbers { grid-template-columns: 1fr; }
+  }
+
+  /* ─── 480px ──────────────────────────── */
+  @media (max-width: 480px) {
+    :root { --pad: 14px; }
+
+    /* Nav — hide name to prevent overflow */
+    nav { padding: 12px var(--pad); }
+    .nav-name { display: none; }
+    .nav-back { min-height: 44px; display: flex; align-items: center; }
+    .vt-btn { min-height: 36px; padding: 6px 10px; }
+
+    /* Typography */
+    .hero-title { font-size: clamp(32px, 5vw, 48px); }
+    .hero-summary { font-size: 15px; }
+    .impact-num { font-size: clamp(36px, 5vw, 52px); }
+    .section-hed { font-size: clamp(22px, 4vw, 44px); }
+
+    /* Grid sections — full width */
+    .section-content, .section-aside,
+    .decision-content, .decision-options,
+    .impact-numbers, .impact-reflection { grid-column: 1 / 13; }
+
+    /* Decision options stack vertically */
+    .decision-options { flex-direction: column; }
+
+    /* TLDR content full width */
+    .tldr-content { grid-column: 1 / 13; }
+
+    /* Sitemap trees */
+    .tree ul ul > li { padding: 1px 0 1px 8px; }
+    .tree ul ul ul > li { padding: 1px 0 1px 8px; }
+    .tree span { font-size: 9px; }
+
+    /* Hero video full width */
+    .hero-image video { width: 96%; }
+
+    body { word-break: break-word; overflow-wrap: break-word; }
+  }
+
+  /* ─── iOS safe area ───────────────────── */
+  @supports (padding: max(0px)) {
+    nav {
+      padding-left: max(var(--pad), env(safe-area-inset-left));
+      padding-right: max(var(--pad), env(safe-area-inset-right));
+    }
   }
 </style>
 </head>
@@ -1072,7 +1176,7 @@
   <div class="hero-left">
     <span class="hero-tag">Shipped · Industrial · 2025</span>
     <h1 class="hero-title">Redesigning a legacy brand<br><em>for modern customers</em></h1>
-    <p class="hero-summary">ACRO's 29-page website buried a 90-year manufacturing reputation under outdated content and broken navigation — costing them inquiries before a single conversation started.</p>
+    <p class="hero-summary">ACRO's 29-page website buried a 90-year manufacturing reputation under outdated content and broken navigation, costing them inquiries before a single conversation started.</p>
   </div>
   <div class="hero-right">
     <div class="hm">
@@ -1106,17 +1210,7 @@
 <!-- TLDR BLOCK -->
 <div class="tldr-block tldr-only">
   <div class="tldr-content">
-    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Buyers were already finding the solutions section — it was the most-visited content on the site — despite it sitting three clicks deep. I restructured the information architecture around where intent actually peaked: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content didn't disappear — the friction did.</p>
-  </div>
-  <div class="tldr-stats">
-    <div>
-      <span class="tldr-stat-num">+28%</span>
-      <span class="tldr-stat-desc">Avg. session duration</span>
-    </div>
-    <div>
-      <span class="tldr-stat-num">1.4×</span>
-      <span class="tldr-stat-desc">CRM inquiry volume</span>
-    </div>
+    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite sitting three clicks deep. I restructured the information architecture around where intent actually peaked: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
   </div>
 </div>
 
@@ -1126,7 +1220,7 @@
   <div class="section-content reveal">
     <span class="section-label">01 — Context</span>
     <h2 class="section-hed">90 years of expertise, buried in the wrong structure.</h2>
-    <p class="section-body">ACRO had built something real over 90 years — a reputation for precision manufacturing that larger competitors couldn't match on provenance alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer.</p>
+    <p class="section-body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on provenance alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer.</p>
     <p class="section-body" style="margin-top: var(--s3); color: var(--mid);">The brief was a UI refresh within new brand guidelines. I pushed back on that framing early. The visual problems were symptoms — the structure was what was actually failing customers. A redesign that cleaned up the aesthetics without fixing the navigation would have looked better and performed the same. The build needed to live in WordPress, managed by ACRO's SEO team post-launch, which shaped every architectural decision I made.</p>
   </div>
   <div class="section-aside reveal d1">
@@ -1137,11 +1231,11 @@
       </div>
       <div class="aside-item">
         <span class="aside-label">The real problem</span>
-        <span class="aside-value">I identified the structure as the core issue early. 29 pages of nested content wasn't a maintenance problem — it was actively destroying conversion by forcing customers to navigate to answers the site already had.</span>
+        <span class="aside-value">I identified the structure as the core issue early. 29 pages of nested content wasn't a maintenance problem. It was actively destroying conversion by forcing customers to navigate to answers the site already had.</span>
       </div>
       <div class="aside-item">
         <span class="aside-label">Success looked like</span>
-        <span class="aside-value">A site where a first-time visitor could confirm ACRO serves their industry, understand what ACRO builds, and find a path to contact — without a single wasted click.</span>
+        <span class="aside-value">A site where a first-time visitor could confirm ACRO serves their industry, understand what ACRO builds, and find a path to contact. No wasted clicks.</span>
       </div>
     </div>
   </div>
@@ -1210,7 +1304,7 @@
         </ul>
         <span class="tree-depth"><mark>Solutions required 3 clicks from homepage</mark></span>
       </div>
-      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching the solutions section — the most-visited content on the site by a wide margin — required finding the right nav item, landing on a landing page, navigating a dropdown, and then finding the relevant product. Most didn't. They left.</p>
+      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching the solutions section (the most-visited content on the site by a wide margin) required finding the right nav item, landing on a landing page, navigating a dropdown, and then finding the relevant product. Most didn't. They left.</p>
     </div>
 
     <div class="sitemap-panel">
@@ -1248,7 +1342,7 @@
         </ul>
         <span class="tree-depth"><mark>Solutions visible on the homepage — zero clicks required</mark></span>
       </div>
-      <p class="sitemap-annotation">I eliminated every page that existed to route customers rather than serve them. The intermediate landing pages were organizational artifacts — they reflected ACRO's internal structure, not how a buyer thinks. Collapsing them into direct destinations cut the path to solutions from three clicks to one.</p>
+      <p class="sitemap-annotation">I eliminated every page that existed to route customers rather than serve them. The intermediate landing pages were organizational artifacts: they reflected ACRO's internal structure, not how a buyer thinks. Collapsing them into direct destinations cut the path to solutions from three clicks to one.</p>
     </div>
 
   </div>
@@ -1264,12 +1358,18 @@
     </blockquote>
     <div class="full-only">
     <p class="decision-body">
-      Google Analytics showed ACRO's solutions section was the most visited part of the existing site — customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
+      Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
     </p>
     <p class="decision-body" style="color: var(--mid);">
-      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into a meeting and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it. If I knew where intent peaked, designing to meet it there wasn't a creative choice — it was the only defensible one.
+      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into a meeting and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it. If I knew where intent peaked, designing to meet it there wasn't a creative choice. It was the only defensible one.
+    </p>
+    <p class="decision-body" style="color: var(--mid);">
+      Throughout the process I ran internal review sessions with the team: engineers and stakeholders who represent exactly the kind of buyer evaluating ACRO. The question we kept asking was simple: if you landed here trying to figure out whether ACRO can build what you need, does this get you there? Every structural decision got walked through that lens before it was finalized.
     </p>
     </div>
+  </div>
+  <div class="decision-options decision-options-tldr reveal d1 tldr-only">
+    <p>Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
   </div>
   <div class="decision-options reveal d1 full-only">
     <div class="option">
@@ -1300,58 +1400,48 @@
         <source src="resources/acro-solutions-index.webm" type="video/webm">
       </video>
     </div>
+    <div class="fs-annotations tldr-only">
+      <div class="annotation">
+        <span class="ann-num">① Getting There Quickly</span>
+        <span class="ann-text">All of ACRO's solutions are visible in the first scroll on the landing page.</span>
+      </div>
+      <div class="annotation">
+        <span class="ann-num">② Ease of Use</span>
+        <span class="ann-text">By forgoing the Solutions landing page and giving users a dropdown list in the navbar, they're able to see all solutions and directly visit that page in one click.</span>
+      </div>
+    </div>
     <div class="fs-annotations full-only">
       <div class="annotation">
         <span class="ann-num">① Industry-led entry point</span>
-        <span class="ann-text">I organized solutions by industry rather than product category because that's how a buyer frames their problem — not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that question before the customer has to ask it.</span>
+        <span class="ann-text">I organized solutions by industry rather than product category because that's how a buyer frames their problem. Not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that question before the customer has to ask it.</span>
       </div>
       <div class="annotation">
-        <span class="ann-num">② What was removed</span>
-        <span class="ann-text">Nothing was deleted — the content all still exists. What I removed was the segregation. Pages that were artificially split across multiple destinations got consolidated into single, scrollable layouts. The goal was to prefer scrolling over hunting: keep customers moving through information rather than forcing them to click their way to it.</span>
+        <span class="ann-num">② Consolidation over elimination</span>
+        <span class="ann-text">Pages that were artificially split across multiple destinations got merged into single, scrollable layouts. The content didn't shrink. The distance to it did. Scrolling through a page is faster than deciding which link to click next.</span>
       </div>
       <div class="annotation">
         <span class="ann-num">③ Closing the loop</span>
-        <span class="ann-text">This case study opens with ACRO's credibility being buried. I designed this screen to be the specific moment that changes — the first view where a customer sees industry relevance, product capability, and a contact path simultaneously. No scroll required.</span>
+        <span class="ann-text">This case study opens with ACRO's credibility being buried. I designed this screen to be the specific moment that changes: the first view where a customer sees industry relevance, product capability, and a contact path simultaneously. No scroll required.</span>
       </div>
     </div>
   </div>
 
-  <div class="fs-secondary reveal d1 full-only">
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w50"></div>
-          <div class="ss-block w80 tall"></div>
-          <div class="ss-block w65"></div>
-          <div class="ss-block accent"></div>
-        </div>
-      </div>
-      <span class="fs-secondary-label">Screen name / state</span>
-    </div>
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w35"></div>
-          <div class="ss-block w65"></div>
-          <div class="ss-block w50 tall"></div>
-          <div class="ss-block w80"></div>
-        </div>
-      </div>
-      <span class="fs-secondary-label">Screen name / state</span>
-    </div>
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w80"></div>
-          <div class="ss-block accent"></div>
-          <div class="ss-block w65 tall"></div>
-          <div class="ss-block w40"></div>
-        </div>
-      </div>
-      <span class="fs-secondary-label">Screen name / state</span>
-    </div>
-  </div>
 </section>
+
+<div class="fs-secondary reveal full-only">
+  <div class="fs-secondary-item">
+    <div class="fs-secondary-screen" style="aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
+      <img src="resources/acro-dispensing-before.webp" alt="ACRO site before redesign" style="width:100%;height:auto;display:block;">
+    </div>
+    <span class="fs-secondary-label">Before</span>
+  </div>
+  <div class="fs-secondary-item">
+    <div class="fs-secondary-screen" style="aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
+      <img src="resources/acro-dispensing-after.webp" alt="ACRO site after redesign" style="width:100%;height:auto;display:block;">
+    </div>
+    <span class="fs-secondary-label">After</span>
+  </div>
+</div>
 
 <!-- IMPACT -->
 <section class="impact">
@@ -1359,18 +1449,18 @@
   <div class="impact-numbers reveal">
     <div class="impact-stat">
       <span class="impact-num">+28%</span>
-      <span class="impact-desc">Average session duration — potential customers spending more time where it mattered: solutions pages, not on a scavenger hunt.</span>
+      <span class="impact-label">Average session duration</span>
+      <span class="impact-desc">Potential customers spending more time where it mattered: solutions pages, not on a scavenger hunt.</span>
     </div>
     <div class="impact-stat">
       <span class="impact-num">1.4×</span>
-      <span class="impact-desc">CRM inquiry volume in the 90 days post-launch vs. the prior baseline. Sales confirmed inquiry quality improved alongside volume — prospects were referencing specific solutions pages in their first emails.</span>
+      <span class="impact-label">CRM inquiry volume</span>
+      <span class="impact-desc">In the 90 days post-launch vs. the prior baseline. Sales confirmed inquiry quality improved alongside volume. Prospects were referencing specific solutions pages in their first emails.</span>
     </div>
   </div>
   <div class="impact-reflection reveal d1 full-only">
     <span class="impact-reflection-hed">What I'd do differently</span>
-    <p class="impact-reflection-body">I'd push harder on the content strategy earlier. The structural decisions were sound, but several solution pages launched with copy that was holdover from the old site — accurate, but written for search bots rather than real humans. We solved the architecture problem. The content problem is ongoing, and I should have scoped it explicitly rather than treating it as out of scope.</p>
-    <p class="impact-reflection-body">I'd also pressure-test the IA with actual customers, not just analytics and internal stakeholders. We validated the structure with the sales team and with data, but never put an early prototype in front of a procurement lead before committing to the architecture. We got lucky that our read of the analytics matched actual site visitor behavior. It should have been confirmed, not assumed.</p>
-  </div>
+    <p class="impact-reflection-body">I'd push harder on the content strategy earlier. The structural decisions were sound, but several solution pages launched with copy that was holdover from the old site, accurate but written for search bots rather than real humans. We solved the architecture problem. The content problem is ongoing, and I should have scoped it explicitly rather than treating it as out of scope.</p>
 </section>
 
 <!-- NEXT PROJECT -->
