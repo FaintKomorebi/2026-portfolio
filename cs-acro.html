@@ -100,7 +100,7 @@
 
   .hero-title {
     font-family: var(--serif);
-    font-size: clamp(48px, 7vw, 100px);
+    font-size: clamp(52px, 8vw, 110px);
     font-weight: 400;
     line-height: 0.95;
     letter-spacing: -0.025em;
@@ -1080,7 +1080,8 @@
     .fs-featured { gap: var(--s3); }
 
     /* Hero video slightly wider */
-    .hero-image video { width: 85%; }
+    .hero-image video { width: 100%; box-shadow: none; }
+    .hero-image { aspect-ratio: unset; padding: 0; }
 
     /* Sitemap gap tighter */
     .sitemap-grid { gap: var(--s4); }
@@ -1095,8 +1096,12 @@
     .hero-title { line-height: 1.0; }
     .hero-summary { font-size: 16px; max-width: 100%; }
 
-    /* Featured solution collapses to single column */
-    .fs-featured { grid-template-columns: 1fr; }
+    /* Featured solution collapses to single column — both full and tldr views */
+    .fs-featured,
+    body[data-view="tldr"] .fs-featured { grid-template-columns: 1fr; }
+
+    /* TLDR annotations stack below video */
+    body[data-view="tldr"] .fs-annotations { flex-direction: column; }
 
     /* Decision pull quote indent reduced */
     .decision-pull { padding-left: var(--s3); }
@@ -1120,7 +1125,7 @@
     .vt-btn { min-height: 36px; padding: 6px 10px; }
 
     /* Typography */
-    .hero-title { font-size: clamp(32px, 5vw, 48px); }
+    .hero-title { font-size: clamp(40px, 6vw, 56px); }
     .hero-summary { font-size: 15px; }
     .impact-num { font-size: clamp(36px, 5vw, 52px); }
     .section-hed { font-size: clamp(22px, 4vw, 44px); }
@@ -1142,7 +1147,7 @@
     .tree span { font-size: 9px; }
 
     /* Hero video full width */
-    .hero-image video { width: 96%; }
+    .hero-image video { width: 100%; }
 
     body { word-break: break-word; overflow-wrap: break-word; }
   }
@@ -1474,7 +1479,7 @@
 
 <footer>
   <span class="footer-t">© 2026 Noah Schilling</span>
-  <span class="footer-t">Back to <a href="index.html" style="color:var(--mid);text-decoration:none;">all work</a></span>
+  <a href="index.html" class="footer-t" style="color:var(--mid);text-decoration:none;">Back to all work</a>
 </footer>
 
 <script>

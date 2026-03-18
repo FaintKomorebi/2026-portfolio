@@ -664,13 +664,13 @@
 
   /* ─── 640px ──────────────────────────── */
   @media (max-width: 640px) {
-    :root { --pad: 20px; }
+    :root { --pad: 20px; --s8: 100px; --s7: 80px; }
 
     .hero-right { flex-direction: column; gap: var(--s2); }
     .thinking-aside { flex-direction: column; gap: var(--s3); }
     .cap-grid { grid-template-columns: 1fr; gap: var(--s4); }
 
-    .hero-name { font-size: clamp(44px, 6vw, 116px); }
+    .hero-name { font-size: clamp(52px, 8vw, 116px); }
     .case-title { font-size: clamp(22px, 3.5vw, 46px); }
     .thinking-hed { font-size: clamp(22px, 3.5vw, 44px); }
     .contact-hed { font-size: clamp(34px, 5vw, 92px); }
@@ -682,13 +682,13 @@
 
   /* ─── 480px ──────────────────────────── */
   @media (max-width: 480px) {
-    :root { --pad: 16px; }
+    :root { --pad: 16px; --s8: 80px; --s7: 60px; }
 
     nav { padding: 18px var(--pad); }
     .nav-links { gap: 20px; }
     .nav-links a { min-height: 44px; display: inline-flex; align-items: center; }
 
-    .hero-name { font-size: clamp(40px, 5.5vw, 116px); }
+    .hero-name { font-size: clamp(48px, 7vw, 116px); }
     .contact-hed { font-size: clamp(30px, 4.5vw, 92px); }
 
     .case-cta { padding: 10px 12px; min-height: 44px; display: inline-flex; align-items: center; }
