@@ -1026,9 +1026,9 @@
     transform: none;
   }
 
-  /* In TLDR, featured screen goes full width without annotation column */
+  /* In TLDR, featured screen goes full width */
   body[data-view="tldr"] .fs-featured {
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr;
   }
 
   body[data-view="tldr"] .impact-numbers {
@@ -1133,10 +1133,12 @@
     .vt-btn { min-height: 36px; padding: 6px 10px; }
 
     /* Typography */
-    .hero-title { font-size: clamp(40px, 6vw, 56px); }
+    .hero-title { font-size: clamp(46px, 12vw, 64px); }
     .hero-summary { font-size: 15px; }
-    .impact-num { font-size: clamp(36px, 5vw, 52px); }
-    .section-hed { font-size: clamp(22px, 4vw, 44px); }
+    .section-hed { font-size: clamp(30px, 7vw, 40px); }
+    .decision-pull { font-size: clamp(22px, 5.5vw, 30px); }
+    .impact-num { font-size: clamp(48px, 12vw, 64px); }
+    .next-title { font-size: clamp(30px, 7vw, 44px); }
 
     /* Grid sections — full width */
     .section-content, .section-aside,
@@ -1187,18 +1189,14 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <span class="hero-tag">Shipped · Industrial · 2025</span>
+    <span class="hero-tag">2025 · Industrial</span>
     <h1 class="hero-title">Redesigning a legacy brand<br><em>for modern customers</em></h1>
-    <p class="hero-summary">ACRO's 29-page website buried a 90-year manufacturing reputation under outdated content and broken navigation, costing them inquiries before a single conversation started.</p>
+    <p class="hero-summary">ACRO's 29-page website was burying a 90-year manufacturing reputation. When a procurement manager landed on it, they had no fast way to confirm ACRO even served their industry. Most didn't stay long enough to find out.</p>
   </div>
   <div class="hero-right">
     <div class="hm">
       <span class="hm-label">My Role</span>
       <span class="hm-value">Lead Designer</span>
-    </div>
-    <div class="hm">
-      <span class="hm-label">Tools</span>
-      <span class="hm-value">Figma · Adobe Suite</span>
     </div>
     <div class="hm">
       <span class="hm-label">Timeline</span>
@@ -1223,7 +1221,7 @@
 <!-- TLDR BLOCK -->
 <div class="tldr-block tldr-only">
   <div class="tldr-content">
-    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite sitting three clicks deep. I restructured the information architecture around where intent actually peaked: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
+    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite sitting three clicks deep. I restructured the information architecture around where customers actually wanted to go: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
   </div>
 </div>
 
@@ -1233,22 +1231,21 @@
   <div class="section-content reveal">
     <span class="section-label">01 — Context</span>
     <h2 class="section-hed">90 years of expertise, buried in the wrong structure.</h2>
-    <p class="section-body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on provenance alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer.</p>
-    <p class="section-body" style="margin-top: var(--s3); color: var(--mid);">The brief was a UI refresh within new brand guidelines. I pushed back on that framing early. The visual problems were symptoms — the structure was what was actually failing customers. A redesign that cleaned up the aesthetics without fixing the navigation would have looked better and performed the same. The build needed to live in WordPress, managed by ACRO's SEO team post-launch, which shaped every architectural decision I made.</p>
+    <p class="section-body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on track record alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer.</p>
   </div>
   <div class="section-aside reveal d1">
     <div class="aside-block">
       <div class="aside-item">
         <span class="aside-label">The brief</span>
-        <span class="aside-value">Modernize the site UI around new brand guidelines, reduce complexity, and build a platform that scales with ACRO's future.</span>
+        <span class="aside-value">A UI refresh within new brand guidelines. I pushed back on that framing early.</span>
       </div>
       <div class="aside-item">
         <span class="aside-label">The real problem</span>
-        <span class="aside-value">I identified the structure as the core issue early. 29 pages of nested content wasn't a maintenance problem. It was actively destroying conversion by forcing customers to navigate to answers the site already had.</span>
+        <span class="aside-value">The visual problems were symptoms. The structure was what was actually failing customers.</span>
       </div>
       <div class="aside-item">
-        <span class="aside-label">Success looked like</span>
-        <span class="aside-value">A site where a first-time visitor could confirm ACRO serves their industry, understand what ACRO builds, and find a path to contact. No wasted clicks.</span>
+        <span class="aside-label">Constraints</span>
+        <span class="aside-value">The build needed to live in WordPress, managed by ACRO's SEO team post-launch. That shaped every architectural decision.</span>
       </div>
     </div>
   </div>
@@ -1317,7 +1314,7 @@
         </ul>
         <span class="tree-depth"><mark>Solutions required 3 clicks from homepage</mark></span>
       </div>
-      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching the solutions section (the most-visited content on the site by a wide margin) required finding the right nav item, landing on a landing page, navigating a dropdown, and then finding the relevant product. Most didn't. They left.</p>
+      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching the solutions section (the most-visited content on the site by a wide margin) required finding the right nav item, landing on a landing page, navigating a dropdown, and then finding the relevant product. Most didn't. They closed the tab.</p>
     </div>
 
     <div class="sitemap-panel">
@@ -1371,18 +1368,18 @@
     </blockquote>
     <div class="full-only">
     <p class="decision-body">
-      Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
+      Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
     </p>
     <p class="decision-body" style="color: var(--mid);">
-      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into a meeting and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it. If I knew where intent peaked, designing to meet it there wasn't a creative choice. It was the only defensible one.
+      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into the room and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it.
     </p>
     <p class="decision-body" style="color: var(--mid);">
-      Throughout the process I ran internal review sessions with the team: engineers and stakeholders who represent exactly the kind of buyer evaluating ACRO. The question we kept asking was simple: if you landed here trying to figure out whether ACRO can build what you need, does this get you there? Every structural decision got walked through that lens before it was finalized.
+      Throughout the process I ran internal review sessions with engineers and stakeholders who represent exactly the kind of buyer evaluating ACRO. The question we kept asking was simple: if you landed here trying to figure out whether ACRO can build what you need, does this get you there? We tested every structural decision against that lens before it was finalized.
     </p>
     </div>
   </div>
   <div class="decision-options decision-options-tldr reveal d1 tldr-only">
-    <p>Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. The conventional approach would have kept it buried inside a navigation menu. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
+    <p>Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
   </div>
   <div class="decision-options reveal d1 full-only">
     <div class="option">
@@ -1413,16 +1410,6 @@
         <source src="resources/acro-solutions-index.webm" type="video/webm">
       </video>
     </div>
-    <div class="fs-annotations tldr-only">
-      <div class="annotation">
-        <span class="ann-num">① Getting There Quickly</span>
-        <span class="ann-text">All of ACRO's solutions are visible in the first scroll on the landing page.</span>
-      </div>
-      <div class="annotation">
-        <span class="ann-num">② Ease of Use</span>
-        <span class="ann-text">By forgoing the Solutions landing page and giving users a dropdown list in the navbar, they're able to see all solutions and directly visit that page in one click.</span>
-      </div>
-    </div>
     <div class="fs-annotations full-only">
       <div class="annotation">
         <span class="ann-num">① Industry-led entry point</span>
@@ -1430,7 +1417,7 @@
       </div>
       <div class="annotation">
         <span class="ann-num">② Consolidation over elimination</span>
-        <span class="ann-text">Pages that were artificially split across multiple destinations got merged into single, scrollable layouts. The content didn't shrink. The distance to it did. Scrolling through a page is faster than deciding which link to click next.</span>
+        <span class="ann-text">Pages that were artificially split across multiple destinations got merged into single, scrollable layouts. The content didn't shrink. The distance to it did.</span>
       </div>
       <div class="annotation">
         <span class="ann-num">③ Closing the loop</span>
@@ -1446,13 +1433,13 @@
     <div class="fs-secondary-screen" style="aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
       <img src="resources/acro-dispensing-before.webp" alt="ACRO site before redesign" style="width:100%;height:auto;display:block;">
     </div>
-    <span class="fs-secondary-label">Before</span>
+    <span class="fs-secondary-label">Detail page — Before (nested three levels deep)</span>
   </div>
   <div class="fs-secondary-item">
     <div class="fs-secondary-screen" style="aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
       <img src="resources/acro-dispensing-after.webp" alt="ACRO site after redesign" style="width:100%;height:auto;display:block;">
     </div>
-    <span class="fs-secondary-label">After</span>
+    <span class="fs-secondary-label">Detail page — After (directly accessible, industry context visible)</span>
   </div>
 </div>
 
@@ -1463,7 +1450,7 @@
     <div class="impact-stat">
       <span class="impact-num">+28%</span>
       <span class="impact-label">Average session duration</span>
-      <span class="impact-desc">Potential customers spending more time where it mattered: solutions pages, not on a scavenger hunt.</span>
+      <span class="impact-desc">A proxy signal: people spending more time on solutions pages rather than navigating between them. The inquiry numbers are the primary confirmation.</span>
     </div>
     <div class="impact-stat">
       <span class="impact-num">1.4×</span>
