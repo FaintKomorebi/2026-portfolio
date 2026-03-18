@@ -163,6 +163,14 @@
     overflow: hidden;
   }
 
+  .hero-video {
+    width: 72%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 6px 24px rgba(0,0,0,0.1);
+  }
+
   .hero-image-inner {
     width: 72%;
     aspect-ratio: 4 / 3;
@@ -1079,9 +1087,9 @@
     /* Featured solution stays two-column but tighter gap */
     .fs-featured { gap: var(--s3); }
 
-    /* Hero video slightly wider */
-    .hero-image video { width: 100%; box-shadow: none; }
-    .hero-image { aspect-ratio: unset; padding: 0; }
+    /* Fig. 1 fills full width */
+    .hero-image { aspect-ratio: unset; }
+    .hero-video { width: 100%; box-shadow: none; }
 
     /* Sitemap gap tighter */
     .sitemap-grid { gap: var(--s4); }
@@ -1147,7 +1155,7 @@
     .tree span { font-size: 9px; }
 
     /* Hero video full width */
-    .hero-image video { width: 100%; }
+    .hero-video { width: 100%; }
 
     body { word-break: break-word; overflow-wrap: break-word; }
   }
@@ -1206,7 +1214,7 @@
 
 <!-- HERO IMAGE -->
 <div class="hero-image reveal">
-  <video autoplay loop muted playsinline style="width:72%;height:auto;object-fit:contain;display:block;box-shadow:0 24px 80px rgba(0,0,0,0.18),0 6px 24px rgba(0,0,0,0.1);">
+  <video class="hero-video" autoplay loop muted playsinline>
     <source src="resources/acro-robot-index.webm" type="video/webm">
   </video>
 </div>
