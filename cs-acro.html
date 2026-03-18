@@ -445,6 +445,15 @@
   /* Intermediate landing pages — the problem */
   .tree-landing { color: var(--mid) !important; }
 
+  /* Highlighted path — shows the 3-click journey */
+  .tree-path {
+    background: rgba(185, 115, 45, 0.13);
+    color: #a06830 !important;
+    border-radius: 2px;
+    padding: 1px 5px;
+    margin-left: -5px;
+  }
+
   /* Dropdown items — not landing pages, a feature */
   .tree-dropdown {
     color: var(--mid) !important;
@@ -1190,7 +1199,7 @@
 <section class="hero">
   <div class="hero-left">
     <span class="hero-tag">2025 · Industrial</span>
-    <h1 class="hero-title">Redesigning a legacy brand<br><em>for modern customers</em></h1>
+    <h1 class="hero-title">Redesigning a legacy brand for <em>modern customers</em></h1>
     <p class="hero-summary">ACRO's 29-page website was burying a 90-year manufacturing reputation. When a procurement manager landed on it, they had no fast way to confirm ACRO even served their industry. Most didn't stay long enough to find out.</p>
   </div>
   <div class="hero-right">
@@ -1216,7 +1225,7 @@
     <source src="resources/acro-robot-index.webm" type="video/webm">
   </video>
 </div>
-<p class="image-caption reveal">Fig. 1 — ACRO Automation Systems · Homepage redesign</p>
+<p class="image-caption reveal">Fig. 1 — ACRO Automation Systems · Index Redesign</p>
 
 <!-- TLDR BLOCK -->
 <div class="tldr-block tldr-only">
@@ -1237,15 +1246,15 @@
     <div class="aside-block">
       <div class="aside-item">
         <span class="aside-label">The brief</span>
-        <span class="aside-value">A UI refresh within new brand guidelines. I pushed back on that framing early.</span>
+        <span class="aside-value">Just a UI refresh within new brand guidelines. I pushed back on that framing early.</span>
       </div>
       <div class="aside-item">
         <span class="aside-label">The real problem</span>
-        <span class="aside-value">The visual problems were symptoms. The structure was what was actually failing customers.</span>
+        <span class="aside-value">I quickly found pages were buried within eachother, making paths messy and hiding content.</span>
       </div>
       <div class="aside-item">
         <span class="aside-label">Constraints</span>
-        <span class="aside-value">The build needed to live in WordPress, managed by ACRO's SEO team post-launch. That shaped every architectural decision.</span>
+        <span class="aside-value">The build needed to live in WordPress, managed by ACRO's SEO team post-launch. ACRO couldn't devote resources to new copy for the site so it had to be completely refreshed using the current content.</span>
       </div>
     </div>
   </div>
@@ -1257,12 +1266,8 @@
   <div class="sitemap-grid">
 
     <div class="sitemap-panel">
-      <div class="sitemap-tag">
-        <div class="sitemap-dot"></div>
-        Before — 29 pages · 3 levels deep
-      </div>
       <div class="tree">
-        <div class="tree-root">Navigation</div>
+        <div class="tree-root">Navigation Tree Before -29 Pages</div>
         <ul>
           <li><span>Index</span></li>
           <li><span class="tree-landing">About Us</span>
@@ -1290,13 +1295,13 @@
               <li><span>Services We Offer</span></li>
             </ul>
           </li>
-          <li><span class="tree-landing">Solutions Overview</span>
+          <li><span class="tree-path">Solutions Overview</span>
             <ul>
               <li><span>Automated Assembly</span></li>
               <li><span>Automated Welding</span></li>
-              <li><span>Dispensing Systems</span></li>
+              <li><span class="tree-path">Dispensing Systems</span></li>
               <li><span>Robotics</span></li>
-              <li><span>Solutions Overview</span></li>
+              <li><span class="tree-path">Solutions Overview</span></li>
               <li><span>System Integration</span></li>
               <li><span>Tool Polishing</span></li>
             </ul>
@@ -1318,12 +1323,8 @@
     </div>
 
     <div class="sitemap-panel">
-      <div class="sitemap-tag">
-        <div class="sitemap-dot sitemap-dot-after"></div>
-        After — 17 pages · 2 levels max
-      </div>
       <div class="tree">
-        <div class="tree-root">Navigation</div>
+        <div class="tree-root">Navigation Tree After -17 Pages</div>
         <ul>
           <li><span>Index <span style="color:var(--mid);font-style:italic;">· Solutions + Services require no click</span></span></li>
           <li><span>Markets</span></li>
@@ -1433,13 +1434,13 @@
     <div class="fs-secondary-screen" style="display:block;aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
       <img src="resources/acro-dispensing-before.webp" alt="ACRO site before redesign" style="width:100%;height:auto;display:block;">
     </div>
-    <span class="fs-secondary-label">Detail page — Before (nested three levels deep)</span>
+    <span class="fs-secondary-label">Previous Nested Solutions Page</span>
   </div>
   <div class="fs-secondary-item">
     <div class="fs-secondary-screen" style="display:block;aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
       <img src="resources/acro-dispensing-after.webp" alt="ACRO site after redesign" style="width:100%;height:auto;display:block;">
     </div>
-    <span class="fs-secondary-label">Detail page — After (directly accessible, industry context visible)</span>
+    <span class="fs-secondary-label">Updated 1 Click Solutions Page</span>
   </div>
 </div>
 
