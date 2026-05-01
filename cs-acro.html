@@ -1177,17 +1177,53 @@
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--mid);
+    color: var(--ink);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     margin-top: var(--s4);
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--faint);
-    transition: color 0.18s, border-color 0.18s;
+    padding: 10px 16px;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.35s ease;
+    white-space: nowrap;
   }
-  .live-site-link:hover { color: var(--ink); border-color: var(--ink); }
+  .live-site-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s ease;
+    z-index: 0;
+  }
+  .live-site-link span {
+    position: relative;
+    z-index: 1;
+  }
+  .live-site-link:hover { color: var(--bg); }
+  .live-site-link:hover::before { transform: scaleX(1); }
+
+  /* ─── SITE LINK BAR (TLDR bottom) ────── */
+  .site-link-bar {
+    padding: 0 var(--pad) var(--s5);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+  .site-link-bar .live-site-link {
+    grid-column: 8 / 12;
+    margin-top: 0;
+    justify-self: start;
+  }
+  @media (max-width: 960px) {
+    .site-link-bar .live-site-link { grid-column: 1 / 13; }
+  }
 
   /* ─── iOS safe area ───────────────────── */
   @supports (padding: max(0px)) {
@@ -1249,7 +1285,6 @@
 <div class="tldr-block tldr-only">
   <div class="tldr-content">
     <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite requiring a landing page visit and a scroll to find it. I restructured the information architecture around where customers actually wanted to go: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
-    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link">View the live site →</a>
   </div>
 </div>
 
@@ -1479,9 +1514,14 @@
   <div class="impact-reflection reveal d1 full-only">
     <span class="impact-reflection-hed">What I'd do differently</span>
     <p class="impact-reflection-body">I'd push harder on the content strategy earlier in the process. The structual decisions were sound, but several solution pages launched with copy that was holdover from the old site. While we addressed the UX in this refresh, the content problem is ongoing, and I should have scoped it explicitly rather than treating as a background task.</p>
-    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link">View the live site →</a>
+    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link"><span>View the live site →</span></a>
   </div>
 </section>
+
+<!-- TLDR: site link at bottom, mirrors full-view position -->
+<div class="site-link-bar reveal tldr-only">
+  <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link"><span>View the live site →</span></a>
+</div>
 
 <!-- NEXT PROJECT -->
 <div class="next reveal">
