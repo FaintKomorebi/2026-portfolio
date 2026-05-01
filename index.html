@@ -241,15 +241,15 @@
     position: absolute;
     inset: -24px;
     background: conic-gradient(from var(--glow-angle),
-      rgba(255, 110, 110, 0.65),
-      rgba(255, 200, 70, 0.65),
-      rgba(80, 210, 140, 0.65),
-      rgba(60, 160, 255, 0.65),
-      rgba(170, 80, 255, 0.65),
-      rgba(255, 80, 190, 0.65),
-      rgba(255, 110, 110, 0.65)
+      rgba(200, 120, 120, 0.4),
+      rgba(200, 185, 100, 0.4),
+      rgba(100, 185, 140, 0.4),
+      rgba(100, 150, 210, 0.4),
+      rgba(160, 110, 210, 0.4),
+      rgba(200, 110, 170, 0.4),
+      rgba(200, 120, 120, 0.4)
     );
-    filter: blur(48px);
+    filter: blur(56px);
     opacity: 0;
     z-index: -1;
     border-radius: 8px;
@@ -262,12 +262,11 @@
     .work-list:has(.case:hover) .case { opacity: 0.25; }
     .work-list:has(.case:hover) .case:hover { opacity: 1; transform: translateY(-2px); }
     .work-list:has(.case:hover) .case:hover::before {
-      opacity: 0.5;
+      opacity: 0.35;
       animation-play-state: running;
     }
     .case:hover .case-cta { color: var(--ink); border-color: var(--ink); }
     .case:hover .case-num { color: var(--ink); }
-    .case:hover .case-title { font-style: italic; }
   }
 
   .case-num {
