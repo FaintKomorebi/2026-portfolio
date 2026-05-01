@@ -1171,6 +1171,24 @@
     body { word-break: break-word; overflow-wrap: break-word; }
   }
 
+  /* ─── LIVE SITE LINK ─────────────────── */
+  .live-site-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--s4);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--faint);
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .live-site-link:hover { color: var(--ink); border-color: var(--ink); }
+
   /* ─── iOS safe area ───────────────────── */
   @supports (padding: max(0px)) {
     nav {
@@ -1231,6 +1249,7 @@
 <div class="tldr-block tldr-only">
   <div class="tldr-content">
     <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite requiring a landing page visit and a scroll to find it. I restructured the information architecture around where customers actually wanted to go: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
+    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link">View the live site →</a>
   </div>
 </div>
 
@@ -1460,6 +1479,8 @@
   <div class="impact-reflection reveal d1 full-only">
     <span class="impact-reflection-hed">What I'd do differently</span>
     <p class="impact-reflection-body">I'd push harder on the content strategy earlier in the process. The structual decisions were sound, but several solution pages launched with copy that was holdover from the old site. While we addressed the UX in this refresh, the content problem is ongoing, and I should have scoped it explicitly rather than treating as a background task.</p>
+    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link">View the live site →</a>
+  </div>
 </section>
 
 <!-- NEXT PROJECT -->
