@@ -1181,9 +1181,9 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    margin-top: var(--s4);
-    padding: 10px 16px;
+    padding: 14px 56px;
     border: 1px solid var(--ink);
     border-radius: 2px;
     position: relative;
@@ -1209,20 +1209,13 @@
   .live-site-link:hover { color: var(--bg); }
   .live-site-link:hover::before { transform: scaleX(1); }
 
-  /* ─── SITE LINK BAR (TLDR bottom) ────── */
-  .site-link-bar {
-    padding: 0 var(--pad) var(--s5);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-  .site-link-bar .live-site-link {
-    grid-column: 8 / 12;
-    margin-top: 0;
-    justify-self: start;
-  }
-  @media (max-width: 960px) {
-    .site-link-bar .live-site-link { grid-column: 1 / 13; }
+  /* ─── CASE STUDY CTA ─────────────────── */
+  .cs-cta {
+    padding: var(--s6) var(--pad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--faint);
   }
 
   /* ─── iOS safe area ───────────────────── */
@@ -1514,12 +1507,11 @@
   <div class="impact-reflection reveal d1 full-only">
     <span class="impact-reflection-hed">What I'd do differently</span>
     <p class="impact-reflection-body">I'd push harder on the content strategy earlier in the process. The structual decisions were sound, but several solution pages launched with copy that was holdover from the old site. While we addressed the UX in this refresh, the content problem is ongoing, and I should have scoped it explicitly rather than treating as a background task.</p>
-    <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link"><span>View the live site →</span></a>
   </div>
 </section>
 
-<!-- TLDR: site link at bottom, mirrors full-view position -->
-<div class="site-link-bar reveal tldr-only">
+<!-- LIVE SITE CTA — shown in both views -->
+<div class="cs-cta reveal">
   <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link"><span>View the live site →</span></a>
 </div>
 
