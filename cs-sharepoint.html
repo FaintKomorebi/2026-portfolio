@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SharePoint IA — Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ece6;
+    --ink: #131313;
+    --mid: #6e6b65;
+    --faint: #e2ddd7;
+    --dim-bg: #e8e4de;
+    --sans: 'IBM Plex Sans', Helvetica Neue, sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --pad: 60px;
+    --s1: 8px;
+    --s2: 16px;
+    --s3: 24px;
+    --s4: 40px;
+    --s5: 64px;
+    --s6: 96px;
+    --s7: 140px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+  }
+
+  .nav-back {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.18s;
+  }
+  .nav-back:hover { color: var(--ink); }
+  .nav-back-arrow { transition: transform 0.18s; }
+  .nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+
+  .nav-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  /* ─── REVEAL ─────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: 0.12s; }
+
+  /* ─── HERO ───────────────────────────── */
+  .hero {
+    padding: 160px var(--pad) var(--s7);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+    align-items: end;
+  }
+
+  .hero-left { grid-column: 1 / 9; }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: block;
+    margin-bottom: var(--s3);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: var(--s4);
+  }
+
+  .hero-title em { font-style: italic; }
+
+  .hero-summary {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--mid);
+    max-width: 520px;
+    letter-spacing: -0.005em;
+  }
+
+  .hero-right {
+    grid-column: 10 / 13;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+    padding-bottom: 8px;
+  }
+
+  .hm {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .hm-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .hm-value {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  .hm-active {
+    color: #a06830;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .hm-active::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a06830;
+    flex-shrink: 0;
+    animation: pulse-amber 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-amber {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── HERO IMAGE ─────────────────────── */
+  .hero-image {
+    width: 100%;
+    background: #1c1e2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s5) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-screenshot {
+    width: 72%;
+    height: auto;
+    display: block;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.45), 0 6px 24px rgba(0,0,0,0.25);
+    border-radius: 3px;
+  }
+
+  .image-caption {
+    padding: 16px var(--pad);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+
+  /* ─── SECTION WRAPPER ────────────────── */
+  .section {
+    padding: var(--s7) var(--pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .section-index { grid-column: 1 / 2; }
+
+  .section-index span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .section-content { grid-column: 2 / 7; }
+  .section-aside { grid-column: 8 / 12; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: block;
+    margin-bottom: var(--s4);
+  }
+
+  .section-hed {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--s4);
+  }
+
+  .section-body {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .section-body + .section-body { margin-top: var(--s3); }
+  .section-body em { font-style: italic; }
+
+  /* ─── ASIDE ──────────────────────────── */
+  .aside-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+    padding-top: 6px;
+  }
+
+  .aside-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .aside-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .aside-value {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ─── DRIVE / IA COMPARE ─────────────── */
+  .ia-compare {
+    padding: 0 var(--pad) var(--s7);
+  }
+
+  .ia-compare-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: var(--s5);
+    display: block;
+  }
+
+  .ia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s5);
+    align-items: start;
+  }
+
+  .ia-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+  }
+
+  .ia-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--s1);
+  }
+
+  .ia-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mid);
+    flex-shrink: 0;
+  }
+
+  .ia-dot-after { background: var(--ink); }
+
+  /* Tree */
+  .tree {
+    border: 1px solid var(--faint);
+    border-radius: 4px;
+    padding: var(--s3);
+  }
+
+  .tree-root {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding-bottom: var(--s2);
+    margin-bottom: var(--s2);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .tree ul { list-style: none; padding: 0; margin: 0; }
+  .tree > ul > li { padding: 2px 0; }
+
+  .tree ul ul {
+    padding-left: 14px;
+    margin: 2px 0 2px 8px;
+    position: relative;
+  }
+
+  .tree ul ul::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 2px; bottom: 8px;
+    border-left: 1px solid var(--faint);
+  }
+
+  .tree ul ul > li {
+    position: relative;
+    padding: 2px 0 2px 14px;
+  }
+
+  .tree ul ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 10px;
+    border-top: 1px solid var(--faint);
+  }
+
+  .tree span {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  .tree-muted { color: var(--mid) !important; }
+
+  .tree-path {
+    background: rgba(185, 115, 45, 0.13);
+    color: #a06830 !important;
+    border-radius: 2px;
+    padding: 1px 5px;
+    margin-left: -5px;
+  }
+
+  .tree-problem {
+    background: rgba(160, 60, 60, 0.09);
+    color: #9a3838 !important;
+    border-radius: 2px;
+    padding: 1px 5px;
+    margin-left: -5px;
+  }
+
+  .tree-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    margin-top: var(--s2);
+    padding-top: var(--s2);
+    border-top: 1px solid var(--faint);
+    display: block;
+  }
+
+  .tree-note mark {
+    background: #fef08a;
+    color: var(--ink);
+    padding: 1px 4px;
+    border-radius: 1px;
+  }
+
+  .ia-annotation {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* ─── DECISION SECTION ───────────────── */
+  .decision-section {
+    padding: 0 var(--pad) var(--s7);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .decision-index { grid-column: 1 / 2; }
+
+  .decision-index span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .decision-content { grid-column: 2 / 7; }
+
+  .decision-pull {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.8vw, 34px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--s5);
+    max-width: 600px;
+    padding-left: var(--s4);
+    border-left: 2px solid var(--faint);
+  }
+
+  .decision-body {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: var(--s3);
+    max-width: 560px;
+  }
+
+  .decision-body em { font-style: italic; }
+
+  .decision-options {
+    grid-column: 8 / 12;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+    padding-top: 6px;
+  }
+
+  .option {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--s3);
+    background: var(--dim-bg);
+    border-radius: 3px;
+  }
+
+  .option.chosen { background: var(--ink); }
+
+  .option-status {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .option.chosen .option-status { color: rgba(255,255,255,0.45); }
+
+  .option-label {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .option.chosen .option-label { color: #fff; }
+
+  .option-reason {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .option.chosen .option-reason { color: rgba(255,255,255,0.5); }
+
+  /* ─── SURVEY QUOTES ──────────────────── */
+  .quotes-section {
+    padding: 0 var(--pad) var(--s7);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .quotes-index { grid-column: 1 / 2; }
+
+  .quotes-index span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .quotes-content {
+    grid-column: 2 / 11;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+  }
+
+  .survey-quote {
+    padding: var(--s3) var(--s4);
+    border-left: 2px solid var(--faint);
+  }
+
+  .survey-quote-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .survey-quote-attr {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+
+  /* ─── DECISIONS LOG ──────────────────── */
+  .decisions-log {
+    padding: 0 var(--pad) var(--s7);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .decisions-log-index { grid-column: 1 / 2; }
+
+  .decisions-log-index span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .decisions-log-content {
+    grid-column: 2 / 13;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s4) var(--s5);
+  }
+
+  .decision-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: var(--s3);
+    border-top: 1px solid var(--faint);
+  }
+
+  .decision-card-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--mid);
+  }
+
+  .decision-card-hed {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .decision-card-body {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  .decision-card-skill {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+
+  /* ─── SCREENS / WHAT'S BUILT ─────────── */
+  .screens-section {
+    padding: 0 var(--pad) var(--s7);
+  }
+
+  .screens-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: var(--s5);
+    display: block;
+  }
+
+  .screens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s4);
+  }
+
+  .screen-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .screen-shot {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 3px;
+    border: 1px solid var(--faint);
+  }
+
+  .screen-caption {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+
+  .screen-desc {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* ─── PROGRESS / STATUS ──────────────── */
+  .progress-section {
+    padding: var(--s7) var(--pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s3);
+  }
+
+  .progress-index { grid-column: 1 / 2; }
+
+  .progress-index span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .progress-content { grid-column: 2 / 7; }
+
+  .progress-hed {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--s4);
+  }
+
+  .progress-body {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--mid);
+    letter-spacing: -0.005em;
+  }
+
+  .progress-aside { grid-column: 8 / 13; }
+
+  .progress-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .progress-group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding-top: var(--s3);
+    margin-bottom: var(--s2);
+    border-top: 1px solid var(--faint);
+  }
+
+  .progress-group-label:first-child { padding-top: 0; border-top: none; }
+
+  .progress-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.4;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .progress-check {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #a06830;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .progress-check.open { color: var(--mid); }
+
+  /* ─── FOOTER ─────────────────────────── */
+  footer {
+    padding: var(--s4) var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--faint);
+  }
+
+  .footer-t {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+
+  /* ─── MOBILE ─────────────────────────── */
+  @media (max-width: 960px) {
+    :root { --pad: 28px; }
+
+    .hero { padding-top: 120px; grid-template-columns: 1fr; }
+    .hero-left { grid-column: 1; }
+    .hero-right { grid-column: 1; flex-direction: row; flex-wrap: wrap; gap: var(--s3); }
+    .hero-screenshot { width: 90%; }
+
+    .section { padding: var(--s6) var(--pad); }
+    .section-index { display: none; }
+    .section-content { grid-column: 1 / 13; }
+    .section-aside { grid-column: 1 / 13; }
+
+    .ia-compare { padding: 0 var(--pad) var(--s6); }
+    .ia-grid { grid-template-columns: 1fr; }
+
+    .decision-section { padding: 0 var(--pad) var(--s6); }
+    .decision-index { display: none; }
+    .decision-content { grid-column: 1 / 13; }
+    .decision-options { grid-column: 1 / 13; }
+
+    .quotes-section { padding: 0 var(--pad) var(--s6); }
+    .quotes-index { display: none; }
+    .quotes-content { grid-column: 1 / 13; }
+
+    .decisions-log { padding: 0 var(--pad) var(--s6); }
+    .decisions-log-index { display: none; }
+    .decisions-log-content { grid-column: 1 / 13; grid-template-columns: 1fr; }
+
+    .screens-section { padding: 0 var(--pad) var(--s6); }
+    .screens-grid { grid-template-columns: 1fr; }
+
+    .progress-section { padding: var(--s6) var(--pad); }
+    .progress-index { display: none; }
+    .progress-content { grid-column: 1 / 13; }
+    .progress-aside { grid-column: 1 / 13; }
+  }
+
+  @media (max-width: 640px) {
+    :root { --pad: 20px; }
+    .hero-title { font-size: clamp(46px, 12vw, 64px); }
+  }
+
+  @media (max-width: 480px) {
+    :root { --pad: 14px; }
+    .hero-title { font-size: clamp(40px, 12vw, 58px); }
+    .nav-name { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <span class="nav-back-arrow">←</span>
+    <span>All Work</span>
+  </a>
+  <a href="index.html" class="nav-name">Noah Schilling</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">2026 · Enterprise · Internal Systems</span>
+    <h1 class="hero-title">Replacing a decade of file chaos with <em>one intentional system</em></h1>
+    <p class="hero-summary">ACRO Automation Systems had ~40 employees saving files across 10+ network drives, personal OneDrives, local machines, and desktops — with no naming conventions and no shared sense of where anything lived. The mandate was to migrate to SharePoint. The opportunity was to design a system that actually worked.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hm">
+      <span class="hm-label">My Role</span>
+      <span class="hm-value">Project Lead</span>
+    </div>
+    <div class="hm">
+      <span class="hm-label">Timeline</span>
+      <span class="hm-value">2026</span>
+    </div>
+    <div class="hm">
+      <span class="hm-label">Status</span>
+      <span class="hm-value hm-active">Active · In Progress</span>
+    </div>
+  </div>
+</section>
+
+<!-- HERO IMAGE -->
+<div class="hero-image reveal">
+  <img class="hero-screenshot" src="resources/sp-homepage.png" alt="ACRO SharePoint homepage showing department tiles">
+</div>
+<p class="image-caption reveal">Fig. 1 — ACRO SharePoint Homepage · Company-wide entry point with department navigation</p>
+
+<!-- OVERVIEW -->
+<section class="section">
+  <div class="section-index"><span>Overview</span></div>
+  <div class="section-content reveal">
+    <span class="section-label">01 — Context</span>
+    <h2 class="section-hed">A 40-person company with no shared understanding of where anything lives.</h2>
+    <p class="section-body">ACRO ran on 10+ mapped network drives — G, I, J, K, L, Q, T, X, Z, and others — each evolved independently, without structure or ownership. Departments had their own drives but also saved to shared ones. Personal folders lived next to company-wide resources with no separation. Nobody had a clear mental model of where to look for anything. Nobody was wrong to be confused.</p>
+    <p class="section-body" style="color:var(--mid);">A Microsoft 365 migration was already planned. The question was whether to drag the existing mess into SharePoint, or use the migration as a forcing function to design something intentional. The company needed a file system that worked for the people using it every day — not just one that was technically migrated.</p>
+  </div>
+  <div class="section-aside reveal d1">
+    <div class="aside-block">
+      <div class="aside-item">
+        <span class="aside-label">The brief</span>
+        <span class="aside-value">Migrate department files off legacy network drives into SharePoint. Move fast where possible.</span>
+      </div>
+      <div class="aside-item">
+        <span class="aside-label">The real problem</span>
+        <span class="aside-value">No information architecture existed to migrate into. A direct copy would relocate the chaos, not fix it.</span>
+      </div>
+      <div class="aside-item">
+        <span class="aside-label">Constraints</span>
+        <span class="aside-value">Engineering CAD deferred — requires a PDM system, not SharePoint. Marketing media excluded — SharePoint's media UX is too poor. Varying tech literacy across ~40 staff. One software tool (RoboGuide) silently fails on paths longer than ~100 characters.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IA BEFORE / AFTER -->
+<div class="ia-compare reveal">
+  <span class="ia-compare-label">Information Architecture</span>
+  <div class="ia-grid">
+
+    <div class="ia-panel">
+      <div class="ia-tag">
+        <span class="ia-dot"></span>
+        Before — 10+ disconnected drives
+      </div>
+      <div class="tree">
+        <div class="tree-root">Drive Inventory · No single root</div>
+        <ul>
+          <li><span>G: / T: Sales files</span></li>
+          <li><span>I: Engineering tools &amp; dept files</span></li>
+          <li><span class="tree-path">J: Common — de facto company forms library</span></li>
+          <li><span class="tree-problem">K: Shared + personal folders (anti-pattern)</span>
+            <ul>
+              <li><span class="tree-problem">K:\nschilling — personal files in shared space</span></li>
+              <li><span class="tree-problem">K:\LHeggernes</span></li>
+              <li><span class="tree-muted">...a personal folder for every employee</span></li>
+            </ul>
+          </li>
+          <li><span>L: EPLAN electrical files</span></li>
+          <li><span>Q: SolidWorks library</span></li>
+          <li><span class="tree-problem">Z: Engineering — 400+ numbered project folders</span></li>
+          <li><span class="tree-muted">Personal OneDrives (unmanaged)</span></li>
+          <li><span class="tree-muted">Local machine drives &amp; desktops</span></li>
+        </ul>
+        <span class="tree-note"><mark>No root. No model. Every department its own island.</mark></span>
+      </div>
+      <p class="ia-annotation">When a new employee asked where to save a file, they got a different answer from every person they asked. Nobody was lying — everyone had built their own working model of a system that had no real structure.</p>
+    </div>
+
+    <div class="ia-panel">
+      <div class="ia-tag">
+        <span class="ia-dot ia-dot-after"></span>
+        After — SharePoint · Two-tier architecture
+      </div>
+      <div class="tree">
+        <div class="tree-root">ACRO SharePoint · One root</div>
+        <ul>
+          <li><span class="tree-path">Resources — Company-wide, self-service</span>
+            <ul>
+              <li><span>Forms &amp; Templates</span></li>
+              <li><span>HR Policies &amp; Handbook</span></li>
+              <li><span>Branding &amp; Assets</span></li>
+              <li><span>Safety Documentation</span></li>
+            </ul>
+          </li>
+          <li><span class="tree-path">Department Team Sites — Operational</span>
+            <ul>
+              <li><span>HR</span></li>
+              <li><span>Sales</span></li>
+              <li><span>IT</span></li>
+              <li><span>Administration</span></li>
+              <li><span>Machine Shop</span></li>
+              <li><span>Assembly &amp; Service</span></li>
+              <li><span>Purchasing &amp; Shipping</span></li>
+              <li><span>Controls Engineering</span></li>
+              <li><span class="tree-muted">Mechanical Engineering (non-CAD)</span></li>
+            </ul>
+          </li>
+          <li><span class="tree-muted">Engineering CAD → PDM system (separate project)</span></li>
+        </ul>
+        <span class="tree-note"><mark>One rule: company-wide = Resources, dept-specific = Team Site.</mark></span>
+      </div>
+      <p class="ia-annotation">The rule eliminates ambiguity at the system level. Users don't guess which drive to check — they know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- DISCOVERY -->
+<section class="section">
+  <div class="section-index"><span>Discovery</span></div>
+  <div class="section-content reveal">
+    <span class="section-label">02 — Research</span>
+    <h2 class="section-hed">Survey first. Structure second.</h2>
+    <p class="section-body">Rather than arriving with a structure, discovery was designed to surface what already existed — how people actually worked, where files actually lived, and what the pain points actually were. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
+    <p class="section-body" style="color:var(--mid);">Two discoveries changed the project scope. J: drive had organically evolved into a de facto company-wide forms library — users already had a mental model for it. The Resources page was built directly on top of it rather than replacing it. K: drive revealed the opposite: an anti-pattern where personal folders for nearly every employee sat alongside shared department files with no separation or governance. That doesn't get migrated. The migration is the forcing function to end it.</p>
+  </div>
+  <div class="section-aside reveal d1">
+    <div class="aside-block">
+      <div class="aside-item">
+        <span class="aside-label">Survey</span>
+        <span class="aside-value">14 respondents across Engineering, Sales, Admin, Machining, Shop. April 2026.</span>
+      </div>
+      <div class="aside-item">
+        <span class="aside-label">Top complaint</span>
+        <span class="aside-value">"I don't know where to look." Surfaced independently across every department, every role level.</span>
+      </div>
+      <div class="aside-item">
+        <span class="aside-label">Engineering finding</span>
+        <span class="aside-value">SolidWorks write conflicts cost 15–30 min per incident. Engineers asked for a PDM system by name — independently, without coordination. This confirmed the scope decision to exclude CAD.</span>
+      </div>
+      <div class="aside-item">
+        <span class="aside-label">Sales finding</span>
+        <span class="aside-value">"Wanted to know our most profitable jobs over the last 5 years. This cannot be compiled." A direct business intelligence failure caused by disorganization.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY QUOTES -->
+<section class="quotes-section">
+  <div class="quotes-index"><span>Voices</span></div>
+  <div class="quotes-content reveal">
+    <div class="survey-quote">
+      <p class="survey-quote-text">"Even after working at ACRO for 10 months, it is challenging to find documents that I need to use fairly frequently like design standards."</p>
+      <span class="survey-quote-attr">Sophia Meinshausen — Mechanical Engineering</span>
+    </div>
+    <div class="survey-quote">
+      <p class="survey-quote-text">"There is no QMS type of system that dictates how to organize files, much less a structure within which the files are organized consistent across departments."</p>
+      <span class="survey-quote-attr">Eric Blosser — Mechanical Engineering</span>
+    </div>
+    <div class="survey-quote">
+      <p class="survey-quote-text">"Start a 5S program at ACRO. Sort, set in order, shine, standardize, sustain. Could be applied to ACRO office and shop floor."</p>
+      <span class="survey-quote-attr">Lars Heggernes — Mechanical Engineering</span>
+    </div>
+    <div class="survey-quote">
+      <p class="survey-quote-text">"Wanted to know our most profitable jobs over the last 5 years. This cannot be compiled."</p>
+      <span class="survey-quote-attr">Todd Schilling — Sales</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE DECISION -->
+<section class="decision-section">
+  <div class="decision-index"><span>Decision</span></div>
+  <div class="decision-content reveal">
+    <span class="section-label">03 — The Key Decision</span>
+    <blockquote class="decision-pull">
+      "A migration is a design opportunity. The mess wasn't random — it was the company's latent information architecture waiting to be made intentional."
+    </blockquote>
+    <p class="decision-body">The biggest failure mode in an enterprise file system is ambiguity: people don't know where to look, files get duplicated, and no version is ever clearly the right one. The two-tier architecture was built on one rule — company-wide files live in Resources; department-specific files live in Team Sites. That rule makes every file decision obvious. There's no grey area, no "which version is current."</p>
+    <p class="decision-body" style="color:var(--mid);">Departments were not asked to let someone organize their files for them. They were given the destination structure and the responsibility to clean their own drives before migration. This is change management as design: if a third party organizes it, nobody owns it. Adoption fails when people feel a system was done <em>to</em> them rather than <em>with</em> them.</p>
+    <p class="decision-body" style="color:var(--mid);">The pilot department was HR — 2 users, all Word and Excel, low risk, already in motion. Every lesson learned (structure, permissions, migration tool behavior, user friction) gets baked into the playbook before rolling to larger departments. A pilot should be low-stakes and high-signal.</p>
+  </div>
+  <div class="decision-options reveal d1">
+    <div class="option">
+      <span class="option-status">Considered</span>
+      <span class="option-label">Single flat library — all files in one place</span>
+      <span class="option-reason">Simpler to set up. Without departmental separation, shared-drive problems recur in a new location.</span>
+    </div>
+    <div class="option">
+      <span class="option-status">Considered</span>
+      <span class="option-label">Organize the files for each department</span>
+      <span class="option-reason">Faster short-term, but departments don't own what they didn't build. Adoption depends on ownership. Ruled out on change management grounds.</span>
+    </div>
+    <div class="option chosen">
+      <span class="option-status">Chosen</span>
+      <span class="option-label">Two-tier: Resources + Department Team Sites</span>
+      <span class="option-reason">One clear rule eliminates ambiguity. Departments own their own structure. The architecture scales to new departments without redesign.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DECISIONS LOG -->
+<section class="decisions-log">
+  <div class="decisions-log-index"><span>Decisions</span></div>
+  <div class="decisions-log-content reveal">
+    <div class="decision-card">
+      <span class="decision-card-num">D-01</span>
+      <span class="decision-card-hed">HR as the pilot department</span>
+      <p class="decision-card-body">2 users. All Word and Excel. Low risk, high signal. Every friction point discovered in HR gets resolved before Sales or Engineering sees it. Lessons compound into a reusable playbook.</p>
+      <span class="decision-card-skill">Risk Management · Iterative Rollout</span>
+    </div>
+    <div class="decision-card">
+      <span class="decision-card-num">D-02</span>
+      <span class="decision-card-hed">Flat folder structure to start</span>
+      <p class="decision-card-body">Every department begins with a single flat layer of top-level folders. No subfolders until the department proves they need them. Deep hierarchies are how drives become unnavigable.</p>
+      <span class="decision-card-skill">Information Architecture · Scalability</span>
+    </div>
+    <div class="decision-card">
+      <span class="decision-card-num">D-03</span>
+      <span class="decision-card-hed">Old drive stays read-only during transition</span>
+      <p class="decision-card-body">After migration, the source drive remains accessible read-only for 2–3 weeks. Change anxiety is real. A safety net removes fear, which removes resistance. Access removed only after department sign-off.</p>
+      <span class="decision-card-skill">Change Management · User Psychology</span>
+    </div>
+    <div class="decision-card">
+      <span class="decision-card-num">D-04</span>
+      <span class="decision-card-hed">SPMT over drag-and-drop</span>
+      <p class="decision-card-body">Microsoft's SharePoint Migration Tool maps source paths to destinations, produces a migration log, and is repeatable and auditable. Drag-and-drop at volume loses files, drops metadata, and leaves no record of what moved where.</p>
+      <span class="decision-card-skill">Technical Product Thinking · Data Integrity</span>
+    </div>
+    <div class="decision-card">
+      <span class="decision-card-num">D-05</span>
+      <span class="decision-card-hed">Engineering CAD gets a different solution</span>
+      <p class="decision-card-body">SharePoint is a document management platform. SolidWorks files have parametric references, assembly dependencies, and version control requirements SharePoint cannot handle. Engineers asked for a PDM system by name. Scoping what NOT to do is as important as scoping what to do.</p>
+      <span class="decision-card-skill">Systems Thinking · Platform Selection · Scope Definition</span>
+    </div>
+    <div class="decision-card">
+      <span class="decision-card-num">D-06</span>
+      <span class="decision-card-hed">Designing for Copilot before it exists</span>
+      <p class="decision-card-body">M365 Copilot search quality is directly tied to how well files are named and organized. Structure decisions are being made with Copilot in mind now — so the company gets compounding value from it on day one, with no second cleanup project required.</p>
+      <span class="decision-card-skill">Future-State Design · Platform Thinking · Technical Foresight</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S BEEN BUILT -->
+<div class="screens-section reveal">
+  <span class="screens-label">Work In Progress · What's Been Built</span>
+  <div class="screens-grid">
+    <div class="screen-item">
+      <img class="screen-shot" src="resources/sp-homepage.png" alt="ACRO SharePoint homepage with department tiles">
+      <span class="screen-caption">SharePoint Homepage · April 2026</span>
+      <p class="screen-desc">Company-wide entry point. Department tiles link directly to each team's site. A new employee can orient in seconds without asking anyone where to go.</p>
+    </div>
+    <div class="screen-item">
+      <img class="screen-shot" src="resources/sp-it-site.png" alt="ACRO IT department team site">
+      <span class="screen-caption">IT Department Team Site · May 2026</span>
+      <p class="screen-desc">Individual department site structure — quick-links to external tools, a documents section for IT-specific files, and a layout that each department site follows as a template.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS -->
+<section class="progress-section">
+  <div class="progress-index"><span>Status</span></div>
+  <div class="progress-content reveal">
+    <span class="section-label">04 — Where This Stands</span>
+    <h2 class="progress-hed">Active project. Outcomes being tracked.</h2>
+    <p class="progress-body">This case study is being built in real time. The architecture is designed and deployed. Department migrations are rolling out in phases. Outcomes — adoption rates, time-to-find improvement, reduction in "where is X?" requests — will be logged here as data becomes available and the migration progresses through remaining departments.</p>
+  </div>
+  <div class="progress-aside reveal d1">
+    <div class="progress-list">
+      <span class="progress-group-label">Shipped</span>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>Two-tier information architecture designed and deployed</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>Company-wide SharePoint homepage live</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>14-person survey completed and analyzed</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>All 10+ network drives inventoried and classified</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>HR pilot migration complete</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check">✓</span>
+        <span>Resources page live (built from J: drive foundation)</span>
+      </div>
+      <span class="progress-group-label">In Flight</span>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>Sales department migration</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>Admin department migration</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>K: drive personal folder retirement</span>
+      </div>
+      <span class="progress-group-label">Planned</span>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>Engineering PDM project scoped and started</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>Remaining departments migrated</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-check open">○</span>
+        <span>Copilot rollout — search quality evaluation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-t">© 2026 Noah Schilling</span>
+  <a href="index.html" class="footer-t" style="color:var(--mid);text-decoration:none;">Back to all work</a>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
