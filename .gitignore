@@ -1,0 +1,11 @@
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Raw/source video and working files
+assets/acro/acro-robot-pngs/
+assets/acro/acro-robot.zip
+assets/acro/*-raw.mov
