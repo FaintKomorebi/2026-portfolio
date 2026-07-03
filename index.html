@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah Schilling, Product Designer</title>
-<meta name="description" content="Noah Schilling, product designer based in Milwaukee, Wisconsin.">
+<title>Noah Schilling · Product Designer</title>
+<meta name="description" content="Noah Schilling, product designer in Milwaukee, Wisconsin. Case studies in web redesign and information architecture.">
 <style>
   @font-face {
     font-family: 'SF Pro Display';
@@ -36,232 +36,221 @@
   }
 
   :root {
-    --ink:   #111113;
-    --mid:   #6e6e73;
-    --soft:  #b9b9be;
-    --faint: #d6d6db;
-    --hair:  #ececf0;
+    --paper: #ffffff;
+    --ink:   #0b0b0e;
+    --grey:  #54545e;
+    --soft:  #8f8f99;
+    --hair:  #e7e7ec;
+    --panel: #f4f4f6;
+    --accent:#2545e0;
+    --sans: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --pad: clamp(20px, 5vw, 64px);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #ffffff;
+    background: var(--paper);
     color: var(--ink);
-    font-family: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    font-family: var(--sans);
     font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
     min-height: 100svh;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--ink); color: var(--paper); }
 
-  /* name · fixed top left */
-  .site-name {
-    position: fixed;
-    top: clamp(24px, 4vh, 40px);
-    left: clamp(24px, 4vw, 48px);
-    font-size: 14px;
-    font-style: italic;
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
     font-weight: 400;
-    color: var(--mid);
-    letter-spacing: 0.01em;
-    z-index: 10;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
   }
 
-  /* page · content lives in the right half */
-  .page {
-    min-height: 100svh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+  /* ── hero ─────────────────────────────── */
+  .hero { padding: clamp(96px, 18vh, 200px) 0 clamp(72px, 11vh, 128px); }
+
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 104px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+    margin-bottom: clamp(28px, 4.5vh, 48px);
   }
 
-  .content {
-    grid-column: 2;
-    padding: clamp(96px, 14vh, 160px) clamp(32px, 6vw, 96px) clamp(72px, 10vh, 120px) clamp(8px, 2vw, 32px);
-  }
-
-  .intro {
-    font-size: clamp(17px, 1.7vw, 19px);
+  .hero p {
+    font-size: clamp(17px, 1.7vw, 20px);
     font-weight: 400;
-    line-height: 1.55;
-    max-width: 30ch;
-    margin-bottom: clamp(44px, 7vh, 72px);
+    line-height: 1.6;
+    color: var(--grey);
+    max-width: 52ch;
   }
 
-  /* two column index */
-  .index {
+  /* ── section head rule ────────────────── */
+  .rule-head {
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: clamp(20px, 3.5vh, 36px);
+  }
+
+  /* ── work index ───────────────────────── */
+  .work { padding-bottom: clamp(72px, 11vh, 128px); }
+
+  .work-item {
+    display: block;
+    padding: clamp(30px, 4.5vh, 44px) 0;
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .work-title {
+    font-size: clamp(27px, 3.8vw, 46px);
+    font-weight: 300;
+    letter-spacing: -0.022em;
+    line-height: 1.06;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+
+  .work-arrow {
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--soft);
+    flex-shrink: 0;
+    transition: transform 0.22s ease, color 0.22s ease;
+  }
+
+  a.work-item:hover .work-arrow { transform: translateX(6px); color: var(--ink); }
+
+  .work-desc {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.6;
+    margin-top: 12px;
+    max-width: 52ch;
+  }
+
+  .work-meta { display: block; margin-top: 16px; font-size: 10px; }
+
+  .work-item.stub { cursor: default; }
+  .work-item.stub .work-title { color: var(--soft); }
+  .work-item.stub .work-desc { color: var(--soft); }
+
+  /* ── contact ──────────────────────────── */
+  .contact { padding-bottom: clamp(96px, 14vh, 160px); }
+
+  .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(40px, 5vw, 72px);
+    gap: 16px 56px;
+    padding-top: 8px;
   }
 
-  .col h2 {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--soft);
-    margin-bottom: 14px;
+  .contact-links a {
+    font-size: 17px;
+    line-height: 1.4;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease;
   }
 
-  .col ul {
-    list-style: none;
+  .contact-links a:hover { border-color: var(--ink); }
+
+  /* ── footer ───────────────────────────── */
+  footer {
+    border-top: 1px solid var(--hair);
+    padding: 22px 0 56px;
     display: flex;
-    flex-direction: column;
-    gap: 9px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .col li {
-    font-size: 15px;
-    line-height: 1.45;
-    color: var(--mid);
-  }
+  footer .tag { font-size: 10px; }
 
-  .col a, .col button {
-    display: inline-block;
-    transition: color 0.18s ease;
-  }
-
-  .col a:hover, .col button:hover { color: var(--ink); }
-
-  .col button {
-    font: inherit;
-    color: inherit;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    padding: 0;
-  }
-
-  .muted { color: var(--faint); }
-
-  /* info popup */
-  .overlay {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.7);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.22s ease, visibility 0.22s ease;
-    z-index: 20;
-  }
-
-  .overlay.open { opacity: 1; visibility: visible; }
-
-  .card {
-    background: #ffffff;
-    border: 1px solid var(--hair);
-    border-radius: 10px;
-    box-shadow: 0 12px 40px rgba(17, 17, 19, 0.07);
-    padding: 30px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transform: translateY(6px);
-    transition: transform 0.22s ease;
-  }
-
-  .overlay.open .card { transform: none; }
-
-  .card a {
-    font-size: 15px;
-    color: var(--mid);
-    transition: color 0.18s ease;
-  }
-
-  .card a:hover { color: var(--ink); }
-
-  /* single pass on load */
+  /* ── load animation ───────────────────── */
   .rise {
     opacity: 0;
-    transform: translateY(10px);
-    animation: rise 0.46s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    transform: translateY(12px);
+    animation: rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
   }
+  .rise.d1 { animation-delay: 0.08s; }
+  .rise.d2 { animation-delay: 0.16s; }
+  .rise.d3 { animation-delay: 0.24s; }
 
-  .rise.d1 { animation-delay: 0.12s; }
-
-  @keyframes rise {
-    to { opacity: 1; transform: none; }
-  }
+  @keyframes rise { to { opacity: 1; transform: none; } }
 
   @media (prefers-reduced-motion: reduce) {
     .rise { animation: none; opacity: 1; transform: none; }
-    .overlay, .card { transition: none; }
+    .work-arrow { transition: none; }
   }
 
-  /* mobile */
-  @media (max-width: 860px) {
-    .page { grid-template-columns: 1fr; align-items: start; }
-    .content {
-      grid-column: 1;
-      padding: clamp(110px, 18vh, 150px) clamp(24px, 6vw, 48px) 80px;
-    }
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 640px) {
+    .hero { padding-top: clamp(72px, 14vh, 120px); }
+    .contact-links { flex-direction: column; gap: 18px; }
+    footer { flex-direction: column; gap: 8px; }
   }
 </style>
 </head>
 <body>
 
-<span class="site-name">Noah Schilling</span>
+<main class="wrap">
 
-<main class="page">
-  <div class="content">
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="rise">Noah Schilling</h1>
+    <p class="rise d1">Product designer in Milwaukee, Wisconsin, open to remote. I redesign the systems people rely on every day: a 90-year manufacturer's public website, an 80-person company's information architecture.</p>
+  </section>
 
-    <p class="intro rise">Hi, I'm Noah. A product designer based in Milwaukee, Wisconsin.</p>
+  <!-- WORK -->
+  <section class="work rise d2" aria-label="Selected work">
+    <div class="rule-head"><span class="tag">Selected Work</span></div>
 
-    <div class="index rise d1">
-      <section class="col">
-        <h2>Successes</h2>
-        <ul>
-          <li><a href="cs-acro.html">Legacy turned modern website</a></li>
-          <li><a href="cs-sharepoint.html">How we find anything now</a></li>
-          <li class="muted">The Taylor Swift problem</li>
-        </ul>
-      </section>
-      <section class="col">
-        <h2>Contact</h2>
-        <ul>
-          <li><a href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume</a></li>
-          <li><button id="info-btn" type="button" aria-haspopup="dialog">Info</button></li>
-        </ul>
-      </section>
+    <a class="work-item" href="cs-acro.html">
+      <span class="work-title">ACRO Automation Systems <span class="work-arrow" aria-hidden="true">&rarr;</span></span>
+      <span class="work-desc">A 29-page website restructured around where customers were already going.</span>
+      <span class="work-meta tag">2025 &middot; Website Redesign &middot; +28% Session Duration &middot; 1.4&times; Inquiries</span>
+    </a>
+
+    <a class="work-item" href="cs-sharepoint.html">
+      <span class="work-title">SharePoint Information Architecture <span class="work-arrow" aria-hidden="true">&rarr;</span></span>
+      <span class="work-desc">Replacing ten unstructured network drives with one system an 80-person company can navigate.</span>
+      <span class="work-meta tag">2026 &middot; Information Architecture &middot; In Progress</span>
+    </a>
+
+    <div class="work-item stub">
+      <span class="work-title">Lincoln Nautilus Infotainment Critique</span>
+      <span class="work-desc">A systems-level UX critique of the 2024 Nautilus interior interface.</span>
+      <span class="work-meta tag">2026 &middot; UX Critique &middot; Up Next</span>
     </div>
+  </section>
 
-  </div>
+  <!-- CONTACT -->
+  <section class="contact rise d3" aria-label="Contact">
+    <div class="rule-head"><span class="tag">Contact</span></div>
+    <div class="contact-links">
+      <a href="mailto:nschillingdesign@gmail.com">nschillingdesign@gmail.com</a>
+      <a href="https://linkedin.com/in/noah-schilling" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume &middot; PDF</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="tag">&copy; 2026 Noah Schilling</span>
+    <span class="tag">Milwaukee, WI &middot; Remote Open</span>
+  </footer>
+
 </main>
-
-<div class="overlay" id="overlay" aria-hidden="true">
-  <div class="card" role="dialog" aria-label="Contact information">
-    <a href="mailto:nschillingdesign@gmail.com">nschillingdesign@gmail.com</a>
-    <a href="https://linkedin.com/in/noah-schilling" target="_blank" rel="noopener">LinkedIn</a>
-  </div>
-</div>
-
-<script>
-  const overlay = document.getElementById('overlay');
-  const infoBtn = document.getElementById('info-btn');
-
-  infoBtn.addEventListener('click', () => {
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden', 'false');
-  });
-
-  function closeOverlay() {
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-  }
-
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeOverlay();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeOverlay();
-  });
-</script>
 
 </body>
 </html>

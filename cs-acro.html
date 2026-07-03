@@ -3,395 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACRO — Case Study</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>ACRO Automation Systems · Noah Schilling</title>
+<meta name="description" content="Case study. Redesigning ACRO Automation Systems' 29-page website around where customers actually go. +28% session duration, 1.4x inquiry volume.">
 <style>
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-RegularItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
-    --bg: #f0ece6;
-    --ink: #131313;
-    --mid: #6e6b65;
-    --faint: #e2ddd7;
-    --dim-bg: #e8e4de;
-    --sans: 'IBM Plex Sans', Helvetica Neue, sans-serif;
-    --serif: 'Instrument Serif', Georgia, serif;
-    --mono: 'IBM Plex Mono', monospace;
-    --pad: 60px;
-    --s1: 8px;
-    --s2: 16px;
-    --s3: 24px;
-    --s4: 40px;
-    --s5: 64px;
-    --s6: 96px;
-    --s7: 140px;
+    --paper: #ffffff;
+    --ink:   #0b0b0e;
+    --grey:  #54545e;
+    --soft:  #8f8f99;
+    --hair:  #e7e7ec;
+    --panel: #f4f4f6;
+    --accent:#2545e0;
+    --sans: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --pad: clamp(20px, 5vw, 64px);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.5;
-    overflow-x: hidden;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* ─── NAV ─────────────────────────────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px var(--pad);
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  .tag-ink { color: var(--ink); }
+
+  /* ── header ───────────────────────────── */
+  .top { border-bottom: 1px solid var(--hair); }
+
+  .top-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--bg);
+    padding: 20px 0;
   }
 
-  .nav-back {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.07em;
-    text-decoration: none;
-    color: var(--mid);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.18s;
-  }
-  .nav-back:hover { color: var(--ink); }
-  .nav-back-arrow { transition: transform 0.18s; }
-  .nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+  .top-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
 
-  .nav-name {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.07em;
-    text-decoration: none;
-    color: var(--ink);
+  .top-links { display: flex; gap: 32px; }
+
+  .top-links a { transition: color 0.18s ease; }
+  .top-links a:hover { color: var(--ink); }
+
+  /* ── hero ─────────────────────────────── */
+  .hero { padding: clamp(64px, 11vh, 128px) 0 clamp(44px, 7vh, 72px); }
+
+  .hero .tag { display: block; margin-bottom: clamp(24px, 4vh, 36px); }
+
+  .hero h1 {
+    font-size: clamp(40px, 6.4vw, 88px);
+    font-weight: 300;
+    letter-spacing: -0.028em;
+    line-height: 1.02;
+    max-width: 17ch;
+    margin-bottom: clamp(24px, 4vh, 40px);
   }
 
-  /* ─── HERO ───────────────────────────── */
-  .hero {
-    padding: 160px var(--pad) var(--s7);
+  .hero .lead {
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.6;
+    color: var(--grey);
+    max-width: 56ch;
+  }
+
+  /* ── spec strip · signature element ───── */
+  .spec {
+    border-top: 1px solid var(--ink);
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-    align-items: end;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: clamp(48px, 8vh, 96px);
   }
 
-  .hero-left {
-    grid-column: 1 / 9;
+  .spec > div {
+    border-bottom: 1px solid var(--hair);
+    border-left: 1px solid var(--hair);
+    padding: 16px 20px 20px;
   }
 
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
+  .spec > div:first-child { border-left: none; padding-left: 0; }
+
+  .spec .tag { display: block; font-size: 10px; margin-bottom: 9px; }
+
+  .spec-v { font-size: 14px; line-height: 1.55; }
+
+  /* ── figures ──────────────────────────── */
+  .fig { margin-bottom: clamp(48px, 8vh, 96px); }
+
+  .fig-media {
+    background: var(--panel);
+    padding: clamp(28px, 4.5vw, 64px);
+  }
+
+  .fig-media video,
+  .fig-media img {
     display: block;
-    margin-bottom: var(--s3);
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(52px, 8vw, 110px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: var(--s4);
-  }
-
-  .hero-title em { font-style: italic; }
-
-  .hero-summary {
-    font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--mid);
-    max-width: 520px;
-    letter-spacing: -0.005em;
-  }
-
-  .hero-right {
-    grid-column: 10 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-bottom: 8px;
-  }
-
-  .hm {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .hm-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .hm-value {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.45;
-  }
-
-  /* ─── HERO IMAGE ─────────────────────── */
-  /* Full-bleed mockup placeholder — swap for real screenshot */
-  .hero-image {
     width: 100%;
-    background: var(--bg);
-    aspect-ratio: 16 / 8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-video {
-    width: 72%;
     height: auto;
-    object-fit: contain;
-    display: block;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 6px 24px rgba(0,0,0,0.1);
+    box-shadow: 0 18px 60px rgba(11, 11, 14, 0.12), 0 4px 16px rgba(11, 11, 14, 0.06);
   }
 
-  .hero-image-inner {
-    width: 72%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 6px;
+  .fig figcaption {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 28px;
-    position: relative;
+    align-items: baseline;
+    gap: 16px;
+    padding-top: 13px;
+    border-top: 1px solid var(--hair);
+    margin-top: 0;
   }
 
-  .mock-bar {
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.08);
-  }
+  .fig figcaption .tag { flex-shrink: 0; }
 
-  .mock-bar.w30 { width: 30%; }
-  .mock-bar.w60 { width: 60%; }
-  .mock-bar.w45 { width: 45%; }
-  .mock-bar.w80 { width: 80%; background: rgba(255,255,255,0.12); }
-  .mock-bar.w20 { width: 20%; }
+  .fig-desc { font-size: 13px; color: var(--grey); line-height: 1.5; }
 
-  .mock-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-top: 8px;
-    flex: 1;
-  }
+  /* ── sections ─────────────────────────── */
+  .sec { padding-top: clamp(72px, 12vh, 144px); }
 
-  .mock-card {
-    background: rgba(255,255,255,0.04);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .image-caption {
-    padding: 16px var(--pad);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--mid);
-  }
-
-  /* ─── SECTION WRAPPER ────────────────── */
-  .section {
-    padding: var(--s7) var(--pad);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .section-index {
-    grid-column: 1 / 2;
-  }
-
-  .section-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .section-content {
-    grid-column: 2 / 7;
-  }
-
-  .section-aside {
-    grid-column: 8 / 12;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: var(--s4);
-  }
-
-  .section-hed {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: var(--s4);
-  }
-
-  .section-body {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-  }
-
-  .section-body + .section-body {
-    margin-top: var(--s3);
-  }
-
-  .section-body em {
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  /* Aside callout box */
-  .aside-block {
+  .sec-head {
     display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-top: 6px;
+    align-items: baseline;
+    gap: 16px;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: clamp(36px, 6vh, 64px);
   }
 
-  .aside-item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .sec-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink); }
 
-  .aside-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .aside-value {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-
-  /* ─── SITEMAP COMPARE ────────────────── */
-  .sitemap-compare {
-    padding: 0 var(--pad) var(--s7);
-  }
-
-  .sitemap-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s5);
-    display: block;
-  }
-
-  .sitemap-grid {
+  .sec-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s5);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(40px, 6vw, 96px);
     align-items: start;
   }
 
-  .sitemap-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s3);
+  .sec h2 {
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    max-width: 24ch;
+    margin-bottom: clamp(20px, 3.5vh, 32px);
   }
 
-  .sitemap-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mid);
+  .body {
+    font-size: 16.5px;
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+
+  .body + .body { margin-top: 20px; }
+  .body.dim { color: var(--grey); }
+
+  .aside { display: flex; flex-direction: column; gap: 28px; padding-top: 6px; }
+  .aside .tag { display: block; margin-bottom: 8px; }
+  .aside p { font-size: 14px; line-height: 1.65; color: var(--ink); }
+
+  /* ── sitemap compare ──────────────────── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .panel-tag {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: var(--s1);
+    margin-bottom: 14px;
   }
 
-  .sitemap-dot {
+  .panel-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--mid);
+    background: var(--soft);
     flex-shrink: 0;
   }
 
-  .sitemap-dot-after { background: var(--ink); }
+  .panel-dot.after { background: var(--accent); }
 
-  /* Tree */
-  .tree {
-    border: 1px solid var(--faint);
-    border-radius: 4px;
-    padding: var(--s3);
-  }
+  .tree { border: 1px solid var(--hair); padding: clamp(16px, 2.5vw, 24px); }
 
   .tree-root {
     font-family: var(--mono);
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--mid);
-    padding-bottom: var(--s2);
-    margin-bottom: var(--s2);
-    border-bottom: 1px solid var(--faint);
+    color: var(--soft);
+    padding-bottom: 13px;
+    margin-bottom: 13px;
+    border-bottom: 1px solid var(--hair);
   }
 
-  .tree ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* Second level */
+  .tree ul { list-style: none; padding: 0; margin: 0; }
   .tree > ul > li { padding: 2px 0; }
 
   .tree ul ul {
@@ -403,1151 +259,567 @@
   .tree ul ul::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 8px;
-    border-left: 1px solid var(--faint);
+    left: 0; top: 2px; bottom: 9px;
+    border-left: 1px solid var(--hair);
   }
 
-  .tree ul ul > li {
-    position: relative;
-    padding: 2px 0 2px 14px;
-  }
+  .tree ul ul > li { position: relative; padding: 2px 0 2px 14px; }
 
   .tree ul ul > li::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 11px;
+    left: 0; top: 12px;
     width: 10px;
-    border-top: 1px solid var(--faint);
+    border-top: 1px solid var(--hair);
   }
 
-  /* Third level */
-  .tree ul ul ul {
-    padding-left: 12px;
-    margin: 2px 0 2px 6px;
-  }
-
+  .tree ul ul ul { padding-left: 12px; margin-left: 6px; }
   .tree ul ul ul > li { padding: 1px 0 1px 12px; }
-
-  .tree ul ul ul > li::before { top: 9px; width: 8px; }
+  .tree ul ul ul > li::before { top: 10px; width: 8px; }
 
   .tree span {
     font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 11px;
     color: var(--ink);
-    letter-spacing: 0.04em;
-    line-height: 1.5;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
   }
 
-  /* Intermediate landing pages — the problem */
-  .tree-landing { color: var(--mid) !important; }
+  .t-dim { color: var(--soft) !important; }
 
-  /* Highlighted path — shows the 3-click journey */
-  .tree-path {
-    background: rgba(185, 115, 45, 0.13);
-    color: #a06830 !important;
-    border-radius: 2px;
+  .t-path {
+    color: var(--accent) !important;
+    background: rgba(37, 69, 224, 0.06);
     padding: 1px 5px;
     margin-left: -5px;
+    border-radius: 2px;
   }
 
-  /* Dropdown items — not landing pages, a feature */
-  .tree-dropdown {
-    color: var(--mid) !important;
-    font-style: italic;
-  }
-
-  /* Depth badge */
-  .tree-depth {
+  .tree-note {
+    display: block;
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.1em;
-    color: var(--mid);
-    margin-top: var(--s2);
-    padding-top: var(--s2);
-    border-top: 1px solid var(--faint);
-    display: block;
-  }
-
-  .tree-depth mark {
-    background: #fef08a;
-    color: var(--ink);
-    padding: 1px 4px;
-    border-radius: 1px;
-    font-style: normal;
-  }
-
-  .sitemap-annotation {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.6;
-  }
-
-  @media (max-width: 960px) {
-    .sitemap-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ─── DECISION SECTION ───────────────── */
-  /* This is the key differentiator — showing judgment, not just output */
-  .decision-section {
-    padding: 0 var(--pad) var(--s7);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .decision-index {
-    grid-column: 1 / 2;
-  }
-
-  .decision-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    color: var(--ink);
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--hair);
   }
 
-  .decision-content {
-    grid-column: 2 / 7;
+  .panel-note {
+    font-size: 13.5px;
+    color: var(--grey);
+    line-height: 1.65;
+    margin-top: 16px;
   }
 
-  /* The "what I didn't do" — pull quote style, shows thinking */
-  .decision-pull {
-    font-family: var(--serif);
-    font-size: clamp(22px, 2.8vw, 34px);
-    font-weight: 400;
+  /* ── decision ─────────────────────────── */
+  .pull {
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-weight: 300;
     font-style: italic;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: var(--s5);
-    max-width: 600px;
-    padding-left: var(--s4);
-    border-left: 2px solid var(--faint);
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    max-width: 26ch;
+    padding-left: clamp(20px, 3vw, 36px);
+    border-left: 1px solid var(--ink);
+    margin-bottom: clamp(28px, 5vh, 48px);
   }
 
-  .decision-body {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    margin-bottom: var(--s3);
-    max-width: 560px;
-  }
+  .opts { border-top: 1px solid var(--hair); margin-top: 6px; }
 
-  .decision-options {
-    grid-column: 8 / 12;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s3);
-    padding-top: 6px;
-  }
-
-  .decision-options-tldr {
-    justify-content: center;
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.6;
-  }
-
-  /* Options considered — shows you explored, not just executed */
-  .option {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: var(--s3);
-    background: var(--dim-bg);
-    border-radius: 3px;
-  }
-
-  .option.chosen {
-    background: var(--ink);
-  }
-
-  .option-status {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .option.chosen .option-status { color: rgba(240,236,230,0.5); }
-
-  .option-label {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  .option.chosen .option-label { color: var(--bg); }
-
-  .option-reason {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--mid);
-    line-height: 1.5;
-    letter-spacing: 0.01em;
-  }
-
-  .option.chosen .option-reason { color: rgba(240,236,230,0.45); }
-
-  /* ─── FINAL SCREENS ──────────────────── */
-  .final-screens {
-    padding: 0 var(--pad) var(--s7);
-  }
-
-  .fs-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s5);
-    display: block;
-  }
-
-  /* Single large screen with annotation sidebar */
-  .fs-featured {
+  .opt {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--s4);
-    margin-bottom: var(--s5);
+    grid-template-columns: 110px 1fr;
+    gap: 6px 28px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .opt-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    padding-top: 3px;
+  }
+
+  .opt.chosen .opt-status { color: var(--accent); }
+
+  .opt-title { font-size: 15px; line-height: 1.45; }
+  .opt.chosen .opt-title { font-weight: 500; }
+
+  .opt-reason { font-size: 13.5px; color: var(--grey); line-height: 1.6; grid-column: 2; }
+
+  /* ── annotations ──────────────────────── */
+  .fig-split {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(28px, 4vw, 56px);
     align-items: start;
+    margin-bottom: clamp(48px, 8vh, 96px);
   }
 
-  .fs-screen {
-    background: var(--bg);
-    aspect-ratio: 16 / 9;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .fig-split .fig { margin-bottom: 0; }
+
+  .annos { display: flex; flex-direction: column; padding-top: 4px; }
+
+  .anno { padding: 18px 0; border-top: 1px solid var(--hair); }
+  .anno:first-child { border-top: none; padding-top: 0; }
+
+  .anno .tag { display: block; font-size: 10px; color: var(--ink); margin-bottom: 8px; }
+
+  .anno p { font-size: 13.5px; color: var(--grey); line-height: 1.65; }
+
+  /* ── before / after ───────────────────── */
+  .ba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
   }
 
-  .fs-main-mock {
-    width: 82%;
-    height: 78%;
+  .ba-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--hair);
+  }
+
+  .ba-cap {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
     gap: 14px;
-    padding: 24px;
+    padding-top: 12px;
   }
 
-  .fmm-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fmm-block {
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.09);
-  }
-
-  .fmm-block.w30 { width: 30%; }
-  .fmm-block.w15 { width: 15%; }
-  .fmm-block.accent { background: rgba(180,160,120,0.5); width: 22%; height: 26px; border-radius: 3px; }
-  .fmm-block.w50 { width: 50%; }
-  .fmm-block.w70 { width: 70%; }
-  .fmm-block.w40 { width: 40%; }
-  .fmm-block.w100 { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
-
-  .fmm-content {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
-
-  .fmm-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 4px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .fmm-card-line {
-    height: 6px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .fmm-card-line.w80 { width: 80%; }
-  .fmm-card-line.w55 { width: 55%; }
-  .fmm-card-line.w70 { width: 70%; }
-
-  /* Annotations */
-  .fs-annotations {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-top: 8px;
-  }
-
-  .annotation {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .ann-num {
+  .ba-badge {
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--mid);
-  }
-
-  .ann-text {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--ink);
-    line-height: 1.55;
+    border: 1px solid var(--hair);
+    padding: 3px 8px;
+    flex-shrink: 0;
   }
 
-  /* Secondary screens row */
-  .fs-secondary {
+  .ba-cap .fig-desc { padding-top: 2px; }
+
+  /* ── outcome ──────────────────────────── */
+  .stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--s3);
-    padding: 0 var(--pad) var(--s7);
+    gap: clamp(40px, 6vw, 96px);
   }
 
-  .fs-secondary-screen {
-    background: #1e1c19;
-    aspect-ratio: 4 / 3;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+  .stat .tag { display: block; font-size: 9.5px; margin-bottom: 18px; }
 
-  .ss-mock {
-    width: 80%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 16px;
-  }
-
-  .ss-block {
-    height: 7px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.07);
-  }
-
-  .ss-block.w50 { width: 50%; }
-  .ss-block.w80 { width: 80%; }
-  .ss-block.w65 { width: 65%; }
-  .ss-block.w35 { width: 35%; }
-  .ss-block.accent { background: rgba(180,160,120,0.35); width: 45%; }
-  .ss-block.tall { height: 40px; border-radius: 3px; }
-
-  .fs-secondary-label {
-    padding-top: var(--s2);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .fs-secondary-item {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* ─── IMPACT ─────────────────────────── */
-  .impact {
-    padding: 0 var(--pad) var(--s7);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .impact-index {
-    grid-column: 1 / 2;
-  }
-
-  .impact-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .impact-numbers {
-    grid-column: 2 / 7;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s4);
-  }
-
-  .impact-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .impact-num {
-    font-family: var(--serif);
-    font-size: clamp(52px, 7vw, 88px);
-    font-weight: 400;
+  .stat-num {
+    font-size: clamp(60px, 8vw, 116px);
+    font-weight: 300;
+    letter-spacing: -0.04em;
     line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--ink);
   }
 
-  .impact-label {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.4;
+  .stat-label { font-size: 16px; font-weight: 500; margin-top: 14px; }
+
+  .stat-desc { font-size: 14px; color: var(--grey); line-height: 1.65; margin-top: 10px; max-width: 42ch; }
+
+  .reflect { margin-top: clamp(48px, 8vh, 88px); max-width: 62ch; }
+  .reflect .tag { display: block; margin-bottom: 14px; }
+  .reflect p { font-size: 15px; line-height: 1.75; color: var(--grey); }
+
+  .live-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: clamp(36px, 6vh, 56px);
+    font-size: 16px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 4px;
+    transition: border-color 0.2s ease;
   }
 
-  .impact-desc {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.55;
-    margin-top: 4px;
-  }
+  .live-link:hover { border-color: var(--ink); }
+  .live-link .tag { font-size: 10px; }
 
-  .impact-reflection {
-    grid-column: 8 / 12;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    justify-content: flex-start;
-    padding-top: 8px;
-  }
+  /* ── next / footer ────────────────────── */
+  .next { margin-top: clamp(80px, 13vh, 160px); border-top: 1px solid var(--ink); }
 
-  .impact-reflection-hed {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s2);
-    display: block;
-  }
+  .next a { display: block; padding: clamp(32px, 5vh, 48px) 0; }
 
-  .impact-reflection-body {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink);
-    margin-bottom: var(--s3);
-  }
-
-  .impact-reflection-body + .impact-reflection-body {
-    color: var(--mid);
-    font-size: 14px;
-  }
-
-  /* ─── NEXT PROJECT ───────────────────── */
-  .next {
-    padding: var(--s6) var(--pad);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .next-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: var(--s2);
-  }
+  .next .tag { display: block; margin-bottom: 14px; }
 
   .next-title {
-    font-family: var(--serif);
-    font-size: clamp(32px, 4.5vw, 60px);
-    font-weight: 400;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
     letter-spacing: -0.025em;
-    line-height: 1.0;
-    color: var(--ink);
-    text-decoration: none;
-    display: block;
-    transition: font-style 0.2s, opacity 0.2s;
-  }
-
-  .next-title:hover { font-style: italic; opacity: 0.6; }
-
-  .next-arrow {
-    font-size: 32px;
-    color: var(--mid);
-    padding-bottom: 4px;
-    transition: transform 0.2s, color 0.2s;
-    text-decoration: none;
-  }
-
-  .next-title:hover ~ .next-arrow,
-  .next:hover .next-arrow { transform: translateX(8px); color: var(--ink); }
-
-  /* ─── FOOTER ─────────────────────────── */
-  footer {
-    padding: 0 var(--pad) var(--s4);
+    line-height: 1.05;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
   }
 
-  .footer-t {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--mid);
-    letter-spacing: 0.1em;
-  }
+  .next-arrow { font-size: 0.6em; color: var(--soft); transition: transform 0.22s ease, color 0.22s ease; }
+  .next a:hover .next-arrow { transform: translateX(8px); color: var(--ink); }
 
-  /* ─── VIEW TOGGLE ───────────────────── */
-  .vt-group {
+  footer {
+    border-top: 1px solid var(--hair);
+    padding: 22px 0 56px;
     display: flex;
-    background: var(--faint);
-    border-radius: 3px;
-    padding: 3px;
-    gap: 2px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .vt-btn {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mid);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px 11px;
-    border-radius: 2px;
-    transition: color 0.18s, background 0.18s;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  footer .tag { font-size: 10px; }
+  footer a:hover { color: var(--ink); }
 
-  .vt-time {
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    opacity: 0.5;
-  }
-
-  .vt-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-  }
-
-  .vt-btn.active .vt-time { opacity: 0.4; }
-  .vt-btn:not(.active):hover { color: var(--ink); }
-
-  /* Fade content on view switch */
-  .full-only, .tldr-only {
-    transition: opacity 0.3s ease;
-  }
-
-  body[data-view="tldr"] .full-only { display: none; }
-  body[data-view="full"] .tldr-only { display: none; }
-
-  /* TLDR summary block */
-  .tldr-block {
-    padding: var(--s6) var(--pad);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .tldr-content {
-    grid-column: 2 / 9;
-  }
-
-  .tldr-text {
-    font-family: var(--sans);
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-  }
-
-  .tldr-stats {
-    grid-column: 10 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-top: 6px;
-  }
-
-  .tldr-stat-num {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 52px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    display: block;
-  }
-
-  .tldr-stat-desc {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-top: 6px;
-  }
-
-  /* In full view, skip re-animating previously hidden reveals */
-  body[data-view="full"] .full-only .reveal {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* In TLDR, featured screen goes full width */
-  body[data-view="tldr"] .fs-featured {
-    grid-template-columns: 1fr;
-  }
-
-  body[data-view="tldr"] .impact-numbers {
-    grid-column: 3 / 11;
-  }
-
-  body[data-view="tldr"] .impact-index {
-    display: none;
-  }
-
-  /* ─── REVEALS ────────────────────────── */
+  /* ── reveal ───────────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .reveal.visible { opacity: 1; transform: none; }
-  .d1 { transition-delay: 0.08s; }
 
-  .hero-tag   { animation: fadeUp 0.7s 0.1s both; }
-  .hero-title { animation: fadeUp 0.7s 0.2s both; }
-  .hero-summary { animation: fadeUp 0.7s 0.32s both; }
-  .hero-right { animation: fadeUp 0.7s 0.4s both; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
   }
 
-  /* ─── RESPONSIVE ─────────────────────── */
-  @media (max-width: 960px) {
-    :root { --pad: 28px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { grid-column: 1; }
-    .hero-right { grid-column: 1; flex-direction: row; flex-wrap: wrap; }
-    .section-content { grid-column: 1 / 13; }
-    .section-aside { grid-column: 1 / 13; }
-    .section-index { display: none; }
-    .fs-secondary { grid-template-columns: 1fr; }
-    .decision-content { grid-column: 1 / 13; }
-    .decision-options { grid-column: 1 / 13; flex-direction: row; flex-wrap: wrap; }
-    .impact-numbers { grid-column: 1 / 13; }
-    .impact-reflection { grid-column: 1 / 13; }
-    .impact-index { display: none; }
-    .decision-index { display: none; }
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 900px) {
+    .sec-grid, .fig-split { grid-template-columns: 1fr; gap: clamp(28px, 5vh, 44px); }
+    .compare, .ba, .stats { grid-template-columns: 1fr; gap: clamp(32px, 5vh, 48px); }
   }
 
-  /* ─── 768px ──────────────────────────── */
-  @media (max-width: 768px) {
-    :root { --pad: 20px; }
-
-    /* Nav — give items room to breathe */
-    nav { gap: 10px; }
-    .nav-back, .nav-name { white-space: nowrap; }
-
-    /* Featured solution stays two-column but tighter gap */
-    .fs-featured { gap: var(--s3); }
-
-    /* Fig. 1 — padded like Final Solution */
-    .hero-image { aspect-ratio: unset; padding: 0 var(--pad); box-sizing: border-box; }
-    .hero-video { width: 100%; box-shadow: none; }
-
-    /* Sitemap gap tighter */
-    .sitemap-grid { gap: var(--s4); }
-  }
-
-  /* ─── 640px ──────────────────────────── */
-  @media (max-width: 640px) {
-    :root { --pad: 18px; }
-
-    /* Hero */
-    .hero-right { flex-direction: column; gap: var(--s2); }
-    .hero-title { line-height: 1.0; }
-    .hero-summary { font-size: 16px; max-width: 100%; }
-
-    /* Featured solution collapses to single column — both full and tldr views */
-    .fs-featured,
-    body[data-view="tldr"] .fs-featured { grid-template-columns: 1fr; }
-
-    /* TLDR annotations stack below video */
-    body[data-view="tldr"] .fs-annotations { flex-direction: column; }
-
-    /* Decision pull quote indent reduced */
-    .decision-pull { padding-left: var(--s3); }
-
-    /* Section gaps tighter */
-    .section { gap: var(--s2); }
-    .decision-section { gap: var(--s2); }
-
-    /* Impact numbers single column */
-    .impact-numbers { grid-template-columns: 1fr; }
-  }
-
-  /* ─── 480px ──────────────────────────── */
-  @media (max-width: 480px) {
-    :root { --pad: 14px; }
-
-    /* Nav — hide name to prevent overflow */
-    nav { padding: 12px var(--pad); }
-    .nav-name { display: none; }
-    .nav-back { min-height: 44px; display: flex; align-items: center; }
-    .vt-btn { min-height: 36px; padding: 6px 10px; }
-
-    /* Typography */
-    .hero-title { font-size: clamp(46px, 12vw, 64px); }
-    .hero-summary { font-size: 15px; }
-    .section-hed { font-size: clamp(30px, 7vw, 40px); }
-    .decision-pull { font-size: clamp(22px, 5.5vw, 30px); }
-    .impact-num { font-size: clamp(48px, 12vw, 64px); }
-    .next-title { font-size: clamp(30px, 7vw, 44px); }
-
-    /* Grid sections — full width */
-    .section-content, .section-aside,
-    .decision-content, .decision-options,
-    .impact-numbers, .impact-reflection { grid-column: 1 / 13; }
-
-    /* Decision options stack vertically */
-    .decision-options { flex-direction: column; }
-
-    /* TLDR content full width */
-    .tldr-content { grid-column: 1 / 13; }
-
-    /* Sitemap trees */
-    .tree ul ul > li { padding: 1px 0 1px 8px; }
-    .tree ul ul ul > li { padding: 1px 0 1px 8px; }
-    .tree span { font-size: 9px; }
-
-    /* Hero video full width */
-    .hero-video { width: 100%; }
-
-    body { word-break: break-word; overflow-wrap: break-word; }
-  }
-
-  /* ─── LIVE SITE LINK ─────────────────── */
-  .live-site-link {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 56px;
-    border: 1px solid var(--ink);
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    transition: color 0.35s ease;
-    white-space: nowrap;
-  }
-  .live-site-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.35s ease;
-    z-index: 0;
-  }
-  .live-site-link span {
-    position: relative;
-    z-index: 1;
-  }
-  .live-site-link:hover { color: var(--bg); }
-  .live-site-link:hover::before { transform: scaleX(1); }
-
-  /* ─── CASE STUDY CTA ─────────────────── */
-  .cs-cta {
-    padding: var(--s4) var(--pad) var(--s6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* ─── iOS safe area ───────────────────── */
-  @supports (padding: max(0px)) {
-    nav {
-      padding-left: max(var(--pad), env(safe-area-inset-left));
-      padding-right: max(var(--pad), env(safe-area-inset-right));
-    }
+  @media (max-width: 680px) {
+    .spec { grid-template-columns: 1fr 1fr; }
+    .spec > div { border-left: none; padding-left: 0; padding-right: 12px; }
+    .top-links { gap: 20px; }
+    .opt { grid-template-columns: 1fr; gap: 6px; }
+    .opt-reason { grid-column: 1; }
   }
 </style>
 </head>
-<body data-view="full">
+<body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-back">
-    <span class="nav-back-arrow">←</span>
-    <span>All Work</span>
-  </a>
-  <div class="vt-group">
-    <button class="vt-btn" data-view="tldr">TLDR <span class="vt-time">30s</span></button>
-    <button class="vt-btn active" data-view="full">Full <span class="vt-time">3m</span></button>
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="top-name" href="index.html">Noah Schilling</a>
+    <nav class="top-links">
+      <a class="tag" href="index.html">Index</a>
+      <a class="tag" href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </div>
-  <a href="index.html" class="nav-name">Noah Schilling</a>
-</nav>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="hero-tag">2025 · Industrial</span>
-    <h1 class="hero-title">Redesigning a legacy brand for <em>modern customers</em></h1>
-    <p class="hero-summary">ACRO's 29-page website was burying a 90-year manufacturing reputation. When a procurement manager landed on it, they had no fast way to confirm ACRO even served their industry. Most didn't stay long enough to find out.</p>
-  </div>
-  <div class="hero-right">
-    <div class="hm">
-      <span class="hm-label">My Role</span>
-      <span class="hm-value">Lead Designer</span>
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="tag">Case Study 01 &middot; ACRO Automation Systems &middot; 2025</span>
+    <h1>Redesigning a legacy brand for modern customers.</h1>
+    <p class="lead">ACRO's 29-page website was burying a 90-year manufacturing reputation. A procurement manager landing on it had no fast way to confirm ACRO even served their industry. Most didn't stay long enough to find out.</p>
+  </section>
+
+  <!-- SPEC STRIP -->
+  <div class="spec" role="list" aria-label="Project details">
+    <div role="listitem">
+      <span class="tag">Role</span>
+      <span class="spec-v">Lead Designer</span>
     </div>
-    <div class="hm">
-      <span class="hm-label">Timeline</span>
-      <span class="hm-value">6 Months</span>
+    <div role="listitem">
+      <span class="tag">Timeline</span>
+      <span class="spec-v">6 months</span>
     </div>
-    <div class="hm">
-      <span class="hm-label">Outcome</span>
-      <span class="hm-value">+28% Dwell Time<br>1.4x CRM Inquiries</span>
+    <div role="listitem">
+      <span class="tag">Platform</span>
+      <span class="spec-v">WordPress &middot; handed to ACRO's SEO team post-launch</span>
     </div>
-  </div>
-</section>
-
-
-<!-- HERO IMAGE -->
-<div class="hero-image reveal">
-  <video class="hero-video" autoplay loop muted playsinline>
-    <source src="resources/acro-robot-index.webm" type="video/webm">
-  </video>
-</div>
-<p class="image-caption reveal">Fig. 1 — ACRO Automation Systems · Index Redesign</p>
-
-<!-- TLDR BLOCK -->
-<div class="tldr-block tldr-only">
-  <div class="tldr-content">
-    <p class="tldr-text">ACRO's 29-page website was burying a 90-year manufacturing reputation. Site visitors were already finding the solutions section — it was the most-visited content on the site, despite requiring a landing page visit and a scroll to find it. I restructured the information architecture around where customers actually wanted to go: solutions on the homepage, at scroll one, organized by industry. 29 pages became 17. The content stayed. The friction didn't.</p>
-  </div>
-</div>
-
-<!-- OVERVIEW -->
-<section class="section full-only">
-  <div class="section-index"><span>Overview</span></div>
-  <div class="section-content reveal">
-    <span class="section-label">01 — Context</span>
-    <h2 class="section-hed">90 years of expertise, buried in the wrong structure.</h2>
-    <p class="section-body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on track record alone. What they hadn't built was a way to communicate it. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide if they were worth a call. The site gave them no quick answer. Competitors had between 17 and 21 pages. ACRO had 29.</p>
-  </div>
-  <div class="section-aside reveal d1">
-    <div class="aside-block">
-      <div class="aside-item">
-        <span class="aside-label">The brief</span>
-        <span class="aside-value">A UI refresh following new brand guidelines. Stated goals were fewer steps to content and solutions for site visitors.</span>
-      </div>
-      <div class="aside-item">
-        <span class="aside-label">The real problem</span>
-        <span class="aside-value">Pages were buried within eachother, making the entire site needlessy messy and hiding content.</span>
-      </div>
-      <div class="aside-item">
-        <span class="aside-label">Constraints</span>
-        <span class="aside-value">The build needed to live in WordPress, managed by ACRO's SEO team post-launch. ACRO couldn't devote resources to new copy for the site so it had to be completely refreshed using the current content.</span>
-      </div>
+    <div role="listitem">
+      <span class="tag">Outcome</span>
+      <span class="spec-v">+28% session duration &middot; 1.4&times; inquiry volume</span>
     </div>
   </div>
-</section>
 
-<!-- SITE ARCHITECTURE -->
-<div class="sitemap-compare reveal full-only">
-  <span class="sitemap-label">Site Architecture</span>
-  <div class="sitemap-grid">
-
-    <div class="sitemap-panel">
-      <div class="tree">
-        <div class="tree-root">Navigation Tree Before -29 Pages</div>
-        <ul>
-          <li><span>Index</span></li>
-          <li><span class="tree-landing">About Us</span>
-            <ul>
-              <li><span>About Us</span></li>
-              <li><span>Management</span></li>
-              <li><span class="tree-landing">Industries We Serve</span>
-                <ul>
-                  <li><span>Automotive</span></li>
-                  <li><span>Electric Vehicles</span></li>
-                  <li><span>Energy Storage</span></li>
-                  <li><span>Appliances</span></li>
-                  <li><span>Consumer Products</span></li>
-                  <li><span>Other Markets</span></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><span class="tree-landing">Services Overview</span>
-            <ul>
-              <li><span>Customer Service</span></li>
-              <li><span>Design Process</span></li>
-              <li><span>Quality Assurance</span></li>
-              <li><span>Retool</span></li>
-              <li><span>Services We Offer</span></li>
-            </ul>
-          </li>
-          <li><span class="tree-path">Solutions Overview</span>
-            <ul>
-              <li><span>Automated Assembly</span></li>
-              <li><span>Automated Welding</span></li>
-              <li><span class="tree-path">Dispensing Systems</span></li>
-              <li><span>Robotics</span></li>
-              <li><span>System Integration</span></li>
-              <li><span>Tool Polishing</span></li>
-            </ul>
-          </li>
-          <li><span>Spare &amp; Replacement Parts</span></li>
-          <li><span class="tree-landing">Media Center</span>
-            <ul>
-              <li><span>Case Studies</span></li>
-              <li><span>Media Center</span></li>
-              <li><span>Video Gallery</span></li>
-            </ul>
-          </li>
-          <li><span>Contact Us</span></li>
-          <li><span>Careers</span></li>
-        </ul>
-        <span class="tree-depth"><mark>Solutions required hunting — no dropdown, landing page + scroll</mark></span>
-      </div>
-      <p class="sitemap-annotation">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching a solution required clicking into the Solutions Overview landing page, scrolling to find what they were looking for, then clicking again. No dropdown. No shortcuts. Most didn't bother. They closed the tab.</p>
-    </div>
-
-    <div class="sitemap-panel">
-      <div class="tree">
-        <div class="tree-root">Navigation Tree After -17 Pages</div>
-        <ul>
-          <li><span class="tree-path">Index <span style="color:#a06830;font-style:italic;opacity:0.7;">· Solutions visible at scroll one</span></span></li>
-          <li><span>Markets</span></li>
-          <li><span class="tree-path">Solutions ↓</span>
-            <ul>
-              <li><span>Automated Assembly</span></li>
-              <li><span>Automated Welding</span></li>
-              <li><span>Dispensing Systems</span></li>
-              <li><span>Robotics</span></li>
-              <li><span>System Integration</span></li>
-              <li><span>Tool Polishing</span></li>
-            </ul>
-          </li>
-          <li><span>Services</span></li>
-          <li><span>Support</span></li>
-          <li><span>About Us</span></li>
-          <li><span class="tree-dropdown">Resources ↓</span>
-            <ul>
-              <li><span>Video Gallery</span></li>
-              <li><span>Case Studies</span></li>
-            </ul>
-          </li>
-          <li><span>Careers</span></li>
-          <li><span>Contact Us</span></li>
-        </ul>
-        <span class="tree-depth"><mark>Solutions on the homepage + full dropdown in nav — both top level, zero required clicks</mark></span>
-      </div>
-      <p class="sitemap-annotation">Solutions are accessible two ways without a single click: browsable with photos and descriptions on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before they've committed to anything.</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- THE DECISION -->
-<section class="decision-section">
-  <div class="decision-index"><span>Decision</span></div>
-  <div class="decision-content reveal">
-    <span class="section-label">02 — The Key Decision</span>
-    <blockquote class="decision-pull">
-      "Analytics showed me where customers were going. I stopped making them work to get there."
-    </blockquote>
-    <div class="full-only">
-    <p class="decision-body">
-      Google Analytics showed ACRO's solutions pages were the most visited content on the site — Automated Welding, Robotics, and Automated Assembly in the top five. Customers were actively seeking them out despite the friction. None of those pages had a call to action. Customers were finding the content on their own, reading it, and then hitting a dead end. I pulled solutions directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.
-    </p>
-    <p class="decision-body" style="color: var(--mid);">
-      It was a deliberate structural break from how the old site was organized, and leadership pushed back on it initially. I brought the analytics into the room and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it.
-    </p>
-    <p class="decision-body" style="color: var(--mid);">
-      Throughout the process I ran internal review sessions with engineers and stakeholders who represent exactly the kind of buyer evaluating ACRO. The question we kept asking was simple: if you landed here trying to figure out whether ACRO can build what you need, does this get you there? We tested every structural decision against that lens before it was finalized.
-    </p>
-    </div>
-  </div>
-  <div class="decision-options decision-options-tldr reveal d1 tldr-only">
-    <p>Google Analytics showed ACRO's solutions section was the most visited part of the existing site. Customers were actively seeking it out despite the friction. I pulled it directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
-  </div>
-  <div class="decision-options reveal d1 full-only">
-    <div class="option">
-      <span class="option-status">Considered</span>
-      <span class="option-label">Keep solutions on a dedicated interior page</span>
-      <span class="option-reason">Standard structure, but added a click and a page load between user and most requested pages on ACRO's website.</span>
-    </div>
-    <div class="option">
-      <span class="option-status">Considered</span>
-      <span class="option-label">Lead with a full-page hero video like competitors</span>
-      <span class="option-reason">Wasn't fond of the idea of just copying competitors for the sake of it. I had to push hard in internal meetings against this as I wanted ACRO to keep its originality.</span>
-    </div>
-    <div class="option chosen">
-      <span class="option-status">Chosen</span>
-      <span class="option-label">Surface solutions on scroll-one of the homepage</span>
-      <span class="option-reason">Analytics confirmed it was the most sought-after content. Reducing that friction became the central structural decision of the redesign.</span>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL SCREENS -->
-<section class="final-screens">
-  <span class="fs-label reveal">Final Solution</span>
-
-  <div class="fs-featured reveal">
-    <div class="fs-screen" style="overflow:hidden;padding:0;">
-      <video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:contain;display:block;">
-        <source src="resources/acro-solutions-index.webm" type="video/webm">
+  <!-- HERO FIGURE -->
+  <figure class="fig reveal">
+    <div class="fig-media">
+      <video autoplay loop muted playsinline aria-label="Scrolling view of the redesigned ACRO homepage">
+        <source src="resources/acro-robot-index.webm" type="video/webm">
       </video>
     </div>
-    <div class="fs-annotations full-only">
-      <div class="annotation">
-        <span class="ann-num">① Industry-led entry point</span>
-        <span class="ann-text">I organized solutions by industry rather than product category because that's how a buyer frames their problem. Not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that question before the customer has to ask it.</span>
+    <figcaption>
+      <span class="tag tag-ink">Fig. 01</span>
+      <span class="fig-desc">The redesigned index. Solutions visible at first scroll, organized by industry.</span>
+    </figcaption>
+  </figure>
+
+  <!-- 01 CONTEXT -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <h2>Ninety years of expertise, buried in the wrong structure.</h2>
+        <p class="body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on track record alone. What it hadn't built was a way to communicate that. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide whether they were worth a call. The site gave them no quick answer.</p>
+        <p class="body">Competitors ran sites of 17 and 21 pages. ACRO had 29. The brief was officially a UI refresh, but its stated goals, fewer steps to content and solutions front and center, were structural. I treated it as an information architecture project.</p>
       </div>
-      <div class="annotation">
-        <span class="ann-num">② Consolidation over elimination</span>
-        <span class="ann-text">Pages that were artificially split across multiple destinations got merged into single, scrollable layouts. The content didn't shrink. The distance to it did.</span>
+      <div class="aside reveal">
+        <div>
+          <span class="tag">The Brief</span>
+          <p>A UI refresh following new brand guidelines. Stated goals: fewer steps to content, solutions as the main focus.</p>
+        </div>
+        <div>
+          <span class="tag">The Real Problem</span>
+          <p>Pages were nested inside pages, hiding the content customers came for and making the site needlessly hard to navigate.</p>
+        </div>
+        <div>
+          <span class="tag">Constraints</span>
+          <p>The build had to live in WordPress and be manageable by ACRO's in-house SEO team after launch. No budget for new copy, so the redesign had to work with existing content.</p>
+        </div>
       </div>
-      <div class="annotation">
-        <span class="ann-num">③ Closing the loop</span>
-        <span class="ann-text">This case study opens with ACRO's credibility being buried. I designed this screen to be the specific moment that changes: the first view where a customer sees industry relevance, product capability, and a contact path simultaneously. No scroll required.</span>
+    </div>
+  </section>
+
+  <!-- 02 ARCHITECTURE -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">02</span><span class="tag">Architecture</span></div>
+    <div class="compare reveal">
+
+      <div>
+        <div class="panel-tag">
+          <span class="panel-dot"></span>
+          <span class="tag">Before &middot; 29 pages</span>
+        </div>
+        <div class="tree">
+          <div class="tree-root">Navigation tree &middot; before</div>
+          <ul>
+            <li><span>Index</span></li>
+            <li><span class="t-dim">About Us</span>
+              <ul>
+                <li><span>About Us</span></li>
+                <li><span>Management</span></li>
+                <li><span class="t-dim">Industries We Serve</span>
+                  <ul>
+                    <li><span>Automotive</span></li>
+                    <li><span>Electric Vehicles</span></li>
+                    <li><span>Energy Storage</span></li>
+                    <li><span>Appliances</span></li>
+                    <li><span>Consumer Products</span></li>
+                    <li><span>Other Markets</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><span class="t-dim">Services Overview</span>
+              <ul>
+                <li><span>Customer Service</span></li>
+                <li><span>Design Process</span></li>
+                <li><span>Quality Assurance</span></li>
+                <li><span>Retool</span></li>
+                <li><span>Services We Offer</span></li>
+              </ul>
+            </li>
+            <li><span class="t-path">Solutions Overview</span>
+              <ul>
+                <li><span>Automated Assembly</span></li>
+                <li><span>Automated Welding</span></li>
+                <li><span class="t-path">Dispensing Systems</span></li>
+                <li><span>Robotics</span></li>
+                <li><span>System Integration</span></li>
+                <li><span>Tool Polishing</span></li>
+              </ul>
+            </li>
+            <li><span>Spare &amp; Replacement Parts</span></li>
+            <li><span class="t-dim">Media Center</span>
+              <ul>
+                <li><span>Case Studies</span></li>
+                <li><span>Media Center</span></li>
+                <li><span>Video Gallery</span></li>
+              </ul>
+            </li>
+            <li><span>Contact Us</span></li>
+            <li><span>Careers</span></li>
+          </ul>
+          <span class="tree-note">Reaching a solution: landing page + scroll + click</span>
+        </div>
+        <p class="panel-note">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching a solution meant clicking into a landing page, scrolling to find the right item, then clicking again. No dropdown, no shortcuts. Most closed the tab instead.</p>
+      </div>
+
+      <div>
+        <div class="panel-tag">
+          <span class="panel-dot after"></span>
+          <span class="tag">After &middot; 17 pages</span>
+        </div>
+        <div class="tree">
+          <div class="tree-root">Navigation tree &middot; after</div>
+          <ul>
+            <li><span class="t-path">Index &middot; solutions at scroll one</span></li>
+            <li><span>Markets</span></li>
+            <li><span class="t-path">Solutions &darr;</span>
+              <ul>
+                <li><span>Automated Assembly</span></li>
+                <li><span>Automated Welding</span></li>
+                <li><span>Dispensing Systems</span></li>
+                <li><span>Robotics</span></li>
+                <li><span>System Integration</span></li>
+                <li><span>Tool Polishing</span></li>
+              </ul>
+            </li>
+            <li><span>Services</span></li>
+            <li><span>Support</span></li>
+            <li><span>About Us</span></li>
+            <li><span class="t-dim">Resources &darr;</span>
+              <ul>
+                <li><span>Video Gallery</span></li>
+                <li><span>Case Studies</span></li>
+              </ul>
+            </li>
+            <li><span>Careers</span></li>
+            <li><span>Contact Us</span></li>
+          </ul>
+          <span class="tree-note">Reaching a solution: zero required clicks</span>
+        </div>
+        <p class="panel-note">Solutions are reachable two ways without a single click: browsable on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before committing to anything.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 DECISION -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">03</span><span class="tag">The Key Decision</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <blockquote class="pull">Analytics showed me where customers were going. I stopped making them work to get there.</blockquote>
+        <p class="body">Google Analytics showed ACRO's solutions pages were the most visited content on the site. Automated Welding, Robotics, and Automated Assembly all sat in the top five. Customers were seeking them out despite the friction, reading them, and then hitting a dead end: none of those pages had a call to action. I pulled solutions directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
+        <p class="body dim">It was a deliberate structural break from how the old site was organized, and leadership pushed back initially. I brought the analytics into the room and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it.</p>
+        <p class="body dim">Throughout the process I ran internal review sessions with engineers and stakeholders who mirror the buyers evaluating ACRO. The question stayed simple: if you landed here trying to figure out whether ACRO can build what you need, does this page get you there? Every structural decision was tested against that lens before it was finalized.</p>
+      </div>
+      <div class="reveal">
+        <div class="opts">
+          <div class="opt">
+            <span class="opt-status">Considered</span>
+            <span class="opt-title">Keep solutions on a dedicated interior page</span>
+            <span class="opt-reason">The standard pattern, but it kept a click and a page load between customers and the most requested content on the site.</span>
+          </div>
+          <div class="opt">
+            <span class="opt-status">Considered</span>
+            <span class="opt-title">Lead with a full-page hero video like competitors</span>
+            <span class="opt-reason">Every competitor leads with one. Matching them would have traded ACRO's identity for a pattern that answers no buyer question. I pushed against this in internal reviews.</span>
+          </div>
+          <div class="opt chosen">
+            <span class="opt-status">Chosen</span>
+            <span class="opt-title">Surface solutions on scroll one of the homepage</span>
+            <span class="opt-reason">Analytics confirmed solutions were the most sought-after content. Removing that friction became the central structural decision of the redesign.</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-</section>
+  <!-- 04 SOLUTION -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">04</span><span class="tag">The Solution</span></div>
 
-<div class="fs-secondary full-only">
-  <div class="fs-secondary-item">
-    <div class="fs-secondary-screen" style="display:block;aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
-      <img src="resources/acro-dispensing-before.webp" alt="ACRO site before redesign" style="width:100%;height:auto;display:block;">
+    <div class="fig-split reveal">
+      <figure class="fig">
+        <div class="fig-media">
+          <video autoplay loop muted playsinline aria-label="Scrolling view of the solutions section on the redesigned homepage">
+            <source src="resources/acro-solutions-index.webm" type="video/webm">
+          </video>
+        </div>
+        <figcaption>
+          <span class="tag tag-ink">Fig. 02</span>
+          <span class="fig-desc">Solutions on the homepage, first scroll after the hero.</span>
+        </figcaption>
+      </figure>
+      <div class="annos">
+        <div class="anno">
+          <span class="tag">01 &middot; Industry-led entry point</span>
+          <p>Solutions are organized by industry rather than product category, because that is how a buyer frames the problem. Not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that before the customer has to ask.</p>
+        </div>
+        <div class="anno">
+          <span class="tag">02 &middot; Consolidation over elimination</span>
+          <p>Pages artificially split across multiple destinations were merged into single scrollable layouts. The content didn't shrink. The distance to it did.</p>
+        </div>
+        <div class="anno">
+          <span class="tag">03 &middot; Closing the loop</span>
+          <p>This is the screen where the buried-credibility problem ends: the first view where a customer sees industry relevance, product capability, and a contact path at once. No scroll required.</p>
+        </div>
+      </div>
     </div>
-    <span class="fs-secondary-label">Previous Nested Solutions Page</span>
-  </div>
-  <div class="fs-secondary-item">
-    <div class="fs-secondary-screen" style="display:block;aspect-ratio:unset;height:auto;padding:0;overflow:hidden;">
-      <img src="resources/acro-dispensing-after.webp" alt="ACRO site after redesign" style="width:100%;height:auto;display:block;">
+
+    <div class="ba reveal">
+      <div class="ba-item">
+        <img src="resources/acro-dispensing-before.webp" alt="Dispensing Systems page before the redesign, nested behind a landing page" loading="lazy">
+        <div class="ba-cap">
+          <span class="ba-badge">Before</span>
+          <span class="fig-desc">Dispensing Systems, nested two levels deep behind a landing page.</span>
+        </div>
+      </div>
+      <div class="ba-item">
+        <img src="resources/acro-dispensing-after.webp" alt="Dispensing Systems page after the redesign, one click from the index" loading="lazy">
+        <div class="ba-cap">
+          <span class="ba-badge">After</span>
+          <span class="fig-desc">The same content, one click from the index, ending in a call to action.</span>
+        </div>
+      </div>
     </div>
-    <span class="fs-secondary-label">Updated 1 Click Solutions Page</span>
-  </div>
-</div>
+  </section>
 
-<!-- IMPACT -->
-<section class="impact">
-  <div class="impact-index"><span>Impact</span></div>
-  <div class="impact-numbers reveal">
-    <div class="impact-stat">
-      <span class="impact-num">+28%</span>
-      <span class="impact-label">Average session duration</span>
-      <span class="impact-desc">Visitors were staying longer and actually reading — learning what ACRO builds and whether it fits their need. When the content is easy to find, people engage with it. The inquiry numbers confirm they did.</span>
+  <!-- 05 OUTCOME -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Outcome</span></div>
+    <div class="stats reveal">
+      <div class="stat">
+        <span class="tag">Source &middot; Google Analytics</span>
+        <span class="stat-num">+28%</span>
+        <span class="stat-label">Average session duration</span>
+        <p class="stat-desc">Post-launch vs. the prior baseline. Visitors were staying longer and actually reading: learning what ACRO builds and whether it fits their need.</p>
+      </div>
+      <div class="stat">
+        <span class="tag">Source &middot; CRM &middot; 90 days post-launch</span>
+        <span class="stat-num">1.4&times;</span>
+        <span class="stat-label">Inquiry volume</span>
+        <p class="stat-desc">Sales confirmed quality improved alongside volume. Prospects were referencing specific solution pages in their first emails.</p>
+      </div>
     </div>
-    <div class="impact-stat">
-      <span class="impact-num">1.4×</span>
-      <span class="impact-label">CRM inquiry volume</span>
-      <span class="impact-desc">In the 90 days post-launch vs. the prior baseline. Sales confirmed inquiry quality improved alongside volume. Prospects were referencing specific solutions pages in their first emails.</span>
+    <div class="reflect reveal">
+      <span class="tag">What I'd Do Differently</span>
+      <p>I'd push harder on content strategy earlier. The structural decisions were sound, but several solution pages launched with copy held over from the old site. The refresh fixed the UX; the content problem is ongoing, and I should have scoped it explicitly rather than treating it as a background task.</p>
     </div>
-  </div>
-  <div class="impact-reflection reveal d1 full-only">
-    <span class="impact-reflection-hed">What I'd do differently</span>
-    <p class="impact-reflection-body">I'd push harder on the content strategy earlier in the process. The structual decisions were sound, but several solution pages launched with copy that was holdover from the old site. While we addressed the UX in this refresh, the content problem is ongoing, and I should have scoped it explicitly rather than treating as a background task.</p>
-  </div>
-</section>
+    <a class="live-link reveal" href="https://www.acro.com" target="_blank" rel="noopener">
+      <span>View the live site</span>
+      <span class="tag tag-ink">acro.com &nearr;</span>
+    </a>
+  </section>
 
-<!-- LIVE SITE CTA — shown in both views -->
-<div class="cs-cta reveal">
-  <a href="https://www.acro.com" target="_blank" rel="noopener" class="live-site-link"><span>View the live site →</span></a>
-</div>
-
-<!-- NEXT PROJECT -->
-<div class="next reveal">
-  <div>
-    <span class="next-label">Next project</span>
-    <span class="next-title">In Progress</span>
+  <!-- NEXT -->
+  <div class="next reveal">
+    <a href="cs-sharepoint.html">
+      <span class="tag">Next Case Study</span>
+      <span class="next-title">SharePoint Information Architecture <span class="next-arrow" aria-hidden="true">&rarr;</span></span>
+    </a>
   </div>
-</div>
 
-<footer>
-  <span class="footer-t">© 2026 Noah Schilling</span>
-  <a href="index.html" class="footer-t" style="color:var(--mid);text-decoration:none;">Back to all work</a>
-</footer>
+  <footer>
+    <span class="tag">&copy; 2026 Noah Schilling</span>
+    <a class="tag" href="index.html">Back to index</a>
+  </footer>
+
+</main>
 
 <script>
-  // View toggle
-  const vtBtns = document.querySelectorAll('.vt-btn');
-  vtBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const view = btn.dataset.view;
-      document.body.style.opacity = '0.6';
-      setTimeout(() => {
-        document.body.dataset.view = view;
-        document.body.style.opacity = '1';
-      }, 150);
-      vtBtns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
-    });
-  });
-  document.body.style.transition = 'opacity 0.15s ease';
-
-
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => obs.observe(el));
