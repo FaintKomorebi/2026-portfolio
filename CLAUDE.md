@@ -66,35 +66,65 @@ FABLE_BRIEF.md        — active design brief, read this for direction
 
 ---
 
-## cs-lincoln.html — Lincoln Nautilus (Not Started)
+## cs-lincoln.html — Lincoln Nautilus (Documentation Done, Ready to Draft)
 
-### Plan
-Redesign critique of the 2024 Lincoln Nautilus infotainment / interior UI.
+### The Car
+Confirmed: 2024+ Lincoln Nautilus, "Lincoln Digital Experience" — a 48" panoramic display replaces the gauge cluster/speedometer/fuel entirely, plus a separate lower touchscreen handles climate/media/nav. Sister's car, her daily driver.
 
-**Why:** Noah drove the car regularly and found the UI genuinely frustrating — specific, real reactions, not a contrived redesign exercise. Sister owns the car and visits every 2-3 weeks.
+### Method
+Had sister (real owner, real daily use) list grievances while driving on 2026-07-05, filmed the specific screens and interactions as she hit them. Real-world usability testing, not a staged redesign exercise — that's the credibility of this piece.
 
-**Documentation session planned:** In-car recording session when sister visits (~2-3 weeks out). Record all screen flows, button layouts, physical control placement, every major task: navigation input, climate, audio, phone, driver settings.
+### The Thesis
+One argument ties all three problems together: physical controls survived a century of car design because they're operable blind. Every failure here is the same failure — a blind-operable analog control replaced by a touch/gesture interface that demands visual confirmation before it works.
 
-### What to Capture
-- Every interaction that requires eyes off road
-- Every task that takes more than one tap
-- Anything that gives no feedback or shows wrong state
-- Physical relationship between touch controls and hardware buttons
-- The moments of genuine frustration — those are the brief
+### Three Problems (real evidence, independently confirmed by press/CR)
+1. **Vents** — changing airflow direction takes 3 taps into a sub-menu plus a touch-and-drag per vent; previously a one-hand flick, done blind, mid-drive. Consumer Reports flags the identical issue almost verbatim: "the automaker forcing the driver to adjust the direction of the air vents by way of the infotainment screen."
+2. **Media/options menu** — a flat, undifferentiated grid mixes Google Maps, Play Store, texts, CarPlay, AM/FM, SiriusXM, Bluetooth with no hierarchy. Sister found it confusing to parse at a glance while driving.
+3. **Steering wheel touchpads** — capacitive swipe pads, no labels, noticeable input lag, no tactile feedback. The dynamic-mapping concept (left = cruise/speed, right = media/volume) is undermined by having no confirmation you've hit the right zone without looking down. Consumer Reports calls this out by name and notes Lincoln carried over the same approach from recent Lexus models, where it was also disliked.
+
+Bonus data point: a CR test unit had a 36-hour touchscreen failure where the *only* function that kept working was climate temperature — everything else, including the vents, went dark. Good illustration of the risk in centralizing every control into one screen with no physical fallback.
+
+### Industry Context (why this lands now, not just "personal opinion")
+- 97% of new cars sold since 2023 ship with at least one touchscreen. A federal bill (Driver Technology and Pedestrian Safety Act, Rep. Kevin Mullin, introduced Feb 2026) calls for an official study on touchscreen-driven distraction.
+- Euro NCAP's 2026 protocol denies a 5-star safety rating to any car that puts turn signals, hazard lights, horn, wipers, or eCall behind a touchscreen instead of a physical control — citing research that 2 seconds of visual diversion doubles crash risk.
+- VW's design chief announced in 2025 that buttons are returning to every future VW: "It's not a phone, it's a car." Broad trade coverage (Autoblog, CarsGuide, DesignNews) frames this as an industry-wide reversal already underway.
+- Framing payoff: Lincoln built this exact interior at the moment the rest of the industry started walking this back.
+
+### Structure Plan
+1. Hook/method — real user, real drive, grievances logged live, not staged.
+2. Industry context — establishes this as a systemic reckoning, not a nitpick.
+3. The thesis — blind-operability as the constraint that got dropped.
+4. Three problem/fix pairs, each: evidence photo → grievance in her words → why it fails (+ CR/journalist corroboration) → one focused high-fidelity redesign mockup of just that screen. Deliberately NOT a full ground-up OS redesign — a full rebuild risks reading as a generic concept-car Dribbble piece and dilutes the sharper point. Three precise fixes read as stronger design judgment.
+   - Vents → persistent, always-visible quick-adjust control, no sub-menu
+   - Media menu → grouped top-level categories (cite Hick's Law: more structure beats fewer taps when the choice set is this mixed)
+   - Steering wheel → fixed, non-dynamic mapping + tactile detents + audio/haptic confirmation, no lag
+5. Close — tie back to Euro NCAP/VW: this isn't nostalgia for buttons, it's re-applying the constraint touchscreens forgot.
 
 ### What This Case Study Needs to Show (that ACRO doesn't)
 - **Product complexity** — multi-state interfaces, edge cases, error states
 - **Design systems thinking** — components, states, scalability
 - **Safety/constraint reasoning** — physical hardware limitations, eyes-off-road cost
-- **User-centered framing** — real frustrated user (Noah), real task flows
+- **User-centered framing** — real frustrated user (sister), real task flows, corroborated by independent professional reviews
 
-### Pre-Session Prep
-- Watch 2024 Nautilus infotainment walkthroughs on YouTube
-- Write down the 3-5 specific interactions that frustrated you most (from memory)
-- Check if Lincoln has updated the 2025 model — if so, frame as 2024 audit
+### Before Publishing — Redaction Needed
+Source screenshots currently show identifying info: contact name/photo on the phone-pairing screen, a specific street-level map location. Crop/blur before any of these go into the live case study.
 
-### Framing Note
-This should not be a "visual redesign." It needs to tell a systems story: broken interface, why it breaks (at the component and flow level), how to fix it. That's what gets this into senior product design conversations.
+### Sources
+- [Vehicle touchscreen frustration & safety concerns — Rep. Kevin Mullin](https://kevinmullin.house.gov/2026/02/03/vehicle-touchscreen-frustration-safety-concerns/)
+- [Euro NCAP brings back car buttons by 2026 — Euro Weekly News](https://euroweeklynews.com/2025/11/14/europes-war-on-touchscreens-new-2026-rules-will-force-carmakers-to-bring-back-buttons/)
+- [Cars will need buttons not just touchscreens for 5-star Euro NCAP rating — ETSC](https://etsc.eu/cars-will-need-buttons-not-just-touchscreens-to-get-a-5-star-euro-ncap-safety-rating/)
+- [VW Design Boss Confirms Buttons Coming Back — InsideEVs](https://insideevs.com/news/752840/vw-brings-back-buttons-switches/)
+- [2024 Lincoln Nautilus Road Test Report — Consumer Reports](https://www.consumerreports.org/cars/lincoln/nautilus/2024/road-test-report/)
+- [2024 Lincoln Nautilus First Drive Review — The Drive](https://www.thedrive.com/car-reviews/2024-lincoln-nautilus-first-drive-review)
+- [2024 Lincoln Nautilus First Drive Review — Autoblog](https://www.autoblog.com/reviews/2024-lincoln-nautilus-first-drive)
+- [The Lincoln Nautilus Changed My Mind About Screens And Touch Controls — TopSpeed](https://www.topspeed.com/lincoln-nautilus-changed-my-mind-screens-touch-controls/)
+
+### Next Steps
+- [ ] Draft actual case study copy for cs-lincoln.html from this plan
+- [ ] Produce the 3 high-fidelity redesign mockups (vents, media menu, steering wheel)
+- [ ] Redact identifying info from source images/video before use
+- [ ] Confirm final selection of which photos/video clips make the cut
+- [ ] Check whether Lincoln updated the UI for 2025/2026 model years — if so, frame explicitly as a 2024-2025 audit
 
 ---
 
