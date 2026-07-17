@@ -505,6 +505,86 @@
     .opt-reason { grid-column: 1; }
     .t-flag { display: none; }
   }
+
+  /* ── reading mode toggle ──────────────── */
+  .mode {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .mode-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .mode-btns { display: flex; gap: 24px; }
+
+  .mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    padding: 4px 0;
+    transition: color 0.18s ease;
+  }
+
+  .mode-btn::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--hair);
+    flex-shrink: 0;
+    transition: background 0.18s ease;
+  }
+
+  .mode-btn:hover { color: var(--ink); }
+  .mode-btn[aria-pressed="true"] { color: var(--ink); }
+  .mode-btn[aria-pressed="true"]::before { background: var(--accent); }
+  .mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  @media (min-width: 1360px) {
+    .mode {
+      position: fixed;
+      top: 50%;
+      right: calc(50vw + 552px);
+      transform: translateY(-50%);
+      background: none;
+      border-bottom: none;
+    }
+    .mode-inner {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 12px 0 0;
+      border-top: 1px solid var(--ink);
+    }
+    .mode-label {
+      display: block;
+      font-size: 9.5px;
+      max-width: 7ch;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .mode-btns { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* mode visibility */
+  body.mode-tldr .full-only { display: none; }
+  body.mode-tldr .sec-num { display: none; }
 </style>
 </head>
 <body>
@@ -519,6 +599,17 @@
     </nav>
   </div>
 </header>
+
+<!-- READING MODE -->
+<div class="mode" role="group" aria-label="Reading mode">
+  <div class="wrap mode-inner">
+    <span class="tag mode-label">Reading Mode</span>
+    <div class="mode-btns">
+      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
+      <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
+    </div>
+  </div>
+</div>
 
 <main class="wrap">
 
@@ -561,7 +652,7 @@
   </figure>
 
   <!-- 01 CONTEXT -->
-  <section class="sec">
+  <section class="sec full-only">
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
@@ -588,7 +679,7 @@
   <!-- 02 DISCOVERY -->
   <section class="sec">
     <div class="sec-head"><span class="sec-num">02</span><span class="tag">Discovery</span></div>
-    <div class="sec-grid">
+    <div class="sec-grid full-only">
       <div class="reveal">
         <h2>Survey first. Structure second.</h2>
         <p class="body">Rather than arriving with a structure, discovery was designed to surface what already existed: how people actually worked, where files actually lived, and what the pain points actually were. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
@@ -656,7 +747,7 @@
           </ul>
           <span class="tree-note">No root. No model. Every department its own island.</span>
         </div>
-        <p class="panel-note">When a new employee asked where to save a file, they got a different answer from every person they asked. Nobody was lying. Everyone had built their own working model of a system that had no real structure.</p>
+        <p class="panel-note full-only">When a new employee asked where to save a file, they got a different answer from every person they asked. Nobody was lying. Everyone had built their own working model of a system that had no real structure.</p>
       </div>
 
       <div>
@@ -692,14 +783,14 @@
           </ul>
           <span class="tree-note">One rule: company-wide = Resources &middot; dept = Team Site</span>
         </div>
-        <p class="panel-note">The rule eliminates ambiguity at the system level. Users don't guess which drive to check. They know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
+        <p class="panel-note full-only">The rule eliminates ambiguity at the system level. Users don't guess which drive to check. They know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
       </div>
 
     </div>
   </section>
 
   <!-- 04 DECISION -->
-  <section class="sec">
+  <section class="sec full-only">
     <div class="sec-head"><span class="sec-num">04</span><span class="tag">The Key Decision</span></div>
     <div class="sec-grid">
       <div class="reveal">
@@ -760,7 +851,7 @@
     <div class="sec-grid">
       <div class="reveal">
         <h2>Active project. Outcomes being tracked.</h2>
-        <p class="body dim">This case study is being written in real time. The architecture is designed and deployed, and department migrations are rolling out in phases. Adoption rates, time-to-find improvement, and the volume of "where is X?" requests will be logged here as the migration moves through the remaining departments.</p>
+        <p class="body dim full-only">This case study is being written in real time. The architecture is designed and deployed, and department migrations are rolling out in phases. Adoption rates, time-to-find improvement, and the volume of "where is X?" requests will be logged here as the migration moves through the remaining departments.</p>
       </div>
       <div class="checks reveal">
         <div class="check-group">Shipped</div>
@@ -805,6 +896,22 @@
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => obs.observe(el));
+
+  // Reading mode toggle
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  function applyMode(mode) {
+    document.body.classList.toggle('mode-tldr', mode === 'tldr');
+    modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  }
+  modeBtns.forEach(b => b.addEventListener('click', () => {
+    applyMode(b.dataset.mode);
+    try { sessionStorage.setItem('readingMode', b.dataset.mode); } catch (err) {}
+    // Sections re-entering the flow shouldn't sit invisible waiting for a scroll they already got.
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }));
+  try {
+    if (sessionStorage.getItem('readingMode') === 'tldr') applyMode('tldr');
+  } catch (err) {}
 </script>
 
 </body>

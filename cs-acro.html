@@ -503,6 +503,86 @@
     .opt { grid-template-columns: 1fr; gap: 6px; }
     .opt-reason { grid-column: 1; }
   }
+
+  /* ── reading mode toggle ──────────────── */
+  .mode {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .mode-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .mode-btns { display: flex; gap: 24px; }
+
+  .mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    padding: 4px 0;
+    transition: color 0.18s ease;
+  }
+
+  .mode-btn::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--hair);
+    flex-shrink: 0;
+    transition: background 0.18s ease;
+  }
+
+  .mode-btn:hover { color: var(--ink); }
+  .mode-btn[aria-pressed="true"] { color: var(--ink); }
+  .mode-btn[aria-pressed="true"]::before { background: var(--accent); }
+  .mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  @media (min-width: 1360px) {
+    .mode {
+      position: fixed;
+      top: 50%;
+      right: calc(50vw + 552px);
+      transform: translateY(-50%);
+      background: none;
+      border-bottom: none;
+    }
+    .mode-inner {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 12px 0 0;
+      border-top: 1px solid var(--ink);
+    }
+    .mode-label {
+      display: block;
+      font-size: 9.5px;
+      max-width: 7ch;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .mode-btns { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* mode visibility */
+  body.mode-tldr .full-only { display: none; }
+  body.mode-tldr .sec-num { display: none; }
 </style>
 </head>
 <body>
@@ -517,6 +597,17 @@
     </nav>
   </div>
 </header>
+
+<!-- READING MODE -->
+<div class="mode" role="group" aria-label="Reading mode">
+  <div class="wrap mode-inner">
+    <span class="tag mode-label">Reading Mode</span>
+    <div class="mode-btns">
+      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
+      <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
+    </div>
+  </div>
+</div>
 
 <main class="wrap">
 
@@ -561,7 +652,7 @@
   </figure>
 
   <!-- 01 CONTEXT -->
-  <section class="sec">
+  <section class="sec full-only">
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
@@ -648,7 +739,7 @@
           </ul>
           <span class="tree-note">Reaching a solution: landing page + scroll + click</span>
         </div>
-        <p class="panel-note">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching a solution meant clicking into a landing page, scrolling to find the right item, then clicking again. No dropdown, no shortcuts. Most closed the tab instead.</p>
+        <p class="panel-note full-only">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching a solution meant clicking into a landing page, scrolling to find the right item, then clicking again. No dropdown, no shortcuts. Most closed the tab instead.</p>
       </div>
 
       <div>
@@ -685,14 +776,14 @@
           </ul>
           <span class="tree-note">Reaching a solution: zero required clicks</span>
         </div>
-        <p class="panel-note">Solutions are reachable two ways without a single click: browsable on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before committing to anything.</p>
+        <p class="panel-note full-only">Solutions are reachable two ways without a single click: browsable on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before committing to anything.</p>
       </div>
 
     </div>
   </section>
 
   <!-- 03 DECISION -->
-  <section class="sec">
+  <section class="sec full-only">
     <div class="sec-head"><span class="sec-num">03</span><span class="tag">The Key Decision</span></div>
     <div class="sec-grid">
       <div class="reveal">
@@ -727,7 +818,7 @@
   <section class="sec">
     <div class="sec-head"><span class="sec-num">04</span><span class="tag">The Solution</span></div>
 
-    <div class="fig-split reveal">
+    <div class="fig-split reveal full-only">
       <figure class="fig">
         <div class="fig-media">
           <video autoplay loop muted playsinline aria-label="Scrolling view of the solutions section on the redesigned homepage">
@@ -790,7 +881,7 @@
         <p class="stat-desc">Sales confirmed quality improved alongside volume. Prospects were referencing specific solution pages in their first emails.</p>
       </div>
     </div>
-    <div class="reflect reveal">
+    <div class="reflect reveal full-only">
       <span class="tag">What I'd Do Differently</span>
       <p>I'd push harder on content strategy earlier. The structural decisions were sound, but several solution pages launched with copy held over from the old site. The refresh fixed the UX; the content problem is ongoing, and I should have scoped it explicitly rather than treating it as a background task.</p>
     </div>
@@ -823,6 +914,22 @@
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => obs.observe(el));
+
+  // Reading mode toggle
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  function applyMode(mode) {
+    document.body.classList.toggle('mode-tldr', mode === 'tldr');
+    modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  }
+  modeBtns.forEach(b => b.addEventListener('click', () => {
+    applyMode(b.dataset.mode);
+    try { sessionStorage.setItem('readingMode', b.dataset.mode); } catch (err) {}
+    // Sections re-entering the flow shouldn't sit invisible waiting for a scroll they already got.
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }));
+  try {
+    if (sessionStorage.getItem('readingMode') === 'tldr') applyMode('tldr');
+  } catch (err) {}
 </script>
 
 </body>
