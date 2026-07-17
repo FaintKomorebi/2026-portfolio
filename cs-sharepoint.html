@@ -86,7 +86,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px var(--pad);
   }
 
   .top-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
@@ -517,51 +517,49 @@
 
   .mode-inner {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 
-  .mode-btns { display: flex; gap: 24px; }
+  .mode-btns { display: flex; gap: 28px; }
 
   .mode-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: none;
     border: none;
     cursor: pointer;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     color: var(--soft);
-    padding: 4px 0;
+    padding: 2px 0;
     transition: color 0.18s ease;
   }
 
   .mode-btn::before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--hair);
+    background: var(--soft);
     flex-shrink: 0;
-    transition: background 0.18s ease;
+    transition: width 0.18s ease, height 0.18s ease, background 0.18s ease;
   }
 
   .mode-btn:hover { color: var(--ink); }
-  .mode-btn[aria-pressed="true"] { color: var(--ink); }
-  .mode-btn[aria-pressed="true"]::before { background: var(--accent); }
+  .mode-btn[aria-pressed="true"] { color: var(--ink); font-weight: 500; }
+  .mode-btn[aria-pressed="true"]::before { width: 9px; height: 9px; background: var(--accent); }
   .mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
   @media (min-width: 1360px) {
     .mode {
       position: fixed;
-      top: 50%;
+      top: 60px;
       right: calc(50vw + 552px);
-      transform: translateY(-50%);
       background: none;
       border-bottom: none;
     }
@@ -569,17 +567,10 @@
       display: block;
       max-width: none;
       margin: 0;
-      padding: 12px 0 0;
+      padding: 14px 0 0;
       border-top: 1px solid var(--ink);
     }
-    .mode-label {
-      display: block;
-      font-size: 9.5px;
-      max-width: 7ch;
-      line-height: 1.7;
-      margin-bottom: 14px;
-    }
-    .mode-btns { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .mode-btns { flex-direction: column; align-items: flex-start; gap: 12px; }
   }
 
   /* mode visibility */
@@ -603,7 +594,6 @@
 <!-- READING MODE -->
 <div class="mode" role="group" aria-label="Reading mode">
   <div class="wrap mode-inner">
-    <span class="tag mode-label">Reading Mode</span>
     <div class="mode-btns">
       <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
       <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
@@ -912,6 +902,25 @@
   try {
     if (sessionStorage.getItem('readingMode') === 'tldr') applyMode('tldr');
   } catch (err) {}
+
+  // Desktop rail: track the spec strip's top hairline until that position
+  // would scroll above a 60px pin point, then hold there for the rest of the read.
+  const modeRail = document.querySelector('.mode');
+  const specStrip = document.querySelector('.spec');
+  const railMQ = window.matchMedia('(min-width: 1360px)');
+  function positionRail() {
+    if (!modeRail || !specStrip || !railMQ.matches) { if (modeRail) modeRail.style.top = ''; return; }
+    const specTop = specStrip.getBoundingClientRect().top;
+    modeRail.style.top = Math.max(60, specTop) + 'px';
+  }
+  window.addEventListener('scroll', positionRail, { passive: true });
+  window.addEventListener('resize', positionRail);
+  positionRail();
+  // Web fonts swap in after first paint and can reflow the hero text above
+  // the spec strip; re-measure once fonts are actually loaded.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionRail);
+  }
 </script>
 
 </body>
