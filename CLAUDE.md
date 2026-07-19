@@ -234,6 +234,23 @@ three fixes)
   broken backup turned out to be a misconfigured check expecting a daily
   ping from a job that only runs weekly, diagnosed by reading the actual
   scheduling config rather than accepting "it's down" as the full story.
+- The sharpest instance of this discipline (2026-07-19): a round of visual
+  layout changes was verified only by a passing build and a health-check
+  ping, not by looking at the actual result, and shipped with a real bug
+  still in it (a launcher grid had silently collapsed into single-column
+  vertical stacks). Caught on direct review, fixed properly that time — and
+  then the very next round of changes shipped three more visual bugs at
+  once. At that point the work was deliberately escalated: taken away from
+  being done directly and handed to a more capable model, with one
+  non-negotiable rule attached — screenshot the actual result and inspect
+  it before claiming anything is fixed. That stricter process then caught
+  and fixed all three bugs, and a further regression it introduced in its
+  own first pass, entirely through that same screenshot-and-verify
+  discipline. This is the single most concrete evidence in the whole
+  project for the thesis question itself: a system's output was trusted
+  exactly as far as it had been proven reliable, and no further, and when
+  it wasn't reliable enough the response was to change what was trusted
+  with it, not to keep hoping the next attempt would be different.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
 - Comfort directing a large, multi-stage technical build without writing
@@ -285,22 +302,43 @@ three fixes)
   2026 hiring. Handled poorly, it could read the wrong way to the wrong
   reviewer. Worth a real conversation, not a default assumption either
   way.
+  - **New concrete evidence for this (2026-07-19):** before continuing the
+    build's polish stage, two separate AI reviewers were deliberately
+    commissioned — not to build anything, purely to critique the live app,
+    each briefed with a distinct expert lens (one a visual/UI design
+    persona, one a product-design persona briefed on how the app is
+    actually used day to day) and required to inspect the real running app
+    rather than reason abstractly. Both came back with real, sometimes
+    pointed findings — including flagging that the app was breaking its
+    own stated design rule about when color is allowed to appear. Nothing
+    from either critique gets built automatically; every recommendation
+    still goes through the same human product-owner judgment as everything
+    else in this project before anything is actioned. This is arguably the
+    single clearest piece of evidence for the whole "directed AI-driven
+    engineering" framing: using AI as a critique instrument, not only a
+    construction one, with a human deciding what's worth acting on. Full
+    critiques preserved in the project's own `PHASE2_PLAN.md`.
 - How much real technical/architecture detail to show versus abstract
   into pure design-decision language. ACRO and Lincoln are both readable
   by a fully non-technical reviewer; this one could lean slightly more
   technical given what it's trying to prove, which is itself a case-study
   strategy decision worth making on purpose.
-- The two open items from the 2026-07-18 build review (the Home surface
-  needing a rebuild, a mobile layout bug on the AI headline) should be
-  resolved before this ships live, so the case study reflects a genuinely
-  finished v1 rather than a mid-build snapshot. Tracked in the project's
-  own `PHASE2_PLAN.md`, not duplicated here.
+- The two open items from the 2026-07-18 build review: the Home surface
+  rebuild is **done** as of 2026-07-19 (hero, weather, bookmarks all
+  reworked, see PHASE2_PLAN.md). The mobile layout bug is **still open** —
+  independently reconfirmed as of 2026-07-19 on both Home and Cockpit (not
+  fixed, not new, pre-existing). Should be resolved before this ships live
+  so the case study reflects a genuinely finished v1, not a mid-build
+  snapshot. Tracked in the project's own `PHASE2_PLAN.md`, not duplicated
+  here.
 
 ### Next Steps
 - [ ] Confirm/adjust the thesis framing with Noah before drafting copy
 - [ ] Decide, on purpose, how to frame "directed AI-driven engineering"
-- [ ] Close the two open build items so the underlying product matches
-      what the case study will claim
+- [x] Home surface rebuild (one of the two open build items) — done 2026-07-19
+- [ ] Fix the remaining open build item (mobile layout overflow bug, still
+      unresolved as of 2026-07-19) so the underlying product matches what
+      the case study will claim
 - [ ] Gather and clean the real screenshots (layout before/after, color
       states, both themes)
 - [ ] Draft actual case study copy for cs-homelab.html from this plan
