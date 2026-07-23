@@ -3,1250 +3,694 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project Name — Case Study</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Homelab Command Center · Noah Schilling</title>
+<meta name="description" content="Case study. A from-scratch homelab dashboard, directed end to end in a weekend, with a built-in AI status layer most homelab dashboards don't have.">
 <style>
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-RegularItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
-    --bg: #f0ece6;
-    --ink: #131313;
-    --mid: #6e6b65;
-    --faint: #e2ddd7;
-    --dim-bg: #e8e4de;
-    --sans: 'IBM Plex Sans', Helvetica Neue, sans-serif;
-    --serif: 'Instrument Serif', Georgia, serif;
-    --mono: 'IBM Plex Mono', monospace;
-    --pad: 60px;
-    --s1: 8px;
-    --s2: 16px;
-    --s3: 24px;
-    --s4: 40px;
-    --s5: 64px;
-    --s6: 96px;
-    --s7: 140px;
+    --paper: #ffffff;
+    --ink:   #0b0b0e;
+    --grey:  #54545e;
+    --soft:  #8f8f99;
+    --hair:  #e7e7ec;
+    --panel: #f4f4f6;
+    --accent:#2545e0;
+    --sans: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --pad: clamp(20px, 5vw, 64px);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.5;
-    overflow-x: hidden;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* ─── NAV ─────────────────────────────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px var(--pad);
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  .tag-ink { color: var(--ink); }
+
+  /* ── header ───────────────────────────── */
+  .top { border-bottom: 1px solid var(--hair); }
+
+  .top-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--bg);
+    padding: 20px var(--pad);
   }
 
-  .nav-back {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.07em;
-    text-decoration: none;
-    color: var(--mid);
-    display: flex;
+  .top-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+
+  .top-links { display: flex; gap: 32px; }
+
+  .top-links a { transition: color 0.18s ease; }
+  .top-links a:hover { color: var(--ink); }
+
+  /* ── hero ─────────────────────────────── */
+  .hero { padding: clamp(64px, 11vh, 128px) 0 clamp(44px, 7vh, 72px); }
+
+  .hero .tag { display: block; margin-bottom: clamp(24px, 4vh, 36px); }
+
+  .hero h1 {
+    font-size: clamp(40px, 6.4vw, 88px);
+    font-weight: 300;
+    letter-spacing: -0.028em;
+    line-height: 1.02;
+    max-width: 17ch;
+    margin-bottom: clamp(24px, 4vh, 40px);
+  }
+
+  .hero .lead {
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.6;
+    color: var(--grey);
+    max-width: 56ch;
+  }
+
+  /* live status */
+  .status-live {
+    color: var(--accent);
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    transition: color 0.18s;
-  }
-  .nav-back:hover { color: var(--ink); }
-  .nav-back-arrow { transition: transform 0.18s; }
-  .nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
-
-  .nav-name {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.07em;
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  /* ─── HERO ───────────────────────────── */
-  .hero {
-    padding: 160px var(--pad) var(--s7);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-    align-items: end;
-  }
-
-  .hero-left {
-    grid-column: 1 / 9;
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: var(--s3);
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(48px, 7vw, 100px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: var(--s4);
-  }
-
-  .hero-title em { font-style: italic; }
-
-  .hero-summary {
-    font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--mid);
-    max-width: 520px;
-    letter-spacing: -0.005em;
-  }
-
-  .hero-right {
-    grid-column: 10 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-bottom: 8px;
-  }
-
-  .hm {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .hm-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .hm-value {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.45;
-  }
-
-  /* ─── HERO IMAGE ─────────────────────── */
-  /* Full-bleed mockup placeholder — swap for real screenshot */
-  .hero-image {
-    width: 100%;
-    background: #1e1c19;
-    aspect-ratio: 16 / 8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-image-inner {
-    width: 72%;
-    aspect-ratio: 4 / 3;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 28px;
-    position: relative;
-  }
-
-  .mock-bar {
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .mock-bar.w30 { width: 30%; }
-  .mock-bar.w60 { width: 60%; }
-  .mock-bar.w45 { width: 45%; }
-  .mock-bar.w80 { width: 80%; background: rgba(255,255,255,0.12); }
-  .mock-bar.w20 { width: 20%; }
-
-  .mock-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-top: 8px;
-    flex: 1;
-  }
-
-  .mock-card {
-    background: rgba(255,255,255,0.04);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .image-caption {
-    padding: 16px var(--pad);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--mid);
-  }
-
-  /* ─── SECTION WRAPPER ────────────────── */
-  .section {
-    padding: var(--s7) var(--pad);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .section-index {
-    grid-column: 1 / 2;
-  }
-
-  .section-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .section-content {
-    grid-column: 2 / 8;
-  }
-
-  .section-aside {
-    grid-column: 9 / 13;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: var(--s4);
-  }
-
-  .section-hed {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: var(--s4);
-  }
-
-  .section-body {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-  }
-
-  .section-body + .section-body {
-    margin-top: var(--s3);
-  }
-
-  .section-body em {
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  /* Aside callout box */
-  .aside-block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-top: 6px;
-  }
-
-  .aside-item {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
   }
 
-  .aside-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .aside-value {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-
-  /* ─── BEFORE / AFTER ─────────────────── */
-  .before-after {
-    padding: 0 var(--pad) var(--s7);
-  }
-
-  .ba-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s5);
-    display: block;
-  }
-
-  .ba-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s3);
-  }
-
-  .ba-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s2);
-  }
-
-  .ba-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .ba-tag-dot {
+  .status-live::before {
+    content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--mid);
-    flex-shrink: 0;
+    background: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
   }
 
-  .ba-tag-dot.after { background: var(--ink); }
-
-  .ba-screen {
-    aspect-ratio: 4 / 3;
-    background: #1e1c19;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
   }
 
-  /* Before: intentionally messier mock */
-  .ba-screen.before-screen {
-    background: #16181c;
-  }
-
-  .before-mock {
-    width: 80%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 20px;
-  }
-
-  .bm-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .bm-block {
-    height: 10px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.06);
-  }
-
-  /* Crowded, misaligned feel */
-  .bm-block.w40 { width: 40%; }
-  .bm-block.w25 { width: 25%; }
-  .bm-block.w55 { width: 55%; }
-  .bm-block.w70 { width: 70%; }
-  .bm-block.w15 { width: 15%; }
-  .bm-block.h20 { height: 20px; }
-  .bm-block.h32 { height: 32px; }
-
-  .bm-cluster {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 3px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  /* After: clean, spacious */
-  .ba-screen.after-screen {
-    background: #1a1c20;
-  }
-
-  .after-mock {
-    width: 78%;
-    height: 72%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 24px;
-  }
-
-  .am-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .am-block {
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .am-block.w35 { width: 35%; }
-  .am-block.w20 { width: 20%; height: 24px; border-radius: 3px; background: rgba(255,255,255,0.12); }
-  .am-block.w100 { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
-  .am-block.w60 { width: 60%; }
-  .am-block.w45 { width: 45%; }
-  .am-block.accent { background: rgba(180,160,120,0.4); width: 30%; }
-
-  .am-card-row {
+  /* ── spec strip · signature element ───── */
+  .spec {
+    border-top: 1px solid var(--ink);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    flex: 1;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: clamp(48px, 8vh, 96px);
   }
 
-  .am-card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .spec > div {
+    border-bottom: 1px solid var(--hair);
+    border-left: 1px solid var(--hair);
+    padding: 16px 20px 20px;
   }
 
-  .ba-annotation {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.6;
-    padding-top: var(--s2);
+  .spec > div:first-child { border-left: none; padding-left: 0; }
+
+  .spec .tag { display: block; font-size: 10px; margin-bottom: 9px; }
+
+  .spec-v { font-size: 14px; line-height: 1.55; }
+
+  /* ── figures ──────────────────────────── */
+  .fig { margin-bottom: clamp(48px, 8vh, 96px); }
+
+  .fig-media {
+    background: var(--panel);
+    padding: clamp(28px, 4.5vw, 64px);
   }
 
-  /* ─── DECISION SECTION ───────────────── */
-  /* This is the key differentiator — showing judgment, not just output */
-  .decision-section {
-    padding: 0 var(--pad) var(--s7);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .decision-index {
-    grid-column: 1 / 2;
-  }
-
-  .decision-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .decision-content {
-    grid-column: 2 / 9;
-  }
-
-  /* The "what I didn't do" — pull quote style, shows thinking */
-  .decision-pull {
-    font-family: var(--serif);
-    font-size: clamp(22px, 2.8vw, 34px);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: var(--s5);
-    max-width: 600px;
-    padding-left: var(--s4);
-    border-left: 2px solid var(--faint);
-  }
-
-  .decision-body {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    margin-bottom: var(--s3);
-    max-width: 560px;
-  }
-
-  .decision-options {
-    grid-column: 10 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s3);
-    padding-top: 6px;
-  }
-
-  /* Options considered — shows you explored, not just executed */
-  .option {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: var(--s3);
-    background: var(--dim-bg);
-    border-radius: 3px;
-  }
-
-  .option.chosen {
-    background: var(--ink);
-  }
-
-  .option-status {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .option.chosen .option-status { color: rgba(240,236,230,0.5); }
-
-  .option-label {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  .option.chosen .option-label { color: var(--bg); }
-
-  .option-reason {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--mid);
-    line-height: 1.5;
-    letter-spacing: 0.01em;
-  }
-
-  .option.chosen .option-reason { color: rgba(240,236,230,0.45); }
-
-  /* ─── FINAL SCREENS ──────────────────── */
-  .final-screens {
-    padding: 0 var(--pad) var(--s7);
-  }
-
-  .fs-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s5);
+  .fig-media img {
     display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 18px 60px rgba(11, 11, 14, 0.12), 0 4px 16px rgba(11, 11, 14, 0.06);
   }
 
-  /* Single large screen with annotation sidebar */
-  .fs-featured {
+  .fig figcaption {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-top: 13px;
+    border-top: 1px solid var(--hair);
+  }
+
+  .fig figcaption .tag { flex-shrink: 0; }
+
+  .fig-desc { font-size: 13px; color: var(--grey); line-height: 1.5; }
+
+  /* ── sections ─────────────────────────── */
+  .sec { padding-top: clamp(72px, 12vh, 144px); }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: clamp(36px, 6vh, 64px);
+  }
+
+  .sec-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink); }
+
+  .sec-grid {
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: var(--s4);
-    margin-bottom: var(--s5);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(40px, 6vw, 96px);
     align-items: start;
   }
 
-  .fs-screen {
-    background: #1a1c20;
-    aspect-ratio: 16 / 10;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .fs-main-mock {
-    width: 82%;
-    height: 78%;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 24px;
-  }
-
-  .fmm-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fmm-block {
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.09);
-  }
-
-  .fmm-block.w30 { width: 30%; }
-  .fmm-block.w15 { width: 15%; }
-  .fmm-block.accent { background: rgba(180,160,120,0.5); width: 22%; height: 26px; border-radius: 3px; }
-  .fmm-block.w50 { width: 50%; }
-  .fmm-block.w70 { width: 70%; }
-  .fmm-block.w40 { width: 40%; }
-  .fmm-block.w100 { width: 100%; height: 1px; background: rgba(255,255,255,0.06); }
-
-  .fmm-content {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
-
-  .fmm-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 4px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .fmm-card-line {
-    height: 6px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .fmm-card-line.w80 { width: 80%; }
-  .fmm-card-line.w55 { width: 55%; }
-  .fmm-card-line.w70 { width: 70%; }
-
-  /* Annotations */
-  .fs-annotations {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    padding-top: 8px;
-  }
-
-  .annotation {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .ann-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--mid);
-  }
-
-  .ann-text {
-    font-family: var(--sans);
-    font-size: 13px;
+  .sec h2 {
+    font-size: clamp(26px, 3vw, 40px);
     font-weight: 300;
-    color: var(--ink);
-    line-height: 1.55;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    max-width: 24ch;
+    margin-bottom: clamp(20px, 3.5vh, 32px);
   }
 
-  /* Secondary screens row */
-  .fs-secondary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s3);
-  }
-
-  .fs-secondary-screen {
-    background: #1e1c19;
-    aspect-ratio: 4 / 3;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .ss-mock {
-    width: 80%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 16px;
-  }
-
-  .ss-block {
-    height: 7px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.07);
-  }
-
-  .ss-block.w50 { width: 50%; }
-  .ss-block.w80 { width: 80%; }
-  .ss-block.w65 { width: 65%; }
-  .ss-block.w35 { width: 35%; }
-  .ss-block.accent { background: rgba(180,160,120,0.35); width: 45%; }
-  .ss-block.tall { height: 40px; border-radius: 3px; }
-
-  .fs-secondary-label {
-    padding-top: var(--s2);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mid);
-  }
-
-  .fs-secondary-item {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* ─── IMPACT ─────────────────────────── */
-  .impact {
-    padding: 0 var(--pad) var(--s7);
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--s3);
-  }
-
-  .impact-index {
-    grid-column: 1 / 2;
-  }
-
-  .impact-index span {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .impact-numbers {
-    grid-column: 2 / 7;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s5);
-  }
-
-  .impact-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .impact-num {
-    font-family: var(--serif);
-    font-size: clamp(52px, 7vw, 88px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-  }
-
-  .impact-desc {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--mid);
-    line-height: 1.55;
-    max-width: 340px;
-  }
-
-  .impact-reflection {
-    grid-column: 8 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s4);
-    justify-content: flex-start;
-    padding-top: 8px;
-  }
-
-  .impact-reflection-hed {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: var(--s2);
-    display: block;
-  }
-
-  .impact-reflection-body {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
+  .body {
+    font-size: 16.5px;
     line-height: 1.75;
-    color: var(--ink);
-    margin-bottom: var(--s3);
+    max-width: 62ch;
   }
 
-  .impact-reflection-body + .impact-reflection-body {
-    color: var(--mid);
-    font-size: 14px;
+  .body + .body { margin-top: 20px; }
+  .body.dim { color: var(--grey); }
+
+  .aside { display: flex; flex-direction: column; gap: 28px; padding-top: 6px; }
+  .aside .tag { display: block; margin-bottom: 8px; }
+  .aside p { font-size: 14px; line-height: 1.65; color: var(--ink); }
+
+  /* ── built so far / shots ─────────────── */
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
   }
 
-  /* ─── NEXT PROJECT ───────────────────── */
-  .next {
-    padding: var(--s6) var(--pad);
+  .shots .fig { margin-bottom: 0; }
+  .shots .fig-media { padding: clamp(20px, 3vw, 40px); }
+
+  .shots + .shots { margin-top: clamp(28px, 4vw, 56px); }
+
+  /* ── compare (before/after) ───────────── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .panel-tag {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
   }
 
-  .next-label {
+  .panel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--soft);
+    flex-shrink: 0;
+  }
+
+  .panel-dot.after { background: var(--accent); }
+
+  /* ── status checklist ─────────────────── */
+  .checks { padding-top: 4px; }
+
+  .check-group {
     font-family: var(--mono);
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--mid);
-    display: block;
-    margin-bottom: var(--s2);
+    color: var(--soft);
+    padding-top: 24px;
+    margin-bottom: 6px;
   }
+
+  .check-group:first-child { padding-top: 0; }
+
+  .check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .check-mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  /* ── next / footer ────────────────────── */
+  .next { margin-top: clamp(80px, 13vh, 160px); border-top: 1px solid var(--ink); }
+
+  .next a { display: block; padding: clamp(32px, 5vh, 48px) 0; }
+
+  .next .tag { display: block; margin-bottom: 14px; }
 
   .next-title {
-    font-family: var(--serif);
-    font-size: clamp(32px, 4.5vw, 60px);
-    font-weight: 400;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
     letter-spacing: -0.025em;
-    line-height: 1.0;
-    color: var(--ink);
-    text-decoration: none;
-    display: block;
-    transition: font-style 0.2s, opacity 0.2s;
-  }
-
-  .next-title:hover { font-style: italic; opacity: 0.6; }
-
-  .next-arrow {
-    font-size: 32px;
-    color: var(--mid);
-    padding-bottom: 4px;
-    transition: transform 0.2s, color 0.2s;
-    text-decoration: none;
-  }
-
-  .next-title:hover ~ .next-arrow,
-  .next:hover .next-arrow { transform: translateX(8px); color: var(--ink); }
-
-  /* ─── FOOTER ─────────────────────────── */
-  footer {
-    padding: 0 var(--pad) var(--s4);
+    line-height: 1.05;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
   }
 
-  .footer-t {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--mid);
-    letter-spacing: 0.1em;
+  .next-arrow { font-size: 0.6em; color: var(--soft); transition: transform 0.22s ease, color 0.22s ease; }
+  .next a:hover .next-arrow { transform: translateX(8px); color: var(--ink); }
+
+  footer {
+    border-top: 1px solid var(--hair);
+    padding: 22px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  /* ─── REVEALS ────────────────────────── */
+  footer .tag { font-size: 10px; }
+  footer a:hover { color: var(--ink); }
+
+  /* ── reveal ───────────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .reveal.visible { opacity: 1; transform: none; }
-  .d1 { transition-delay: 0.08s; }
-  .d2 { transition-delay: 0.16s; }
-  .d3 { transition-delay: 0.24s; }
 
-  .hero-tag   { animation: fadeUp 0.7s 0.1s both; }
-  .hero-title { animation: fadeUp 0.7s 0.2s both; }
-  .hero-summary { animation: fadeUp 0.7s 0.32s both; }
-  .hero-right { animation: fadeUp 0.7s 0.4s both; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .status-live::before { animation: none; }
+    html { scroll-behavior: auto; }
   }
 
-  /* ─── RESPONSIVE ─────────────────────── */
-  @media (max-width: 960px) {
-    :root { --pad: 28px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { grid-column: 1; }
-    .hero-right { grid-column: 1; flex-direction: row; flex-wrap: wrap; }
-    .section-content { grid-column: 1 / 13; }
-    .section-aside { grid-column: 1 / 13; }
-    .section-index { display: none; }
-    .ba-grid { grid-template-columns: 1fr; }
-    .fs-featured { grid-template-columns: 1fr; }
-    .fs-secondary { grid-template-columns: 1fr 1fr; }
-    .decision-content { grid-column: 1 / 13; }
-    .decision-options { grid-column: 1 / 13; flex-direction: row; flex-wrap: wrap; }
-    .impact-numbers { grid-column: 1 / 13; }
-    .impact-reflection { grid-column: 1 / 13; }
-    .impact-index { display: none; }
-    .decision-index { display: none; }
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 900px) {
+    .sec-grid { grid-template-columns: 1fr; gap: clamp(28px, 5vh, 44px); }
+    .compare, .shots { grid-template-columns: 1fr; gap: clamp(32px, 5vh, 48px); }
   }
+
+  @media (max-width: 680px) {
+    .spec { grid-template-columns: 1fr 1fr; }
+    .spec > div { border-left: none; padding-left: 0; padding-right: 12px; }
+    .top-links { gap: 20px; }
+  }
+
+  /* ── reading mode toggle ──────────────── */
+  .mode {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .mode-inner {
+    display: flex;
+    align-items: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .mode-btns { display: flex; gap: 28px; }
+
+  .mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--soft);
+    padding: 2px 0;
+    transition: color 0.18s ease;
+  }
+
+  .mode-btn::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--soft);
+    flex-shrink: 0;
+    transition: width 0.18s ease, height 0.18s ease, background 0.18s ease;
+  }
+
+  .mode-btn:hover { color: var(--ink); }
+  .mode-btn[aria-pressed="true"] { color: var(--ink); font-weight: 500; }
+  .mode-btn[aria-pressed="true"]::before { width: 9px; height: 9px; background: var(--accent); }
+  .mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  @media (min-width: 1360px) {
+    .mode {
+      position: fixed;
+      top: 60px;
+      right: calc(50vw + 552px);
+      background: none;
+      border-bottom: none;
+    }
+    .mode-inner {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 14px 0 0;
+      border-top: 1px solid var(--ink);
+    }
+    .mode-btns { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* mode visibility */
+  body.mode-tldr .full-only { display: none; }
+  body.mode-tldr .sec-num { display: none; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-back">
-    <span class="nav-back-arrow">←</span>
-    <span>All Work</span>
-  </a>
-  <a href="index.html" class="nav-name">Your Name</a>
-</nav>
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="top-name" href="index.html">Noah Schilling</a>
+    <nav class="top-links">
+      <a class="tag" href="index.html">Index</a>
+      <a class="tag" href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </div>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="hero-tag">Shipped · [Industry] · [Year]</span>
-    <h1 class="hero-title">Your Project<br><em>Title Here</em></h1>
-    <p class="hero-summary">One sentence on the problem — specific, not generic. What was broken, who felt it, why it mattered to the business.</p>
-  </div>
-  <div class="hero-right">
-    <div class="hm">
-      <span class="hm-label">My Role</span>
-      <span class="hm-value">Your specific role<br>on this project</span>
-    </div>
-    <div class="hm">
-      <span class="hm-label">Timeline</span>
-      <span class="hm-value">X weeks / months</span>
-    </div>
-    <div class="hm">
-      <span class="hm-label">Team</span>
-      <span class="hm-value">Who you worked with<br>(PM, eng, etc.)</span>
-    </div>
-    <div class="hm">
-      <span class="hm-label">Outcome</span>
-      <span class="hm-value">Your key result number<br>up front, no burying it</span>
-    </div>
-  </div>
-</section>
-
-<!-- HERO IMAGE -->
-<div class="hero-image reveal">
-  <!-- Replace this entire div with your actual screenshot -->
-  <div class="hero-image-inner">
-    <div class="mock-bar w30"></div>
-    <div class="mock-bar w80"></div>
-    <div class="mock-bar w60"></div>
-    <div class="mock-bar w45"></div>
-    <div class="mock-grid">
-      <div class="mock-card"></div>
-      <div class="mock-card"></div>
-      <div class="mock-card"></div>
-    </div>
-  </div>
-</div>
-<p class="image-caption reveal">Fig. 1 — Final state of [screen name]. Replace with your real screenshot.</p>
-
-<!-- OVERVIEW -->
-<section class="section">
-  <div class="section-index"><span>Overview</span></div>
-  <div class="section-content reveal">
-    <span class="section-label">01 — Context</span>
-    <h2 class="section-hed">What the situation actually was.</h2>
-    <p class="section-body">Set the scene honestly. What was the product, who were the users, what was the team trying to achieve? This isn't a brief restatement — it's the business or human context that made this problem worth solving. Two or three paragraphs max.</p>
-    <p class="section-body" style="margin-top: var(--s3); color: var(--mid);">What constraints shaped your work? Timeline pressure, technical limits, conflicting stakeholder priorities — be specific. Constraints are interesting. They show you operate in reality, not a design vacuum.</p>
-  </div>
-  <div class="section-aside reveal d1">
-    <div class="aside-block">
-      <div class="aside-item">
-        <span class="aside-label">The brief</span>
-        <span class="aside-value">One line on what you were asked to do — before you figured out what actually needed doing.</span>
-      </div>
-      <div class="aside-item">
-        <span class="aside-label">The real problem</span>
-        <span class="aside-value">What you discovered the actual problem was, once you dug in.</span>
-      </div>
-      <div class="aside-item">
-        <span class="aside-label">Success looked like</span>
-        <span class="aside-value">How you and the team agreed you'd know it worked.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BEFORE / AFTER -->
-<div class="before-after reveal">
-  <span class="ba-label">Before & After</span>
-  <div class="ba-grid">
-    <div class="ba-panel">
-      <div class="ba-tag">
-        <div class="ba-tag-dot"></div>
-        Before
-      </div>
-      <div class="ba-screen before-screen">
-        <!-- Replace with your real before screenshot -->
-        <div class="before-mock">
-          <div class="bm-row">
-            <div class="bm-block w40"></div>
-            <div class="bm-block w25"></div>
-          </div>
-          <div class="bm-cluster">
-            <div class="bm-block w70"></div>
-            <div class="bm-block w55"></div>
-            <div class="bm-block w70"></div>
-          </div>
-          <div class="bm-row" style="gap:6px">
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w15 h20"></div>
-            <div class="bm-block w40 h20"></div>
-          </div>
-          <div class="bm-cluster" style="margin-top:4px">
-            <div class="bm-block w55"></div>
-            <div class="bm-block w40"></div>
-          </div>
-        </div>
-      </div>
-      <p class="ba-annotation">Describe what was wrong here — not just visually, but functionally. What were users actually struggling to do? What did the data show?</p>
-    </div>
-    <div class="ba-panel">
-      <div class="ba-tag">
-        <div class="ba-tag-dot after"></div>
-        After
-      </div>
-      <div class="ba-screen after-screen">
-        <!-- Replace with your real after screenshot -->
-        <div class="after-mock">
-          <div class="am-header">
-            <div class="am-block w35"></div>
-            <div class="am-block w20"></div>
-          </div>
-          <div class="am-block w100"></div>
-          <div class="am-block w60"></div>
-          <div class="am-block accent"></div>
-          <div class="am-card-row">
-            <div class="am-card">
-              <div class="am-block w60" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.1)"></div>
-              <div class="am-block w45" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.07)"></div>
-            </div>
-            <div class="am-card">
-              <div class="am-block w60" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.1)"></div>
-              <div class="am-block w45" style="height:6px;border-radius:2px;background:rgba(255,255,255,0.07)"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="ba-annotation">What changed and why it matters — in plain language. Focus on the user experience shift, not just the visual difference.</p>
+<!-- READING MODE -->
+<div class="mode" role="group" aria-label="Reading mode">
+  <div class="wrap mode-inner">
+    <div class="mode-btns">
+      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
+      <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
     </div>
   </div>
 </div>
 
-<!-- THE DECISION -->
-<section class="decision-section">
-  <div class="decision-index"><span>Decision</span></div>
-  <div class="decision-content reveal">
-    <span class="section-label">02 — The Key Decision</span>
-    <blockquote class="decision-pull">
-      "The obvious solution was X. We didn't do that."
-    </blockquote>
-    <p class="decision-body">
-      Replace this with the most interesting design decision you made on this project — ideally one where you pushed back on an assumption, reframed the problem, or chose a harder path because it was the right one. This is what hiring managers remember.
-    </p>
-    <p class="decision-body" style="color: var(--mid);">
-      Explain your reasoning without jargon. What did you learn from users or data that pointed you here? What tradeoffs did you accept and why?
-    </p>
-  </div>
-  <div class="decision-options reveal d1">
-    <div class="option">
-      <span class="option-status">Considered</span>
-      <span class="option-label">Option A — the obvious approach</span>
-      <span class="option-reason">Why you didn't: one honest sentence.</span>
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="tag">Case Study 03 &middot; Homelab Command Center &middot; 2026 &middot; <span class="status-live">Live</span></span>
+    <h1>I ran the homelab dashboards worth running. None of them would ever be mine, so I built the one that was.</h1>
+    <p class="lead">A weekend build, directed end to end, in my own design language, nothing extra. It doesn't just show status, it tells me in plain English what actually needs my attention.</p>
+  </section>
+
+  <!-- SPEC STRIP -->
+  <div class="spec" role="list" aria-label="Project details">
+    <div role="listitem">
+      <span class="tag">Role</span>
+      <span class="spec-v">Product Direction</span>
     </div>
-    <div class="option">
-      <span class="option-status">Considered</span>
-      <span class="option-label">Option B — the safe middle ground</span>
-      <span class="option-reason">Why you didn't: one honest sentence.</span>
+    <div role="listitem">
+      <span class="tag">Timeline</span>
+      <span class="spec-v">2026 &middot; one weekend</span>
     </div>
-    <div class="option chosen">
-      <span class="option-status">Chosen</span>
-      <span class="option-label">Option C — what you actually did</span>
-      <span class="option-reason">The reasoning that got you here.</span>
+    <div role="listitem">
+      <span class="tag">Scope</span>
+      <span class="spec-v">15+ services &middot; one interface</span>
+    </div>
+    <div role="listitem">
+      <span class="tag">Status</span>
+      <span class="spec-v">Live &middot; daily use</span>
     </div>
   </div>
-</section>
 
-<!-- FINAL SCREENS -->
-<section class="final-screens">
-  <span class="fs-label reveal">Final Solution</span>
+  <!-- HERO FIGURE -->
+  <!-- TODO: replace with a real screenshot of the Home tab, calm state -->
+  <figure class="fig reveal">
+    <div class="fig-media">
+      <img src="resources/hl-home-calm.png" alt="The Command Center dashboard's Home tab in its calm, everything-is-fine state">
+    </div>
+    <figcaption>
+      <span class="tag tag-ink">Fig. 01</span>
+      <span class="fig-desc">The Home tab, calm state. Quiet by default, color only when something's actually wrong.</span>
+    </figcaption>
+  </figure>
 
-  <div class="fs-featured reveal">
-    <div class="fs-screen">
-      <!-- Replace with primary final screen -->
-      <div class="fs-main-mock">
-        <div class="fmm-nav">
-          <div class="fmm-block w30"></div>
-          <div class="fmm-block accent"></div>
+  <!-- 01 CONTEXT -->
+  <section class="sec full-only">
+    <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <h2>The dashboard I had worked. It just wasn't mine.</h2>
+        <p class="body">I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. But it was a stock layout built for a version of a homelab that wasn't mine. Before touching a single line, I actually ran the popular alternatives myself, lived with them for a while, and judged what each one got right and where each one fell short. None of them were ever going to become genuinely mine without fighting their defaults the whole way. So instead of settling on the next off-the-shelf option, I directed a full custom replacement built to my own spec from day one.</p>
+      </div>
+      <div class="aside reveal">
+        <div>
+          <span class="tag">The Bar</span>
+          <p>Everything the old dashboard did, plus a layer that actually tells me what matters, plus my own design language, minus every bit of bloat I never used.</p>
         </div>
-        <div class="fmm-block w100"></div>
-        <div class="fmm-block w50"></div>
-        <div class="fmm-block w70"></div>
-        <div class="fmm-content">
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
-          <div class="fmm-card">
-            <div class="fmm-card-line w80"></div>
-            <div class="fmm-card-line w55"></div>
-            <div class="fmm-card-line w70"></div>
-          </div>
+        <div>
+          <span class="tag">The Research</span>
+          <p>Ran the popular self-hosted dashboard tools directly before deciding none of them were worth adapting instead of building.</p>
         </div>
       </div>
     </div>
-    <div class="fs-annotations">
-      <div class="annotation">
-        <span class="ann-num">① Decision made here</span>
-        <span class="ann-text">Briefly call out a specific design choice visible in this screen and why it was made. Keep it to one insight per annotation.</span>
-      </div>
-      <div class="annotation">
-        <span class="ann-num">② What you removed</span>
-        <span class="ann-text">Showing what you took out is often more powerful than what you added. What did you cut and what did that unlock?</span>
-      </div>
-      <div class="annotation">
-        <span class="ann-num">③ The constraint it solves</span>
-        <span class="ann-text">Connect the visual to the user problem from the top of the page. Close the loop.</span>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <div class="fs-secondary reveal d1">
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w50"></div>
-          <div class="ss-block w80 tall"></div>
-          <div class="ss-block w65"></div>
-          <div class="ss-block accent"></div>
+  <!-- 02 WHAT MAKES IT DIFFERENT -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">02</span><span class="tag">What Makes It Different</span></div>
+    <div class="reveal">
+      <h2>Most dashboards show you data. Mine tells you what matters.</h2>
+      <p class="body full-only">Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.</p>
+    </div>
+  </section>
+
+  <!-- 03 HOW IT WAS BUILT -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">03</span><span class="tag">How It Was Built</span></div>
+    <div class="reveal">
+      <h2>AI did the building. I owned everything that outlives it.</h2>
+      <p class="body full-only">AI did the building. I owned every decision that outlives the build: what it looks like, and what each credential is allowed to touch. Every credential starts locked to exactly what one piece needs, nothing more, widened only on a direct call, never by default.</p>
+    </div>
+  </section>
+
+  <!-- 04 PROOF, NOT JUST PROCESS (headline survives TL;DR on purpose) -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">04</span><span class="tag">Proof, Not Just Process</span></div>
+    <div class="reveal">
+      <h2>I asked for a second opinion, on purpose. It caught a real mistake.</h2>
+      <p class="body full-only">Partway through, I had two AI reviewers critique the live dashboard under different lenses: one purely visual, one purely how I actually use it day to day. Both had to actually go look at the running app, not just reason abstractly. Both came back with specific, uncomfortable findings, including one that caught the dashboard quietly breaking its own rule that color only shows up when it's earned. I didn't act on any of it automatically. Every recommendation went through the same question as everything else in this build: does this actually serve how I use it, or is it just noise.</p>
+      <p class="body full-only">Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. Caught on a live look, not a report, and fixed before anyone but me ever saw it.</p>
+    </div>
+
+    <!-- TODO: replace both with real before/after screenshots of the panel dead-space fix -->
+    <div class="compare reveal" style="margin-top: clamp(28px, 5vh, 48px);">
+      <div>
+        <div class="panel-tag">
+          <span class="panel-dot"></span>
+          <span class="tag">Before &middot; rigid grid</span>
         </div>
-      </div>
-      <span class="fs-secondary-label">Screen name / state</span>
-    </div>
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w35"></div>
-          <div class="ss-block w65"></div>
-          <div class="ss-block w50 tall"></div>
-          <div class="ss-block w80"></div>
+        <div class="fig-media">
+          <img src="resources/hl-layout-before.png" alt="Dashboard panel layout with visible dead space, a rigid grid stretching every panel to match its tallest neighbor">
         </div>
+        <p class="fig-desc" style="margin-top: 12px;">Looked clean in a screenshot. Live review found the dead space a static image didn't show.</p>
       </div>
-      <span class="fs-secondary-label">Screen name / state</span>
-    </div>
-    <div class="fs-secondary-item">
-      <div class="fs-secondary-screen">
-        <div class="ss-mock">
-          <div class="ss-block w80"></div>
-          <div class="ss-block accent"></div>
-          <div class="ss-block w65 tall"></div>
-          <div class="ss-block w40"></div>
+      <div>
+        <div class="panel-tag">
+          <span class="panel-dot after"></span>
+          <span class="tag">After &middot; self-balancing layout</span>
         </div>
+        <div class="fig-media">
+          <img src="resources/hl-layout-after.png" alt="Dashboard panel layout after the fix, a self-balancing column layout with no dead space">
+        </div>
+        <p class="fig-desc" style="margin-top: 12px;">Fixed and re-verified against the same uneven real data that exposed the problem.</p>
       </div>
-      <span class="fs-secondary-label">Screen name / state</span>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- IMPACT -->
-<section class="impact">
-  <div class="impact-index"><span>Impact</span></div>
-  <div class="impact-numbers reveal">
-    <div class="impact-stat">
-      <span class="impact-num">+XX%</span>
-      <span class="impact-desc">Your primary outcome metric — be specific about what it measures and over what timeframe.</span>
+  <!-- 05 SCREENS -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Screens</span></div>
+
+    <!-- TODO: replace with a real Homepage (the old dashboard) screenshot and an early build iteration -->
+    <div class="shots reveal">
+      <figure class="fig">
+        <div class="fig-media">
+          <img src="resources/hl-old-dashboard.png" alt="Homepage, the open-source homelab dashboard this project replaced" loading="lazy">
+        </div>
+        <figcaption>
+          <span class="tag tag-ink">Fig. 02</span>
+          <span class="fig-desc">Homepage, the dashboard this replaced. Worked fine. Wasn't mine.</span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-media">
+          <img src="resources/hl-iteration-early.png" alt="An early build iteration of the new dashboard" loading="lazy">
+        </div>
+        <figcaption>
+          <span class="tag tag-ink">Fig. 03</span>
+          <span class="fig-desc">An early build iteration, before the visual design system landed.</span>
+        </figcaption>
+      </figure>
     </div>
-    <div class="impact-stat">
-      <span class="impact-num">XXk</span>
-      <span class="impact-desc">A second metric if you have one. Scale of users, another conversion point, support tickets reduced — whatever is real.</span>
+
+    <!-- TODO: replace with real calm-state and watch/urgent-state screenshots -->
+    <div class="shots reveal">
+      <figure class="fig">
+        <div class="fig-media">
+          <img src="resources/hl-home-calm.png" alt="The dashboard in its calm state, quiet and mostly grayscale" loading="lazy">
+        </div>
+        <figcaption>
+          <span class="tag tag-ink">Fig. 04</span>
+          <span class="fig-desc">Calm state. Nothing needs you, so nothing shouts.</span>
+        </figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-media">
+          <img src="resources/hl-home-watch.png" alt="The dashboard when something needs attention, showing a colored status pill" loading="lazy">
+        </div>
+        <figcaption>
+          <span class="tag tag-ink">Fig. 05</span>
+          <span class="fig-desc">Something needs a look. Color only shows up because it's earned.</span>
+        </figcaption>
+      </figure>
     </div>
-  </div>
-  <div class="impact-reflection reveal d1">
-    <span class="impact-reflection-hed">What I'd do differently</span>
-    <p class="impact-reflection-body">One honest paragraph about what you learned or what you'd change with hindsight. This is the most underused section in portfolios — it signals maturity and self-awareness more than any credential.</p>
-    <p class="impact-reflection-body">What would you have done earlier? What did you get wrong before you got it right? Interviewers trust designers who can reflect honestly on their own work.</p>
-  </div>
-</section>
+  </section>
 
-<!-- NEXT PROJECT -->
-<div class="next reveal">
-  <div>
-    <span class="next-label">Next project</span>
-    <a href="#" class="next-title">Your Second Project</a>
-  </div>
-  <a href="#" class="next-arrow">→</a>
-</div>
+  <!-- 06 WHERE IT STANDS -->
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">06</span><span class="tag">Where It Stands</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <h2>Live, every day, since the weekend I shipped it.</h2>
+        <p class="body">It replaced the old dashboard the weekend I shipped it, and I've opened it first every morning since. When it stays quiet, everything's fine. The only time it uses color, something actually needs me. That's the whole product.</p>
+      </div>
+      <div class="checks reveal">
+        <div class="check-group">Shipped</div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Full custom rebuild, replacing the old dashboard entirely</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Built-in AI status layer, live every day, not just at build time</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Own visual design language, light and dark</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Installable as a real app over HTTPS</span></div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <span class="footer-t">© 2025 Your Name</span>
-  <span class="footer-t">Back to <a href="index.html" style="color:var(--mid);text-decoration:none;">all work</a></span>
-</footer>
+  <!-- NEXT -->
+  <div class="next reveal">
+    <a href="cs-acro.html">
+      <span class="tag">Next Case Study</span>
+      <span class="next-title">ACRO Automation Systems <span class="next-arrow" aria-hidden="true">&rarr;</span></span>
+    </a>
+  </div>
+
+  <footer>
+    <span class="tag">&copy; 2026 Noah Schilling</span>
+    <a class="tag" href="index.html">Back to index</a>
+  </footer>
+
+</main>
 
 <script>
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => obs.observe(el));
+
+  // Reading mode toggle
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  function applyMode(mode) {
+    document.body.classList.toggle('mode-tldr', mode === 'tldr');
+    modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  }
+  modeBtns.forEach(b => b.addEventListener('click', () => {
+    applyMode(b.dataset.mode);
+    try { sessionStorage.setItem('readingMode', b.dataset.mode); } catch (err) {}
+    // Sections re-entering the flow shouldn't sit invisible waiting for a scroll they already got.
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }));
+  try {
+    if (sessionStorage.getItem('readingMode') === 'tldr') applyMode('tldr');
+  } catch (err) {}
+
+  // Desktop rail: track the spec strip's top hairline until that position
+  // would scroll above a 60px pin point, then hold there for the rest of the read.
+  const modeRail = document.querySelector('.mode');
+  const specStrip = document.querySelector('.spec');
+  const railMQ = window.matchMedia('(min-width: 1360px)');
+  function positionRail() {
+    if (!modeRail || !specStrip || !railMQ.matches) { if (modeRail) modeRail.style.top = ''; return; }
+    const specTop = specStrip.getBoundingClientRect().top;
+    modeRail.style.top = Math.max(60, specTop) + 'px';
+  }
+  window.addEventListener('scroll', positionRail, { passive: true });
+  window.addEventListener('resize', positionRail);
+  positionRail();
+  // Web fonts swap in after first paint and can reflow the hero text above
+  // the spec strip; re-measure once fonts are actually loaded.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionRail);
+  }
 </script>
 
 </body>

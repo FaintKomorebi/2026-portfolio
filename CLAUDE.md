@@ -28,7 +28,7 @@ index.html          — Portfolio homepage
 cs-acro.html        — ACRO case study (complete, richest material)
 cs-sharepoint.html  — SharePoint IA case study (active, in progress)
 cs-lincoln.html     — Lincoln case study (stub, not started)
-cs-homelab.html     — Command Center case study (draft copy finalized 2026-07-23, ready to build)
+cs-homelab.html     — Command Center case study (built 2026-07-23, placeholder screenshots pending)
 assets/fonts/       — SF Pro Display OTF (Light, Regular, RegularItalic, Medium)
 resources/          — Images, video, resume
   acro-robot-index.webm
@@ -135,174 +135,61 @@ Source screenshots currently show identifying info: contact name/photo on the ph
 
 ---
 
-## cs-homelab.html — The Command Center (Draft Copy Finalized, Ready to Build)
+## cs-homelab.html — The Command Center (Built, Live in the Repo)
 
-### The Project
-A from-scratch replacement for the status dashboard on a self-hosted homelab
-running 15+ services (Proxmox, Immich, Jellyfin, the arr media stack,
-Paperless, Healthchecks, Tailscale, and more). The old dashboard was a
-generic bookmark-grid tool. It worked, but it wasn't tailored to Noah: no
-real status awareness, no design language of his own, no accommodation for
-what he actually wanted day to day. Noah evaluated the popular self-hosted
-alternatives directly (ran them, lived with them) before concluding none of
-them would ever become genuinely his without fighting their defaults the
-whole way, and directed a full custom replacement instead, built to his own
-spec in roughly a weekend. Internally called "the Command Center."
+**Status:** The actual copy lives in `cs-homelab.html` now, built on
+2026-07-23 from cs-sharepoint.html's real structure (TL;DR toggle, spec
+strip, sec-head/sec-grid, `.compare` before/after, `.shots` figure grid).
+Nothing about the case study's content is duplicated here anymore, read the
+file itself for the real copy, not this note.
 
-Working title for the case study: **The Command Center**.
+**The one-line pitch:** a from-scratch replacement for an existing homelab
+status dashboard, evaluated against the popular self-hosted alternatives
+first, directed end to end in a weekend, with a built-in AI judgment layer
+(plain-English verdict, color only when earned) as a real shipped feature,
+not a build-process footnote.
 
-### Method (framing corrected 2026-07-23, see below)
-Directed end to end using Claude Code as the builder, with Noah owning every
-decision that outlives the build itself: visual design, what data/systems
-each credential is allowed to touch, and the standing rule that the AI's
-judgment layer never gets to decide its own color or copy, only the
-interface does. The standout feature isn't just that AI helped build it,
-it's that an AI judgment layer is a permanent, shipped part of the finished
-product, something off-the-shelf homelab dashboards (Homepage, Glance, and
-the rest Noah evaluated first) don't have out of the box.
+**Framing, worth remembering if this ever gets revisited:** an earlier
+planning pass framed this as a multi-week epic with a "didn't type every
+line myself" angle. Noah corrected both after reading the first draft: it
+was a weekend build, and that framing read as a hedge, not a strength. The
+copy in `cs-homelab.html` reflects the corrected version (AI as the builder,
+Noah owning every decision that outlives the build, the judgment layer
+itself as the differentiator) — don't reintroduce the old framing.
 
-**Framing correction, important, read before touching the copy below:**
-An earlier planning pass (preserved in "Supporting Evidence" below) framed
-this as a multi-week epic and leaned on a "didn't write every line myself"
-angle. Noah corrected both after reading the first full draft: this was a
-weekend build, not a multi-week saga, and the "didn't type every line"
-framing read as a hedge, not a strength. The corrected, approved angle:
-he evaluated the market, decided nothing else would ever be truly his, and
-directed a custom build to his own spec, with AI as the builder and the
-judgment layer as a real shipped feature, not a build-process footnote. The
-final draft copy below reflects the corrected framing and is the one to
-build from, not the older "Thesis/Three Principles" language further down.
-
-### Final Draft Copy (approved 2026-07-23, ready to build into the HTML)
-Reviewed once already by an independent design-hiring-manager-persona
-critique (dispatched as a background agent, not a build agent, mirroring the
-project's own "commission a second opinion, inspect the real thing" habit).
-Its main findings, already applied below: promote the strongest evidence
-(the dual-AI-critique story) so its headline survives the page's TL;DR
-toggle instead of hiding behind it; state the AI/Noah division of labor once
-instead of three times and let the evidence carry it after that; cut the
-vague "accessibility" claim down to the one concrete thing that's actually
-true (the verdict is always plain language, never color alone); and drop
-the outcomes-are-later hedge in the close for something concrete instead.
-
-Section markers below (`full-only` / `survives TL;DR`) describe how each
-section should behave under the site's existing TL;DR reading-mode toggle,
-same mechanism cs-sharepoint.html already uses: `full-only` content
-disappears entirely in TL;DR mode, everything else keeps its heading visible
-and only its body/asides collapse.
-
----
-
-**HERO**
-> Case Study 03 · Homelab Command Center · 2026 · Live
-> **H1:** I ran the homelab dashboards worth running. None of them would ever be mine, so I built the one that was.
-> **Lead:** A weekend build, directed end to end, in my own design language, nothing extra. It doesn't just show status, it tells me in plain English what actually needs my attention.
-
-**SPEC STRIP**
-- Role: Product Direction
-- Timeline: 2026 · one weekend
-- Scope: 15+ services, one interface
-- Status: Live · daily use
-
-**01 · Context** *(full-only, hidden in TL;DR)*
-> **H2:** The dashboard I had worked. It just wasn't mine.
->
-> I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. But it was a stock layout built for a version of a homelab that wasn't mine. Before touching a single line, I actually ran the popular alternatives myself, lived with them for a while, and judged what each one got right and where each one fell short. None of them were ever going to become genuinely mine without fighting their defaults the whole way. So instead of settling on the next off-the-shelf option, I directed a full custom replacement built to my own spec from day one.
->
-> **Aside, "The Bar":** Everything the old dashboard did, plus a layer that actually tells me what matters, plus my own design language, minus every bit of bloat I never used.
->
-> **Aside, "The Research":** Ran the popular self-hosted dashboard tools directly before deciding none of them were worth adapting instead of building.
-
-**02 · What makes it different** *(headline survives TL;DR)*
-> **H2:** Most dashboards show you data. Mine tells you what matters.
->
-> Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.
-
-**03 · How it was built** *(headline survives TL;DR)*
-> **H2:** AI did the building. I owned everything that outlives it.
->
-> AI did the building. I owned every decision that outlives the build: what it looks like, and what each credential is allowed to touch. Every credential starts locked to exactly what one piece needs, nothing more, widened only on a direct call, never by default.
-
-**04 · I asked for a second opinion, on purpose. It caught a real mistake.** *(headline promoted to survive TL;DR, this is the strongest evidence in the piece per the outside critique, don't let it hide behind the toggle)*
-> Partway through, I had two AI reviewers critique the live dashboard under different lenses: one purely visual, one purely how I actually use it day to day. Both had to actually go look at the running app, not just reason abstractly. Both came back with specific, uncomfortable findings, including one that caught the dashboard quietly breaking its own rule that color only shows up when it's earned. I didn't act on any of it automatically. Every recommendation went through the same question as everything else in this build: does this actually serve how I use it, or is it just noise.
->
-> Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. Caught on a live look, not a report, and fixed before anyone but me ever saw it.
-
-**05 · Where it stands** *(headline survives TL;DR)*
-> **H2:** Live, every day, since the weekend I shipped it.
->
-> It replaced the old dashboard the weekend I shipped it, and I've opened it first every morning since. When it stays quiet, everything's fine. The only time it uses color, something actually needs me. That's the whole product.
-
----
-
-### Supporting Evidence (raw material behind the copy above, historical, framing/timeline superseded)
-The original planning pass below over-specified this as a multi-week build
-and leaned on a "didn't write every line" framing that Noah rejected on
-review (see "Framing correction" above). The underlying technical evidence
-is still accurate and still useful as deeper raw material if the case study
-ever needs to expand (e.g. a technical-detail hover state, an appendix, or
-answering a follow-up question in an interview), it's just not the language
-or timeline to build the live page from:
-- Credential scoping: the dashboard's Proxmox token is read-only, kept
-  deliberately separate from an unrelated bot's power-management token. A
-  cross-host SSH bridge was locked to one fixed command and verified live by
-  sending it an unrelated command and confirming it was silently refused.
-  The same pattern got reused for four more bridges over the life of the
-  project without ever inventing a new mechanism.
-- The AI layer originally was going to use a paid API key. Caught live,
-  mid-build, after asking "does this cost more than a plan already being
-  paid for?", yes, so it was switched to reuse an already-authenticated
-  session instead, tradeoffs written down rather than hidden.
-- The dead-space layout bug (now the centerpiece of section 04 above): an
-  early layout paired panels side by side, looked clean in a screenshot,
-  and was live-reviewed to reveal a two-column grid stretching every panel
-  to match its tallest neighbor. Fixed with a self-balancing column layout,
-  verified against the same uneven real data that exposed the problem.
-- Two independent AI critiques (a visual/UI persona and a product/UX
-  persona) were commissioned specifically to inspect the live app and
-  critique it, not build anything, catching (among other things) the
-  dashboard quietly breaking its own "color only when earned" rule. Full
-  critiques preserved in the project's own `PHASE2_PLAN.md`.
-- A round of visual changes once shipped verified only by a passing build
-  and a health-check ping, not a real look, and contained a real bug (a
-  launcher grid had silently collapsed to single-column). The very next
-  round shipped three more bugs the same way. The process was corrected
-  after that: screenshot the actual result and inspect it before claiming
-  anything is fixed, a rule that then caught all three bugs plus a further
-  regression its own first pass introduced.
+**Section 04 ("I asked for a second opinion, on purpose") is the strongest
+evidence in the piece** — two independent AI critiques (a visual/UI persona
+and a product/UX persona) that caught the dashboard quietly breaking its
+own "color only when earned" rule, plus the dead-space layout bug this same
+section pairs it with. Its headline is deliberately promoted to survive the
+TL;DR toggle rather than hiding behind it, per an independent
+design-hiring-manager-persona critique commissioned specifically to review
+the draft before it was built.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
 - Real product taste and direction, evaluating what already exists before
   deciding to build something better, not just visual design in isolation.
-- Real judgment about where AI belongs in a product and where it doesn't,
-  directly relevant to how design roles are actually changing right now.
+- Real judgment about where AI belongs in a product and where it doesn't.
 - Security and systems literacy (credential scoping, least privilege,
   verification over trust) that most design portfolios don't touch at all.
 - Real, verifiable iteration with a genuine before/after moment (the
   layout fix), not just a single polished final screenshot.
 
-### Assets Needed
-- Real screenshots already exist from the build itself: the layout
-  before/after, the calm/watch/urgent color states, light and dark themes.
-  Need to pull final clean versions from the build's own review artifacts.
-- Redact real IPs, hostnames, and any other personally identifying
-  homelab specifics before anything goes live, same discipline as
-  Lincoln's note about the phone-pairing contact photo.
-- No outcome/impact number for now, by deliberate choice (confirmed with
-  Noah 2026-07-23). Revisit later if a real one turns up. Do not fabricate.
-
-### Next Steps
-- [x] Confirm/correct the framing with Noah before finalizing copy — done
-      2026-07-23, see "Framing correction" above
-- [x] Draft actual case study copy for cs-homelab.html — done 2026-07-23,
-      independently reviewed once by a design-hiring-manager-persona
-      critique, feedback applied, see "Final Draft Copy" above
-- [ ] Gather and clean the real screenshots (layout before/after, color
-      states, both themes)
-- [ ] Build the approved copy above into cs-homelab.html (currently still
-      the blank template scaffold, no case-study code written yet)
-- [ ] Redact IPs/hostnames/personal homelab specifics before publishing
-- [ ] Revisit an outcome/impact stat later, only if a real one shows up
+### Still Open
+- [ ] Real screenshots — `cs-homelab.html` currently points at placeholder
+      filenames (`resources/hl-home-calm.png`, `hl-home-watch.png`,
+      `hl-old-dashboard.png`, `hl-iteration-early.png`,
+      `hl-layout-before.png`, `hl-layout-after.png`) that don't exist yet.
+      Drop matching real files into `resources/` and they'll just work.
+      `hl-old-dashboard.png` is meant to be a real Homepage (the actual
+      open-source project this replaced) screenshot, not staged.
+- [ ] Redact real IPs/hostnames/personal specifics from any screenshot
+      before it goes in, same discipline as Lincoln's phone-pairing photo.
+- [ ] `index.html` doesn't link to this case study yet — it's not in the
+      homepage's Successes list. Needs its own decision on where it slots
+      in and what the index copy says, not assumed here.
+- [ ] No outcome/impact number, by deliberate choice (confirmed with Noah
+      2026-07-23). Revisit only if a real one turns up. Do not fabricate.
 
 ---
 
