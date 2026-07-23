@@ -28,7 +28,7 @@ index.html          — Portfolio homepage
 cs-acro.html        — ACRO case study (complete, richest material)
 cs-sharepoint.html  — SharePoint IA case study (active, in progress)
 cs-lincoln.html     — Lincoln case study (stub, not started)
-cs-homelab.html     — Command Center case study (documentation done, ready to draft)
+cs-homelab.html     — Command Center case study (draft copy finalized 2026-07-23, ready to build)
 assets/fonts/       — SF Pro Display OTF (Light, Regular, RegularItalic, Medium)
 resources/          — Images, video, resume
   acro-robot-index.webm
@@ -135,215 +135,174 @@ Source screenshots currently show identifying info: contact name/photo on the ph
 
 ---
 
-## cs-homelab.html — The Command Center (Documentation Done, Ready to Draft)
+## cs-homelab.html — The Command Center (Draft Copy Finalized, Ready to Build)
 
 ### The Project
-A ground-up rebuild of the status dashboard for a self-hosted homelab running
-roughly 15 VMs/containers across a dozen-plus services (Proxmox, Immich,
-Jellyfin, the arr media stack, Paperless, Healthchecks, Tailscale, and more).
-The old dashboard was a static bookmark grid with a few disconnected widgets.
-The new one, internally called "the Command Center," unifies live status
-across every service into one interface, adds an AI judgment layer on top of
-the raw data, and is built for a household member who is not the operator to
-eventually use too, not just the sysadmin who already knows where to look.
+A from-scratch replacement for the status dashboard on a self-hosted homelab
+running 15+ services (Proxmox, Immich, Jellyfin, the arr media stack,
+Paperless, Healthchecks, Tailscale, and more). The old dashboard was a
+generic bookmark-grid tool. It worked, but it wasn't tailored to Noah: no
+real status awareness, no design language of his own, no accommodation for
+what he actually wanted day to day. Noah evaluated the popular self-hosted
+alternatives directly (ran them, lived with them) before concluding none of
+them would ever become genuinely his without fighting their defaults the
+whole way, and directed a full custom replacement instead, built to his own
+spec in roughly a weekend. Internally called "the Command Center."
 
 Working title for the case study: **The Command Center**.
 
-### Method
-Directed as a multi-week, staged build using Claude Code as the engineering
-team, with Noah acting as product owner and design reviewer at every stage,
-not as the person writing every line. This framing matters and needs careful
-handling in the actual copy (see Open Questions below): it should read as
-product/technical direction and design judgment applied to an AI-augmented
-build, not as "didn't do the work." The strongest version of this case study
-leans into that framing directly rather than hiding it, since directing
-AI-driven engineering well is itself the differentiated skill.
+### Method (framing corrected 2026-07-23, see below)
+Directed end to end using Claude Code as the builder, with Noah owning every
+decision that outlives the build itself: visual design, what data/systems
+each credential is allowed to touch, and the standing rule that the AI's
+judgment layer never gets to decide its own color or copy, only the
+interface does. The standout feature isn't just that AI helped build it,
+it's that an AI judgment layer is a permanent, shipped part of the finished
+product, something off-the-shelf homelab dashboards (Homepage, Glance, and
+the rest Noah evaluated first) don't have out of the box.
 
-### The Thesis
-One question drove every real decision in this build: **how much authority
-does an AI system get inside your own infrastructure, and how do you prove
-it deserves that much before giving it more?**
+**Framing correction, important, read before touching the copy below:**
+An earlier planning pass (preserved in "Supporting Evidence" below) framed
+this as a multi-week epic and leaned on a "didn't write every line myself"
+angle. Noah corrected both after reading the first full draft: this was a
+weekend build, not a multi-week saga, and the "didn't type every line"
+framing read as a hedge, not a strength. The corrected, approved angle:
+he evaluated the market, decided nothing else would ever be truly his, and
+directed a custom build to his own spec, with AI as the builder and the
+judgment layer as a real shipped feature, not a build-process footnote. The
+final draft copy below reflects the corrected framing and is the one to
+build from, not the older "Thesis/Three Principles" language further down.
 
-Every interesting design choice in this project is really an answer to that
-one question, applied at a different layer:
-- Credentials start read-only and narrowly scoped, and only ever expand
-  after the narrower version is proven to work.
-- The AI proposes judgment (a structured verdict on what needs attention);
-  the interface, not the AI, decides how that judgment gets shown. The AI
-  never touches color, layout, or copy directly. It returns data. Code
-  renders it.
-- Nothing shipped as one big reveal. The build moved through explicit,
-  reviewable checkpoints, and more than once a checkpoint caught a real
-  problem before it reached the live interface.
+### Final Draft Copy (approved 2026-07-23, ready to build into the HTML)
+Reviewed once already by an independent design-hiring-manager-persona
+critique (dispatched as a background agent, not a build agent, mirroring the
+project's own "commission a second opinion, inspect the real thing" habit).
+Its main findings, already applied below: promote the strongest evidence
+(the dual-AI-critique story) so its headline survives the page's TL;DR
+toggle instead of hiding behind it; state the AI/Noah division of labor once
+instead of three times and let the evidence carry it after that; cut the
+vague "accessibility" claim down to the one concrete thing that's actually
+true (the verdict is always plain language, never color alone); and drop
+the outcomes-are-later hedge in the close for something concrete instead.
 
-This is a genuinely different pitch than "I added AI to a dashboard." It is
-a case study about restraint as a design material, at a moment when most
-portfolios are going to show the opposite instinct.
+Section markers below (`full-only` / `survives TL;DR`) describe how each
+section should behave under the site's existing TL;DR reading-mode toggle,
+same mechanism cs-sharepoint.html already uses: `full-only` content
+disappears entirely in TL;DR mode, everything else keeps its heading visible
+and only its body/asides collapse.
 
-### Three Principles, Each With Real Evidence (structure mirrors Lincoln's
-three-problem rhythm, reframed as three demonstrated principles rather than
-three fixes)
+---
 
-**1. Access is earned, not assumed.**
-- The dashboard's own Proxmox token is read-only, deliberately separate from
-  a different, already-existing token that has power-management rights for
-  an unrelated bot. Two credentials, two authority levels, kept apart on
-  purpose.
-- A cross-host bridge needed to reach one service was restricted at the SSH
-  layer to run exactly one fixed command and nothing else. This was not
-  taken on faith: it was tested live by sending the restricted key an
-  unrelated command and confirming the system silently refused to run it.
-  The same verification-by-attack pattern was reused later for a second,
-  unrelated bridge built for the AI layer.
-- When the AI layer needed a way to call Claude, the plan originally
-  called for a paid API key. Reconsidered live, mid-build, after a direct
-  cost question: does this cost more than a plan already being paid for?
-  Yes. Switched to reusing an already-authenticated session instead, with
-  the tradeoffs (shared rate limits, less structured output) written down
-  and flagged for revisiting later rather than hidden.
+**HERO**
+> Case Study 03 · Homelab Command Center · 2026 · Live
+> **H1:** I ran the homelab dashboards worth running. None of them would ever be mine, so I built the one that was.
+> **Lead:** A weekend build, directed end to end, in my own design language, nothing extra. It doesn't just show status, it tells me in plain English what actually needs my attention.
 
-**2. The AI proposes. The interface decides.**
-- The AI layer returns one small, structured piece of judgment: is
-  anything wrong, how urgent, and where. It never returns color, never
-  returns layout, never writes prose that gets rendered as-is.
-- A severity level maps to a color through code, not through the model's
-  own words. Red is rare and earned. A calm homelab should look calm.
-- If the AI call fails for any reason, the interface falls back to plain
-  data with no fabricated judgment, automatically. Degradation was
-  designed in from the first version of this layer, not patched on after
-  something broke.
+**SPEC STRIP**
+- Role: Product Direction
+- Timeline: 2026 · one weekend
+- Scope: 15+ services, one interface
+- Status: Live · daily use
 
-**3. Ship in checkpoints, not black boxes.**
-- The build moved through clearly separated stages, and the riskiest ones
-  (minting a new credential, wiring the AI's judgment into what the user
-  actually sees) each stopped for review before the next stage started.
-- The strongest evidence of this: an early layout paired panels side by
-  side to reduce scrolling, and it shipped looking clean in a screenshot.
-  Live review caught a real problem screenshots hadn't shown: mismatched
-  panel heights left visible dead space, because a two-column grid
-  stretches every panel in a row to match its tallest neighbor. Two fixes
-  were weighed with real tradeoffs, a self-balancing column layout was
-  chosen instead of the rigid grid, and it was verified against the same
-  real, uneven data that exposed the problem in the first place. The
-  before and after of this are both real screenshots, not mockups.
-- A second layer of this same discipline: claims got independently
-  rechecked rather than trusted at face value, more than once. A reference
-  image that a build session reported as "broken" turned out to just be
-  blocked by bot protection, and was a second, different image entirely
-  once actually fetched correctly. A monitoring alert that looked like a
-  broken backup turned out to be a misconfigured check expecting a daily
-  ping from a job that only runs weekly, diagnosed by reading the actual
-  scheduling config rather than accepting "it's down" as the full story.
-- The sharpest instance of this discipline (2026-07-19): a round of visual
-  layout changes was verified only by a passing build and a health-check
-  ping, not by looking at the actual result, and shipped with a real bug
-  still in it (a launcher grid had silently collapsed into single-column
-  vertical stacks). Caught on direct review, fixed properly that time — and
-  then the very next round of changes shipped three more visual bugs at
-  once. At that point the work was deliberately escalated: taken away from
-  being done directly and handed to a more capable model, with one
-  non-negotiable rule attached — screenshot the actual result and inspect
-  it before claiming anything is fixed. That stricter process then caught
-  and fixed all three bugs, and a further regression it introduced in its
-  own first pass, entirely through that same screenshot-and-verify
-  discipline. This is the single most concrete evidence in the whole
-  project for the thesis question itself: a system's output was trusted
-  exactly as far as it had been proven reliable, and no further, and when
-  it wasn't reliable enough the response was to change what was trusted
-  with it, not to keep hoping the next attempt would be different.
+**01 · Context** *(full-only, hidden in TL;DR)*
+> **H2:** The dashboard I had worked. It just wasn't mine.
+>
+> I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. But it was a stock layout built for a version of a homelab that wasn't mine. Before touching a single line, I actually ran the popular alternatives myself, lived with them for a while, and judged what each one got right and where each one fell short. None of them were ever going to become genuinely mine without fighting their defaults the whole way. So instead of settling on the next off-the-shelf option, I directed a full custom replacement built to my own spec from day one.
+>
+> **Aside, "The Bar":** Everything the old dashboard did, plus a layer that actually tells me what matters, plus my own design language, minus every bit of bloat I never used.
+>
+> **Aside, "The Research":** Ran the popular self-hosted dashboard tools directly before deciding none of them were worth adapting instead of building.
+
+**02 · What makes it different** *(headline survives TL;DR)*
+> **H2:** Most dashboards show you data. Mine tells you what matters.
+>
+> Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.
+
+**03 · How it was built** *(headline survives TL;DR)*
+> **H2:** AI did the building. I owned everything that outlives it.
+>
+> AI did the building. I owned every decision that outlives the build: what it looks like, and what each credential is allowed to touch. Every credential starts locked to exactly what one piece needs, nothing more, widened only on a direct call, never by default.
+
+**04 · I asked for a second opinion, on purpose. It caught a real mistake.** *(headline promoted to survive TL;DR, this is the strongest evidence in the piece per the outside critique, don't let it hide behind the toggle)*
+> Partway through, I had two AI reviewers critique the live dashboard under different lenses: one purely visual, one purely how I actually use it day to day. Both had to actually go look at the running app, not just reason abstractly. Both came back with specific, uncomfortable findings, including one that caught the dashboard quietly breaking its own rule that color only shows up when it's earned. I didn't act on any of it automatically. Every recommendation went through the same question as everything else in this build: does this actually serve how I use it, or is it just noise.
+>
+> Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. Caught on a live look, not a report, and fixed before anyone but me ever saw it.
+
+**05 · Where it stands** *(headline survives TL;DR)*
+> **H2:** Live, every day, since the weekend I shipped it.
+>
+> It replaced the old dashboard the weekend I shipped it, and I've opened it first every morning since. When it stays quiet, everything's fine. The only time it uses color, something actually needs me. That's the whole product.
+
+---
+
+### Supporting Evidence (raw material behind the copy above, historical, framing/timeline superseded)
+The original planning pass below over-specified this as a multi-week build
+and leaned on a "didn't write every line" framing that Noah rejected on
+review (see "Framing correction" above). The underlying technical evidence
+is still accurate and still useful as deeper raw material if the case study
+ever needs to expand (e.g. a technical-detail hover state, an appendix, or
+answering a follow-up question in an interview), it's just not the language
+or timeline to build the live page from:
+- Credential scoping: the dashboard's Proxmox token is read-only, kept
+  deliberately separate from an unrelated bot's power-management token. A
+  cross-host SSH bridge was locked to one fixed command and verified live by
+  sending it an unrelated command and confirming it was silently refused.
+  The same pattern got reused for four more bridges over the life of the
+  project without ever inventing a new mechanism.
+- The AI layer originally was going to use a paid API key. Caught live,
+  mid-build, after asking "does this cost more than a plan already being
+  paid for?", yes, so it was switched to reuse an already-authenticated
+  session instead, tradeoffs written down rather than hidden.
+- The dead-space layout bug (now the centerpiece of section 04 above): an
+  early layout paired panels side by side, looked clean in a screenshot,
+  and was live-reviewed to reveal a two-column grid stretching every panel
+  to match its tallest neighbor. Fixed with a self-balancing column layout,
+  verified against the same uneven real data that exposed the problem.
+- Two independent AI critiques (a visual/UI persona and a product/UX
+  persona) were commissioned specifically to inspect the live app and
+  critique it, not build anything, catching (among other things) the
+  dashboard quietly breaking its own "color only when earned" rule. Full
+  critiques preserved in the project's own `PHASE2_PLAN.md`.
+- A round of visual changes once shipped verified only by a passing build
+  and a health-check ping, not a real look, and contained a real bug (a
+  launcher grid had silently collapsed to single-column). The very next
+  round shipped three more bugs the same way. The process was corrected
+  after that: screenshot the actual result and inspect it before claiming
+  anything is fixed, a rule that then caught all three bugs plus a further
+  regression its own first pass introduced.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
-- Comfort directing a large, multi-stage technical build without writing
-  every line personally: product and technical leadership, not just visual
-  design.
-- Real judgment about where AI belongs in a system and where it doesn't,
+- Real product taste and direction, evaluating what already exists before
+  deciding to build something better, not just visual design in isolation.
+- Real judgment about where AI belongs in a product and where it doesn't,
   directly relevant to how design roles are actually changing right now.
 - Security and systems literacy (credential scoping, least privilege,
   verification over trust) that most design portfolios don't touch at all.
-  This is the piece's sharpest differentiator.
-- Real, verifiable iteration with genuine before/after evidence (the
+- Real, verifiable iteration with a genuine before/after moment (the
   layout fix), not just a single polished final screenshot.
 
-### Structure Plan
-1. Hook: what a status dashboard usually is (a mirror that just reflects
-   raw data back at you) versus what this one had to be (a colleague with
-   judgment) and the real design question underneath: how much authority
-   does it get.
-2. The old state: a static bookmark grid, a dozen-plus services with no
-   unified view, no judgment layer, you had to already know what mattered
-   to know where to look.
-3. The design philosophy, stated plainly: two surfaces (a calm daily-use
-   view and a deep operational one), color as an earned signal rather than
-   decoration, the AI proposes / the interface decides split.
-4. The three principles above, each grounded in one specific, evidenced
-   moment, not abstract claims.
-5. Close: tie back to the thesis. What this proves about working with AI
-   as real design material at the point where that judgment actually
-   matters for how a team hires, not as a buzzword on a resume.
-
 ### Assets Needed
-- Real screenshots already exist from the build itself: the masonry
-  layout before/after, the healthy/watch/urgent color states, the light
-  and dark themes. Need to pull final clean versions from the build's own
-  review artifacts.
+- Real screenshots already exist from the build itself: the layout
+  before/after, the calm/watch/urgent color states, light and dark themes.
+  Need to pull final clean versions from the build's own review artifacts.
 - Redact real IPs, hostnames, and any other personally identifying
   homelab specifics before anything goes live, same discipline as
   Lincoln's note about the phone-pairing contact photo.
-- An outcome/impact number would strengthen the close (services unified
-  into one view, a measurable reduction in "how many tabs did I have to
-  check" is the natural candidate) but do not fabricate one. Flag as open
-  if nothing solid exists by draft time.
-
-### Open Questions Before Drafting
-- Confirm the thesis framing above actually lands the way it's intended,
-  or adjust it, before any live copy gets written.
-- Decide deliberately how the "directed AI-driven engineering" angle gets
-  framed. Handled well, this is the piece's biggest differentiator for
-  2026 hiring. Handled poorly, it could read the wrong way to the wrong
-  reviewer. Worth a real conversation, not a default assumption either
-  way.
-  - **New concrete evidence for this (2026-07-19):** before continuing the
-    build's polish stage, two separate AI reviewers were deliberately
-    commissioned — not to build anything, purely to critique the live app,
-    each briefed with a distinct expert lens (one a visual/UI design
-    persona, one a product-design persona briefed on how the app is
-    actually used day to day) and required to inspect the real running app
-    rather than reason abstractly. Both came back with real, sometimes
-    pointed findings — including flagging that the app was breaking its
-    own stated design rule about when color is allowed to appear. Nothing
-    from either critique gets built automatically; every recommendation
-    still goes through the same human product-owner judgment as everything
-    else in this project before anything is actioned. This is arguably the
-    single clearest piece of evidence for the whole "directed AI-driven
-    engineering" framing: using AI as a critique instrument, not only a
-    construction one, with a human deciding what's worth acting on. Full
-    critiques preserved in the project's own `PHASE2_PLAN.md`.
-- How much real technical/architecture detail to show versus abstract
-  into pure design-decision language. ACRO and Lincoln are both readable
-  by a fully non-technical reviewer; this one could lean slightly more
-  technical given what it's trying to prove, which is itself a case-study
-  strategy decision worth making on purpose.
-- The two open items from the 2026-07-18 build review: the Home surface
-  rebuild is **done** as of 2026-07-19 (hero, weather, bookmarks all
-  reworked, see PHASE2_PLAN.md). The mobile layout bug is **still open** —
-  independently reconfirmed as of 2026-07-19 on both Home and Cockpit (not
-  fixed, not new, pre-existing). Should be resolved before this ships live
-  so the case study reflects a genuinely finished v1, not a mid-build
-  snapshot. Tracked in the project's own `PHASE2_PLAN.md`, not duplicated
-  here.
+- No outcome/impact number for now, by deliberate choice (confirmed with
+  Noah 2026-07-23). Revisit later if a real one turns up. Do not fabricate.
 
 ### Next Steps
-- [ ] Confirm/adjust the thesis framing with Noah before drafting copy
-- [ ] Decide, on purpose, how to frame "directed AI-driven engineering"
-- [x] Home surface rebuild (one of the two open build items) — done 2026-07-19
-- [ ] Fix the remaining open build item (mobile layout overflow bug, still
-      unresolved as of 2026-07-19) so the underlying product matches what
-      the case study will claim
+- [x] Confirm/correct the framing with Noah before finalizing copy — done
+      2026-07-23, see "Framing correction" above
+- [x] Draft actual case study copy for cs-homelab.html — done 2026-07-23,
+      independently reviewed once by a design-hiring-manager-persona
+      critique, feedback applied, see "Final Draft Copy" above
 - [ ] Gather and clean the real screenshots (layout before/after, color
       states, both themes)
-- [ ] Draft actual case study copy for cs-homelab.html from this plan
-- [ ] Decide on a real outcome/impact stat, or deliberately omit one
+- [ ] Build the approved copy above into cs-homelab.html (currently still
+      the blank template scaffold, no case-study code written yet)
 - [ ] Redact IPs/hostnames/personal homelab specifics before publishing
+- [ ] Revisit an outcome/impact stat later, only if a real one shows up
 
 ---
 
