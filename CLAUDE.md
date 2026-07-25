@@ -135,56 +135,71 @@ Source screenshots currently show identifying info: contact name/photo on the ph
 
 ---
 
-## cs-homelab.html — The Command Center (Built, Live in the Repo)
+## cs-homelab.html — The Command Center (Complete, Live)
 
-**Status:** The actual copy lives in `cs-homelab.html` now, built on
-2026-07-23 from cs-sharepoint.html's real structure (TL;DR toggle, spec
-strip, sec-head/sec-grid, `.compare` before/after, `.shots` figure grid).
-Nothing about the case study's content is duplicated here anymore, read the
-file itself for the real copy, not this note.
+**Status:** Complete and live on the site as of 2026-07-25. All placeholder
+screenshots have been replaced with real photography, and the copy has been
+through several full revision passes since the initial 2026-07-23 build.
+Read the file itself for the real copy, not this note.
 
 **The one-line pitch:** a from-scratch replacement for an existing homelab
 status dashboard, evaluated against the popular self-hosted alternatives
 first, directed end to end in a weekend, with a built-in AI judgment layer
-(plain-English verdict, color only when earned) as a real shipped feature,
-not a build-process footnote.
+(plain-English verdict, color only when earned) and real text-based control
+(start/stop VMs, monitoring alerts, update notifications) as shipped
+features a distributed, built-for-everyone dashboard tool can't offer.
 
-**Framing, worth remembering if this ever gets revisited:** an earlier
-planning pass framed this as a multi-week epic with a "didn't type every
-line myself" angle. Noah corrected both after reading the first draft: it
-was a weekend build, and that framing read as a hedge, not a strength. The
-copy in `cs-homelab.html` reflects the corrected version (AI as the builder,
-Noah owning every decision that outlives the build, the judgment layer
-itself as the differentiator) — don't reintroduce the old framing.
+**Section 03, "How It Was Built," was cut entirely (2026-07-25).** It
+originally covered the AI-assisted build process and credential scoping.
+Noah's call: he wouldn't hide that AI built this if asked directly in an
+interview, but he doesn't want it stated outright in the written case
+study copy, and any honest version of that section has to say so. Rather
+than force an oblique version, it was deleted. **Do not re-add a section
+about the build process or AI's role in construction** — that's a
+conversation topic, not page content. One consequence: the
+credential-scoping/least-privilege angle (see below) no longer appears
+anywhere in the shipped copy.
 
-**Section 04 ("I asked for a second opinion, on purpose") is the strongest
-evidence in the piece** — two independent AI critiques (a visual/UI persona
-and a product/UX persona) that caught the dashboard quietly breaking its
-own "color only when earned" rule, plus the dead-space layout bug this same
-section pairs it with. Its headline is deliberately promoted to survive the
-TL;DR toggle rather than hiding behind it, per an independent
-design-hiring-manager-persona critique commissioned specifically to review
-the draft before it was built.
+**Current section numbering:** 01 Context, 02 What Makes It Different,
+03 Proof Not Just Process, 04 Screens, 05 Where It Stands.
+
+**Section 03 ("I asked for a second opinion. Reviewers made real
+upgrades.") is the strongest evidence in the piece, but mind a real
+distinction inside it:** the two AI reviewers (visual persona + UX
+persona) caught the dashboard quietly breaking its own "color only when
+earned" rule — that catch has no screenshot. The before/after layout
+images (`hl-layout-before.png` / `hl-layout-after.png`) illustrate a
+*different* bug Noah caught himself on a live look, not something the
+two reviewers found. The headline was rewritten specifically to stop
+implying the screenshots are the reviewers' catch — preserve that
+distinction if this section is touched again.
+
+**Real screenshots, final mapping (2026-07-25):**
+- `hl-home-calm.png` — hero + Fig. 04, a real calm-state verdict card
+- `hl-vm-control.png` — Fig. 02, phone screenshot of the Telegram bot
+  (`/vmstatus`, `/vmstart`, `/vmstop`, a live monitoring alert), capped at
+  320px wide since a full-width phone screenshot dominated the page
+- `hl-iteration-early.png` — Fig. 03, the actual pre-redesign UI (2026-07-17)
+- `hl-home-watch.png` — Fig. 05, a real outage (arr stack down, homeai
+  offline), cropped to the domain drill-down panels, not the top hero
+- `hl-layout-before.png` / `hl-layout-after.png` — Media-panel crops
+  showing the real dead-space bug and its fix
+- `hl-old-dashboard.png` was cut after being wired in. It showed the
+  actual old Homepage (the open-source project) instance, but Noah judged
+  it added nothing to the study once he saw it in place. Don't re-add it.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
 - Real product taste and direction, evaluating what already exists before
   deciding to build something better, not just visual design in isolation.
-- Real judgment about where AI belongs in a product and where it doesn't.
-- Security and systems literacy (credential scoping, least privilege,
-  verification over trust) that most design portfolios don't touch at all.
 - Real, verifiable iteration with a genuine before/after moment (the
   layout fix), not just a single polished final screenshot.
+- Security/systems literacy (credential scoping, least privilege) was
+  originally meant to live here, but that material left with Section 03
+  (see above) and isn't represented in the current copy. If it ever needs
+  to come back, it needs a home that isn't a dedicated build-process
+  section.
 
 ### Still Open
-- [ ] Real screenshots — `cs-homelab.html` currently points at placeholder
-      filenames (`resources/hl-home-calm.png`, `hl-home-watch.png`,
-      `hl-old-dashboard.png`, `hl-iteration-early.png`,
-      `hl-layout-before.png`, `hl-layout-after.png`) that don't exist yet.
-      Drop matching real files into `resources/` and they'll just work.
-      `hl-old-dashboard.png` is meant to be a real Homepage (the actual
-      open-source project this replaced) screenshot, not staged.
-- [ ] Redact real IPs/hostnames/personal specifics from any screenshot
-      before it goes in, same discipline as Lincoln's phone-pairing photo.
 - [ ] `index.html` doesn't link to this case study yet — it's not in the
       homepage's Successes list. Needs its own decision on where it slots
       in and what the index copy says, not assumed here.
