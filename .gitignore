@@ -9,3 +9,7 @@ Thumbs.db
 assets/acro/acro-robot-pngs/
 assets/acro/acro-robot.zip
 assets/acro/*-raw.mov
+
+# Raw/source material - case study not yet built
+assets/lincoln/
+assets/dashboard/

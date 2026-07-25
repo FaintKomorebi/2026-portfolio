@@ -482,7 +482,6 @@
   </div>
 
   <!-- HERO FIGURE -->
-  <!-- TODO: replace with a real screenshot of the Home tab, calm state -->
   <figure class="fig reveal">
     <div class="fig-media">
       <img src="resources/hl-home-calm.png" alt="The Command Center dashboard's Home tab in its calm, everything-is-fine state">
@@ -499,7 +498,7 @@
     <div class="sec-grid">
       <div class="reveal">
         <h2>The dashboard I had worked. It just wasn't mine.</h2>
-        <p class="body">I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. But it was a stock layout built for a version of a homelab that wasn't mine. Before touching a single line, I actually ran the popular alternatives myself, lived with them for a while, and judged what each one got right and where each one fell short. None of them were ever going to become genuinely mine without fighting their defaults the whole way. So instead of settling on the next off-the-shelf option, I directed a full custom replacement built to my own spec from day one.</p>
+        <p class="body">I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. Before touching a single line, I actually ran the popular alternatives myself and lived with them for a while, trying to find one worth switching to instead of building anything. What kept nagging at me was the same thing every time: these are built to run on thousands of setups they've never seen, so they're built to whatever works everywhere, not to what works for me specifically. None of them could start or stop a specific VM because I texted it to. None of them could text me when something actually broke, or tell me a container had quietly fallen behind on updates. I don't think anyone forgot to build that in, I think it's just not really an option when you're shipping to a stranger's homelab instead of your own. Once that clicked, the choice got a lot simpler: keep adapting someone else's generic tool, or just build the thing for exactly what I run and how I actually want to be told about it.</p>
       </div>
       <div class="aside reveal">
         <div>
@@ -518,30 +517,31 @@
   <section class="sec">
     <div class="sec-head"><span class="sec-num">02</span><span class="tag">What Makes It Different</span></div>
     <div class="reveal">
-      <h2>Most dashboards show you data. Mine tells you what matters.</h2>
+      <h2>Most dashboards show you data. Mine manages it.</h2>
       <p class="body full-only">Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.</p>
+      <p class="body full-only">It doesn't stop at watching, either. I wanted it to start or stop a specific VM because I texted it to, page me the moment a backup job or container actually needs attention instead of me remembering to check, and flag when something in the fleet has an update just sitting there. That's not a plugin idea I bolted onto someone else's dashboard, it's honestly just what I wanted for myself, and building it myself was the only way to actually get it.</p>
     </div>
+
+    <figure class="fig reveal" style="margin-top: clamp(28px, 5vh, 48px);">
+      <div class="fig-media" style="display: flex; justify-content: center;">
+        <img src="resources/hl-vm-control.png" alt="Texting the homelab's Telegram bot to check VM status, start a VM, stop it, and a monitoring alert firing in the same thread" style="width: auto; max-width: 320px;">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 02</span>
+        <span class="fig-desc">Texting the bot directly: status check, start, stop, and a monitoring alert firing in the same thread.</span>
+      </figcaption>
+    </figure>
   </section>
 
-  <!-- 03 HOW IT WAS BUILT -->
+  <!-- 03 PROOF, NOT JUST PROCESS (headline survives TL;DR on purpose) -->
   <section class="sec">
-    <div class="sec-head"><span class="sec-num">03</span><span class="tag">How It Was Built</span></div>
+    <div class="sec-head"><span class="sec-num">03</span><span class="tag">Proof, Not Just Process</span></div>
     <div class="reveal">
-      <h2>AI did the building. I owned everything that outlives it.</h2>
-      <p class="body full-only">AI did the building. I owned every decision that outlives the build: what it looks like, and what each credential is allowed to touch. Every credential starts locked to exactly what one piece needs, nothing more, widened only on a direct call, never by default.</p>
-    </div>
-  </section>
-
-  <!-- 04 PROOF, NOT JUST PROCESS (headline survives TL;DR on purpose) -->
-  <section class="sec">
-    <div class="sec-head"><span class="sec-num">04</span><span class="tag">Proof, Not Just Process</span></div>
-    <div class="reveal">
-      <h2>I asked for a second opinion, on purpose. It caught a real mistake.</h2>
+      <h2>I asked for a second opinion. Reviewers made real upgrades.</h2>
       <p class="body full-only">Partway through, I had two AI reviewers critique the live dashboard under different lenses: one purely visual, one purely how I actually use it day to day. Both had to actually go look at the running app, not just reason abstractly. Both came back with specific, uncomfortable findings, including one that caught the dashboard quietly breaking its own rule that color only shows up when it's earned. I didn't act on any of it automatically. Every recommendation went through the same question as everything else in this build: does this actually serve how I use it, or is it just noise.</p>
       <p class="body full-only">Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. Caught on a live look, not a report, and fixed before anyone but me ever saw it.</p>
     </div>
 
-    <!-- TODO: replace both with real before/after screenshots of the panel dead-space fix -->
     <div class="compare reveal" style="margin-top: clamp(28px, 5vh, 48px);">
       <div>
         <div class="panel-tag">
@@ -566,62 +566,48 @@
     </div>
   </section>
 
-  <!-- 05 SCREENS -->
+  <!-- 04 SCREENS -->
   <section class="sec">
-    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Screens</span></div>
+    <div class="sec-head"><span class="sec-num">04</span><span class="tag">Screens</span></div>
 
-    <!-- TODO: replace with a real Homepage (the old dashboard) screenshot and an early build iteration -->
-    <div class="shots reveal">
-      <figure class="fig">
-        <div class="fig-media">
-          <img src="resources/hl-old-dashboard.png" alt="Homepage, the open-source homelab dashboard this project replaced" loading="lazy">
-        </div>
-        <figcaption>
-          <span class="tag tag-ink">Fig. 02</span>
-          <span class="fig-desc">Homepage, the dashboard this replaced. Worked fine. Wasn't mine.</span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="fig-media">
-          <img src="resources/hl-iteration-early.png" alt="An early build iteration of the new dashboard" loading="lazy">
-        </div>
-        <figcaption>
-          <span class="tag tag-ink">Fig. 03</span>
-          <span class="fig-desc">An early build iteration, before the visual design system landed.</span>
-        </figcaption>
-      </figure>
-    </div>
+    <figure class="fig reveal">
+      <div class="fig-media">
+        <img src="resources/hl-iteration-early.png" alt="An early build iteration of the new dashboard" loading="lazy">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 03</span>
+        <span class="fig-desc">An early build iteration, before the visual design system landed.</span>
+      </figcaption>
+    </figure>
 
-    <!-- TODO: replace with real calm-state and watch/urgent-state screenshots -->
-    <div class="shots reveal">
-      <figure class="fig">
-        <div class="fig-media">
-          <img src="resources/hl-home-calm.png" alt="The dashboard in its calm state, quiet and mostly grayscale" loading="lazy">
-        </div>
-        <figcaption>
-          <span class="tag tag-ink">Fig. 04</span>
-          <span class="fig-desc">Calm state. Nothing needs you, so nothing shouts.</span>
-        </figcaption>
-      </figure>
-      <figure class="fig">
-        <div class="fig-media">
-          <img src="resources/hl-home-watch.png" alt="The dashboard when something needs attention, showing a colored status pill" loading="lazy">
-        </div>
-        <figcaption>
-          <span class="tag tag-ink">Fig. 05</span>
-          <span class="fig-desc">Something needs a look. Color only shows up because it's earned.</span>
-        </figcaption>
-      </figure>
-    </div>
+    <figure class="fig reveal">
+      <div class="fig-media">
+        <img src="resources/hl-home-calm.png" alt="The dashboard's homelab status card in its calm state" loading="lazy">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 04</span>
+        <span class="fig-desc">Calm state. Nothing needs you, so nothing shouts.</span>
+      </figcaption>
+    </figure>
+
+    <figure class="fig reveal">
+      <div class="fig-media">
+        <img src="resources/hl-home-watch.png" alt="The dashboard's domain panels when something needs attention, showing red down states and a needs-attention pill" loading="lazy">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 05</span>
+        <span class="fig-desc">Something needs a look. Color only shows up because it's earned.</span>
+      </figcaption>
+    </figure>
   </section>
 
-  <!-- 06 WHERE IT STANDS -->
+  <!-- 05 WHERE IT STANDS -->
   <section class="sec">
-    <div class="sec-head"><span class="sec-num">06</span><span class="tag">Where It Stands</span></div>
+    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Where It Stands</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>Live, every day, since the weekend I shipped it.</h2>
-        <p class="body">It replaced the old dashboard the weekend I shipped it, and I've opened it first every morning since. When it stays quiet, everything's fine. The only time it uses color, something actually needs me. That's the whole product.</p>
+        <h2>Live, every day.</h2>
+        <p class="body">It replaced the old dashboard the weekend I shipped it, and I've opened it every morning since. Every feature I need to control and maintain my entire home server and network is right there, a text or a couple of clicks away. That's the whole product.</p>
       </div>
       <div class="checks reveal">
         <div class="check-group">Shipped</div>
