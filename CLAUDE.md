@@ -187,6 +187,11 @@ distinction if this section is touched again.
 - `hl-old-dashboard.png` was cut after being wired in. It showed the
   actual old Homepage (the open-source project) instance, but Noah judged
   it added nothing to the study once he saw it in place. Don't re-add it.
+- `hl-home-full.png` — Fig. 06, added 2026-07-25, closing shot of the
+  Screens section. Full Home tab (status hero, Bookmarks, Calendar),
+  cropped from a raw browser screenshot in `assets/dashboard/` with all
+  browser chrome removed to match the other figures. A coworker's name
+  was redacted (painted out) from the Calendar card before publishing.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
 - Real product taste and direction, evaluating what already exists before
