@@ -134,27 +134,16 @@ behind cleverness.
 
 ## Next steps
 
-- [ ] **About / personality page.** Separate page, not folded into the homepage.
-  - Purpose: tonal counterweight to the case studies. Case studies prove competence
-    through restraint and precision; this page proves Noah is a real person. Contrast
-    is the point, not an inconsistency.
-  - Tone: "the light page" — loose, wry, self-aware. Not childish, and not so serious
-    it just restates how serious he is about the job (that's the opposite of the goal).
-  - Content: real hobbies (homelab, keyboards, car) framed as evidence of the same
-    instincts sold in the case studies — systems thinking, tactile obsession, chronic
-    friction-noticing — not a flat list of trivia. Specific and dry beats a list of
-    interests every time.
-  - Visual treatment: black and white photography. Keeps the looser content controlled
-    and editorial rather than tipping into lifestyle-blog territory.
-  - System consistency: same fonts, hairlines, and mono-tag instrumentation as the rest
-    of the site. The voice loosens here, the craft doesn't.
-  - Page name/slug: undecided. Don't default to a literal "About Me" label without
-    checking it against whatever tone the copy lands on.
-  - Sequencing: Noah drafts the copy first. Do not build layout before copy exists —
-    the tone of the actual sentences should drive how loose the structure gets, not
-    the reverse.
-  - Homepage needs a minimal call-to-action link added once the page exists. Not
-    added yet since there's nothing to link to.
+- [x] **About / personality page — shipped 2026-07-27 as `about.html`.**
+  Final format ended up simpler than first discussed: one paragraph in
+  Noah's own voice (not caption-per-photo storytelling — an early wry-caption
+  draft was explicitly rejected, "not going to fly at all, super casual"),
+  followed by four black-and-white square photos with plain two-part labels.
+  Page name landed on the literal "About Me" after all. Linked from the
+  homepage contact row and the top nav of every built case study. Full
+  detail (photo selection, what got cut and why, nav wiring) is in
+  `CLAUDE.md` under `about.html — About Me`, not repeated here since this
+  file is direction, not build log.
 - [ ] **Verify contact email.** Visible contact links are approved, but
   nschillingdesign@gmail.com was carried over from the old page and hasn't been
   explicitly reconfirmed as current.

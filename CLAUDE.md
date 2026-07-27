@@ -25,14 +25,16 @@ Project instructions and context for Claude Code. Read this at the start of ever
 
 ```
 index.html          — Portfolio homepage
+about.html          — About Me page (complete, live 2026-07-27)
 cs-acro.html        — ACRO case study (complete, richest material)
 cs-sharepoint.html  — SharePoint IA case study (active, in progress)
-cs-lincoln.html     — Lincoln case study (stub, not started)
-cs-homelab.html     — Command Center case study (built 2026-07-23, placeholder screenshots pending)
+cs-lincoln.html     — Lincoln case study (generic unbuilt template stub, not linked from index with a real href yet)
+cs-homelab.html     — Command Center case study (complete, live)
 assets/fonts/       — SF Pro Display OTF (Light, Regular, RegularItalic, Medium)
 resources/          — Images, video, resume
   acro-robot-index.webm
   acro-solutions-index.webm
+  acro-prototype.webp        — Framer prototype (desktop/tablet/phone), Fig. 02 in cs-acro.html
   acro-dispensing-before.webp
   acro-dispensing-after.webp
   acro-solutions.webp
@@ -40,6 +42,10 @@ resources/          — Images, video, resume
   acro-aboutus.webp
   sp-homepage.png
   sp-it-site.png
+  about-california.webp      — About Me evidence photo, B&W square crop
+  about-autocross.webp       — About Me evidence photo, B&W square crop
+  about-keyboard.webp        — About Me evidence photo, B&W square crop
+  about-led.webp             — About Me evidence photo, B&W square crop
   Noah_Schilling_Product_Design.pdf
 CLAUDE.md            — this file: workflow, project facts, case study material
 FABLE_BRIEF.md        — active design brief, read this for direction
@@ -63,6 +69,22 @@ FABLE_BRIEF.md        — active design brief, read this for direction
 - +28% average session duration (proxy signal — engagement, not navigation)
 - 1.4× CRM inquiry volume in 90 days post-launch vs. prior baseline
 - Sales confirmed inquiry quality improved — prospects referencing specific solution pages
+
+### Update — 2026-07-27
+- **Platform spec line** now reads "Figma, Framer, Adobe Suite · handed to ACRO's
+  WordPress team post-launch" (was just "WordPress · handed to ACRO's SEO team
+  post-launch") — corrected because WordPress was the handoff destination, not
+  the design tool.
+- **New Fig. 02** in Section 04 (The Solution): a real Framer screenshot showing
+  the homepage prototype across desktop/tablet/phone breakpoints
+  (`resources/acro-prototype.webp`), captioned as prototyping-before-build
+  evidence. The final shipped-homepage scrolling video (previously Fig. 02) is
+  now Fig. 03. This addresses a real gap — the case study previously showed
+  only finished output, no prototyping/process evidence.
+- Only one Framer screenshot was actually usable (a real in-editor capture,
+  cropped to remove all browser chrome and the Framer side panels). Figma
+  static exports (desktop/mobile) were discussed but never delivered — if
+  Noah produces those later, they'd slot in alongside or replace this figure.
 
 ---
 
@@ -205,11 +227,82 @@ distinction if this section is touched again.
   section.
 
 ### Still Open
-- [ ] `index.html` doesn't link to this case study yet — it's not in the
-      homepage's Successes list. Needs its own decision on where it slots
-      in and what the index copy says, not assumed here.
+- [x] `index.html` links to this case study from the Selected Work list —
+      confirmed live 2026-07-27, this item was stale.
 - [ ] No outcome/impact number, by deliberate choice (confirmed with Noah
       2026-07-23). Revisit only if a real one turns up. Do not fabricate.
+
+---
+
+## about.html — About Me (Complete, Live 2026-07-27)
+
+**Format:** intro paragraph (Noah's own words, verbatim, not written by Claude)
+followed by a 2x2 grid of four black-and-white, square-cropped photos, each
+with a plain two-part mono label (no wry/caption-style copy — that tone was
+tried first and explicitly rejected as "not going to fly at all, super
+casual"). B&W treatment follows the standing FABLE_BRIEF.md spec for this page.
+
+**The four photos, in order:**
+1. California coastline · San Diego — Torrey Pines bluffs, camera raised
+2. Autocross · Milwaukee — mid-corner action shot, Genesis G70
+3. Keyboard Build · MODE — mid-teardown, switches pulled, not a styled finished shot
+4. LED Wall · Music-Reactive, MP3 jack — the room's audio-reactive light
+   install, monitor visibly showing the FastLED/Arduino code driving it
+
+**Selected from a 20-photo pool, cut and why:**
+- Both mini-ITX PC build photos and the homelab rack — same "builds his own
+  gear" trait as the LED wall and keyboard, a third repeat added nothing
+- Golf — decent photo, didn't clearly earn a distinct trait
+- A second Korea/lanterns camera photo — duplicated the California shot's
+  "observation" beat
+- **Wedding photo and a Korea/palace couple photo were deliberately left
+  out** — flagged to Noah as a judgment call (spouse photos shift the page
+  from "evidence of how I think" to "personal life," closer to the
+  oversharing risk he was trying to avoid), and he agreed to leave both out.
+- The LED-wall video was shot but not used — "let's do those without the
+  video then, just easier for now." Stills only for this round.
+
+**Nav wiring:**
+- Homepage (`index.html`) contact row: email · LinkedIn · Resume · About Me
+- Top nav of `cs-acro.html`, `cs-sharepoint.html`, `cs-homelab.html`: now
+  Index · About Me · Resume
+- **`cs-lincoln.html` was deliberately skipped** — it's still the generic
+  unbuilt template stub (different fonts/colors entirely, not even reachable
+  from the homepage with a real link), so there was no real nav to add to.
+- The About Me page's own nav is Index · Resume only (no self-link), per
+  explicit instruction, matching how case studies never link to themselves.
+
+**Source photos:** originals (color, full-res) live locally in
+`assets/about me/` (note the space in the folder name — untracked,
+not pushed to the public repo). Superseded by the cropped B&W webps in
+`resources/`, kept only as Noah's local backup.
+
+---
+
+## Resume Conversions
+
+**No Microsoft Word, Pages, or LibreOffice on this Mac.** When the resume
+needs updating from a `.docx` source and only that format is available:
+1. `textutil -convert html` (built-in) to get the docx content out losing
+   minimal formatting for a simple single-column resume.
+2. Print that HTML to PDF via headless Brave (`--headless --disable-gpu
+   --print-to-pdf=...`). Brave/Chromium's `--print-to-pdf-no-header` flag did
+   **not** suppress the browser's auto-inserted date/URL header and page-count
+   footer in practice — instead, crop them out afterward with `pypdf` by
+   shrinking the page's MediaBox/CropBox a fixed amount off the top and
+   bottom (measured by rendering to PNG and checking for non-white rows).
+3. **Watch the resulting font sizes.** A plain Word doc export can carry much
+   smaller point sizes than a designed resume — the 2026-07-27 update came in
+   at 10-11pt body / 20pt name against the previous (Illustrator-designed)
+   resume's 14.6-24pt, and looked "super tiny" by comparison once live, even
+   though nothing was technically broken. Fixed by scaling every `px` value
+   in the intermediate HTML by ~1.35x before printing to PDF. Sanity-check
+   new conversions against the old file's embedded font sizes (`pikepdf`,
+   look for `Tf` operators in the content stream) before shipping.
+4. If a live change looks stale after pushing, check the CDN response
+   directly (`curl -sI https://noahschilling.com/...`) before assuming the
+   deploy failed — GitHub Pages/Fastly served the fresh file within seconds
+   both times this came up; the stale copy was the browser's own cache.
 
 ---
 
