@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me · Noah Schilling</title>
+<meta name="description" content="Noah Schilling, product designer in Milwaukee, Wisconsin. A few things outside the case studies.">
+<style>
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --paper: #ffffff;
+    --ink:   #0b0b0e;
+    --grey:  #54545e;
+    --soft:  #8f8f99;
+    --hair:  #e7e7ec;
+    --panel: #f4f4f6;
+    --accent:#2545e0;
+    --sans: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --pad: clamp(20px, 5vw, 64px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  .tag-ink { color: var(--ink); }
+
+  /* ── header ───────────────────────────── */
+  .top { border-bottom: 1px solid var(--hair); }
+
+  .top-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px var(--pad);
+  }
+
+  .top-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+
+  .top-links { display: flex; gap: 32px; }
+
+  .top-links a { transition: color 0.18s ease; }
+  .top-links a:hover { color: var(--ink); }
+
+  /* ── hero ─────────────────────────────── */
+  .hero { padding: clamp(64px, 11vh, 128px) 0 clamp(44px, 7vh, 72px); }
+
+  .hero .tag { display: block; margin-bottom: clamp(24px, 4vh, 36px); }
+
+  .hero h1 {
+    font-size: clamp(36px, 5.4vw, 68px);
+    font-weight: 300;
+    letter-spacing: -0.026em;
+    line-height: 1.04;
+    max-width: 17ch;
+    margin-bottom: clamp(24px, 4vh, 40px);
+  }
+
+  .hero .lead {
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.65;
+    color: var(--grey);
+    max-width: 62ch;
+  }
+
+  /* ── photo grid ───────────────────────── */
+  .evidence { padding-bottom: clamp(96px, 14vh, 160px); }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px);
+  }
+
+  .evidence-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .evidence-cap {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--hair);
+    margin-top: 16px;
+  }
+
+  .evidence-cap .tag { flex-shrink: 0; }
+
+  /* ── footer ───────────────────────────── */
+  footer {
+    border-top: 1px solid var(--hair);
+    padding: 22px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  footer .tag { font-size: 10px; }
+  footer a:hover { color: var(--ink); }
+
+  /* ── reveal ───────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 640px) {
+    .evidence-grid { grid-template-columns: 1fr; gap: clamp(32px, 6vh, 44px); }
+    .top-links { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="top-name" href="index.html">Noah Schilling</a>
+    <nav class="top-links">
+      <a class="tag" href="index.html">Index</a>
+      <a class="tag" href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="tag reveal">About</span>
+    <h1 class="reveal">About Me</h1>
+    <p class="lead reveal">I'm a UI designer who's happiest when I'm building something end-to-end. Whether that's a product flow, a home server rack, or an LED wall installation wired up to react to whatever I'm listening to that week. Outside of design work, you'll usually find me carving up an autocross course, chasing a better golf swing, or down a rabbit hole with a soldering iron and way too many mechanical keyboard switches on my desk. I like systems, the kind you design on screen and the kind you build with your hands, and I'm pretty bad at leaving a good idea half-finished.</p>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section class="evidence">
+    <div class="evidence-grid">
+      <figure class="evidence-item reveal">
+        <img src="resources/about-california.webp" alt="Photographing the coastline from a bluff in San Diego" loading="lazy">
+        <div class="evidence-cap">
+          <span class="tag tag-ink">California</span>
+          <span class="tag">San Diego</span>
+        </div>
+      </figure>
+
+      <figure class="evidence-item reveal">
+        <img src="resources/about-autocross.webp" alt="Driving a white Genesis G70 through an autocross corner" loading="lazy">
+        <div class="evidence-cap">
+          <span class="tag tag-ink">Autocross</span>
+          <span class="tag">Milwaukee</span>
+        </div>
+      </figure>
+
+      <figure class="evidence-item reveal">
+        <img src="resources/about-keyboard.webp" alt="A mechanical keyboard mid-build with switches removed" loading="lazy">
+        <div class="evidence-cap">
+          <span class="tag tag-ink">Keyboard Build</span>
+          <span class="tag">MODE</span>
+        </div>
+      </figure>
+
+      <figure class="evidence-item reveal">
+        <img src="resources/about-led.webp" alt="An LED wall installation with the FastLED code driving it visible on screen" loading="lazy">
+        <div class="evidence-cap">
+          <span class="tag tag-ink">LED Wall</span>
+          <span class="tag">Music-Reactive · MP3 Jack</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <span class="tag">&copy; 2026 Noah Schilling</span>
+    <a class="tag" href="index.html">Back to index</a>
+  </footer>
+
+</main>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
