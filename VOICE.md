@@ -34,7 +34,7 @@ A page can be clean on one and drenched in the other. Measure both separately.
 
 | Page | Verdict | Action |
 |---|---|---|
-| `cs-homelab.html` | **The reference.** Real, unforced, sounds like a person. High on Claude rhythm tics, and it does not matter, the repetition is how people talk. | Do not touch. Do not "fix" the 14 uses of "actually." |
+| `cs-homelab.html` | **The reference.** Real, unforced, sounds like a person. High on Claude rhythm tics, and it does not matter, the repetition is how people talk. | Do not touch. Do not "fix" the 14 uses of "actually." **Two cuts on 2026-08-19 at Noah's request** (dropped the closer "That's the whole product.", trimmed one 17-word clause to 9). Both were deletions, not rewrites. The standing rule is unchanged. |
 | `about.html` | Noah's own words, verbatim. **The ceiling for looseness.** | Do not touch. |
 | `cs-sharepoint.html` | Landed most of it already. **Light pass done 2026-08-19**, 10 edits. Still in progress, so write new sections in this voice rather than fixing them later. | Done for now. |
 | `cs-acro.html` | Was the outlier, half Claude and half buzzword book. **Rewritten 2026-08-19**, 19 edits, now the worked example of this brief. | Done. |

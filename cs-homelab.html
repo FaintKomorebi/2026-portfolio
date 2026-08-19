@@ -491,11 +491,11 @@
   <!-- HERO FIGURE -->
   <figure class="fig reveal">
     <div class="fig-media">
-      <img src="resources/hl-home-calm.png" alt="The Command Center dashboard's Home tab in its calm, everything-is-fine state">
+      <img src="resources/hl-home-final.webp" alt="The Command Center dashboard's Home tab: a greeting card reading &quot;Nothing needs you right now&quot; with the local forecast, bookmarked services grouped by host, a Homelab Pulse panel showing temperature, CPU, memory, uptime, last backup and pending updates, and the week's calendar">
     </div>
     <figcaption>
       <span class="tag tag-ink">Fig. 01</span>
-      <span class="fig-desc">The Home tab, calm state. Quiet by default, color only when something's actually wrong.</span>
+      <span class="fig-desc">The whole Home tab, calm state. Status, bookmarks, pulse, and the week ahead, one screen, no digging.</span>
     </figcaption>
   </figure>
 
@@ -526,15 +526,28 @@
     <div class="reveal">
       <h2>Most dashboards show you data. Mine manages it.</h2>
       <p class="body full-only">Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.</p>
+    </div>
+
+    <figure class="fig reveal" style="margin-top: clamp(28px, 5vh, 48px);">
+      <div class="fig-media">
+        <img src="resources/hl-home-watch.webp" alt="The dashboard's domain panels when something needs attention, showing red down states and a needs-attention pill" loading="lazy">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 02</span>
+        <span class="fig-desc">Something needs a look. Color only shows up because it's earned.</span>
+      </figcaption>
+    </figure>
+
+    <div class="reveal full-only">
       <p class="body full-only">It doesn't stop at watching, either. I wanted it to start or stop a specific VM because I texted it to, page me the moment a backup job or container actually needs attention instead of me remembering to check, and flag when something in the fleet has an update just sitting there. That's not a plugin idea I bolted onto someone else's dashboard, it's honestly just what I wanted for myself, and building it myself was the only way to actually get it.</p>
     </div>
 
     <figure class="fig reveal" style="margin-top: clamp(28px, 5vh, 48px);">
       <div class="fig-media" style="display: flex; justify-content: center;">
-        <img src="resources/hl-vm-control.png" alt="Texting the homelab's Telegram bot to check VM status, start a VM, stop it, and a monitoring alert firing in the same thread" style="width: auto; max-width: 320px;">
+        <img src="resources/hl-vm-control.webp" alt="Texting the homelab's Telegram bot to check VM status, start a VM, stop it, and a monitoring alert firing in the same thread" style="width: auto; max-width: 320px;">
       </div>
       <figcaption>
-        <span class="tag tag-ink">Fig. 02</span>
+        <span class="tag tag-ink">Fig. 03</span>
         <span class="fig-desc">Texting the bot directly: status check, start, stop, and a monitoring alert firing in the same thread.</span>
       </figcaption>
     </figure>
@@ -556,7 +569,7 @@
           <span class="tag">Before &middot; rigid grid</span>
         </div>
         <div class="fig-media">
-          <img src="resources/hl-layout-before.png" alt="Dashboard panel layout with visible dead space, a rigid grid stretching every panel to match its tallest neighbor">
+          <img src="resources/hl-layout-before.webp" alt="Dashboard panel layout with visible dead space, a rigid grid stretching every panel to match its tallest neighbor">
         </div>
         <p class="fig-desc" style="margin-top: 12px;">Looked clean in a screenshot. Live review found the dead space a static image didn't show.</p>
       </div>
@@ -566,65 +579,20 @@
           <span class="tag">After &middot; self-balancing layout</span>
         </div>
         <div class="fig-media">
-          <img src="resources/hl-layout-after.png" alt="Dashboard panel layout after the fix, a self-balancing column layout with no dead space">
+          <img src="resources/hl-layout-after.webp" alt="Dashboard panel layout after the fix, a self-balancing column layout with no dead space">
         </div>
         <p class="fig-desc" style="margin-top: 12px;">Fixed and re-verified against the same uneven real data that exposed the problem.</p>
       </div>
     </div>
   </section>
 
-  <!-- 04 SCREENS -->
+  <!-- 04 WHERE IT STANDS -->
   <section class="sec">
-    <div class="sec-head"><span class="sec-num">04</span><span class="tag">Screens</span></div>
-
-    <figure class="fig reveal">
-      <div class="fig-media">
-        <img src="resources/hl-iteration-early.png" alt="An early build iteration of the new dashboard" loading="lazy">
-      </div>
-      <figcaption>
-        <span class="tag tag-ink">Fig. 03</span>
-        <span class="fig-desc">An early build iteration, before the visual design system landed.</span>
-      </figcaption>
-    </figure>
-
-    <figure class="fig reveal">
-      <div class="fig-media">
-        <img src="resources/hl-home-calm.png" alt="The dashboard's homelab status card in its calm state" loading="lazy">
-      </div>
-      <figcaption>
-        <span class="tag tag-ink">Fig. 04</span>
-        <span class="fig-desc">Calm state. Nothing needs you, so nothing shouts.</span>
-      </figcaption>
-    </figure>
-
-    <figure class="fig reveal">
-      <div class="fig-media">
-        <img src="resources/hl-home-watch.png" alt="The dashboard's domain panels when something needs attention, showing red down states and a needs-attention pill" loading="lazy">
-      </div>
-      <figcaption>
-        <span class="tag tag-ink">Fig. 05</span>
-        <span class="fig-desc">Something needs a look. Color only shows up because it's earned.</span>
-      </figcaption>
-    </figure>
-
-    <figure class="fig reveal">
-      <div class="fig-media">
-        <img src="resources/hl-home-full.png" alt="The dashboard's Home tab showing the full status hero, bookmarked services, and upcoming calendar events" loading="lazy">
-      </div>
-      <figcaption>
-        <span class="tag tag-ink">Fig. 06</span>
-        <span class="fig-desc">The whole Home tab in one shot: status, bookmarks, and the week ahead. Everything checked every morning, one screen, no digging.</span>
-      </figcaption>
-    </figure>
-  </section>
-
-  <!-- 05 WHERE IT STANDS -->
-  <section class="sec">
-    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Where It Stands</span></div>
+    <div class="sec-head"><span class="sec-num">04</span><span class="tag">Where It Stands</span></div>
     <div class="sec-grid">
       <div class="reveal">
         <h2>Live, every day.</h2>
-        <p class="body">It replaced the old dashboard the weekend I shipped it, and I've opened it every morning since. Every feature I need to control and maintain my entire home server and network is right there, a text or a couple of clicks away. That's the whole product.</p>
+        <p class="body">It replaced the old dashboard the weekend I shipped it, and I've opened it every morning since. Everything I need to run my server and network is right there, a text or a couple of clicks away.</p>
       </div>
       <div class="checks reveal">
         <div class="check-group">Shipped</div>

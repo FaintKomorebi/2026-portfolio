@@ -42,8 +42,13 @@ resources/          — Images, video, resume
   acro-solutions.webp
   acro-services.webp
   acro-aboutus.webp
-  sp-homepage.png
-  sp-it-site.png
+  sp-homepage.webp
+  sp-it-site.webp
+  hl-home-final.webp         — Fig. 01 hero in cs-homelab.html, the live Home tab
+  hl-vm-control.webp         — Fig. 03, Telegram bot thread, capped at 320px wide
+  hl-layout-before.webp      — Section 03 before/after pair
+  hl-layout-after.webp
+  hl-home-watch.webp         — Fig. 02, domain panels during a real outage
   about-california.webp      — About Me evidence photo, B&W square crop
   about-autocross.webp       — About Me evidence photo, B&W square crop
   about-keyboard.webp        — About Me evidence photo, B&W square crop
@@ -242,7 +247,12 @@ credential-scoping/least-privilege angle (see below) no longer appears
 anywhere in the shipped copy.
 
 **Current section numbering:** 01 Context, 02 What Makes It Different,
-03 Proof Not Just Process, 04 Screens, 05 Where It Stands.
+03 Proof Not Just Process, 04 Where It Stands. **"Screens" was dissolved
+2026-08-19.** It had been reduced to a single figure, and that figure (the
+watch state) is the visual proof for the "color only shows up when earned"
+claim in section 02, so it moved there and sits directly under the paragraph
+it proves. Do not re-add a Screens section to hold one or two images. A
+figure belongs next to the argument it supports.
 
 **Section 03 ("I asked for a second opinion. Reviewers made real
 upgrades.") is the strongest evidence in the piece, but mind a real
@@ -255,24 +265,43 @@ two reviewers found. The headline was rewritten specifically to stop
 implying the screenshots are the reviewers' catch — preserve that
 distinction if this section is touched again.
 
-**Real screenshots, final mapping (2026-07-25):**
-- `hl-home-calm.png` — hero + Fig. 04, a real calm-state verdict card
-- `hl-vm-control.png` — Fig. 02, phone screenshot of the Telegram bot
-  (`/vmstatus`, `/vmstart`, `/vmstop`, a live monitoring alert), capped at
-  320px wide since a full-width phone screenshot dominated the page
-- `hl-iteration-early.png` — Fig. 03, the actual pre-redesign UI (2026-07-17)
-- `hl-home-watch.png` — Fig. 05, a real outage (arr stack down, homeai
-  offline), cropped to the domain drill-down panels, not the top hero
-- `hl-layout-before.png` / `hl-layout-after.png` — Media-panel crops
-  showing the real dead-space bug and its fix
+**Real screenshots, final mapping (revised 2026-08-19):** three figures,
+all webp. The page went from six figures to three.
+- `hl-home-final.webp` — Fig. 01 hero. The live Home tab as of 2026-08-19:
+  greeting card with the "Nothing needs you right now" verdict and forecast,
+  Bookmarks grouped by host, the Homelab Pulse panel (temp, CPU, memory,
+  uptime, last backup, pending updates, Minecraft start/stop), and Calendar.
+  Cropped from `assets/dashboard/Screenshot 2026-08-19 at 2.21.50 PM.png`
+  to (0, 230, 3810, 2128) — browser chrome cut at the pixel row where it
+  ends, bottom stopped in the gutter below the Calendar card and above the
+  next card, right edge cut at the scrollbar, which also re-centers the
+  content (content center 1904.5 vs image center 1920).
+- `hl-home-watch.webp` — Fig. 02, in section 02 under the color-when-earned
+  paragraph. A real outage (arr stack down, homeai offline), cropped to the
+  domain drill-down panels, not the top hero.
+- `hl-vm-control.webp` — Fig. 03, closing section 02 under the control /
+  alerting paragraph. Phone screenshot of the Telegram bot (`/vmstatus`,
+  `/vmstart`, `/vmstop`, a live monitoring alert), capped at 320px wide
+  since a full-width phone screenshot dominated the page.
+- `hl-layout-before.webp` / `hl-layout-after.webp` — Media-panel crops in
+  section 03, not numbered figures
+- **Cut 2026-08-19, do not re-add:** `hl-iteration-early.png` (was Fig. 03,
+  early build before the design system), `hl-home-calm.png` (was hero +
+  Fig. 04, the old HOMELAB STATUS card with 13/11/3 counters — the build no
+  longer has that card, so it read as a second, older product next to the
+  new hero), and `hl-home-full.png` (was Fig. 06, the July 19 Home tab,
+  superseded by the hero above).
 - `hl-old-dashboard.png` was cut after being wired in. It showed the
   actual old Homepage (the open-source project) instance, but Noah judged
   it added nothing to the study once he saw it in place. Don't re-add it.
-- `hl-home-full.png` — Fig. 06, added 2026-07-25, closing shot of the
-  Screens section. Full Home tab (status hero, Bookmarks, Calendar),
-  cropped from a raw browser screenshot in `assets/dashboard/` with all
-  browser chrome removed to match the other figures. A coworker's name
-  was redacted (painted out) from the Calendar card before publishing.
+
+**Image format (2026-08-19):** every case-study image is now webp; no PNGs
+are referenced by any page. Flat UI screenshots are encoded lossless (it
+beats q90 on them and stays pixel-exact); the gradient-heavy phone shot and
+the two SharePoint page captures are lossy (q90 / q92). Combined weight of
+the seven converted files went 5203K to 886K. Keep this split when adding a
+new figure: lossless for flat UI, lossy for anything with photos or
+gradients.
 
 ### What This Case Study Needs to Show (that ACRO and Lincoln don't)
 - Real product taste and direction, evaluating what already exists before
