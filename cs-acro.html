@@ -80,7 +80,13 @@
   .tag-ink { color: var(--ink); }
 
   /* ── header ───────────────────────────── */
-  .top { border-bottom: 1px solid var(--hair); }
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
 
   .top-inner {
     display: flex;
@@ -507,7 +513,7 @@
   /* ── reading mode toggle ──────────────── */
   .mode {
     position: sticky;
-    top: 0;
+    top: 62px;
     z-index: 60;
     background: var(--paper);
     border-bottom: 1px solid var(--hair);
@@ -556,7 +562,7 @@
   @media (min-width: 1360px) {
     .mode {
       position: fixed;
-      top: 60px;
+      top: 96px;
       right: calc(50vw + 552px);
       background: none;
       border-bottom: none;
@@ -605,8 +611,8 @@
   <!-- HERO -->
   <section class="hero">
     <span class="tag">Case Study 01 &middot; ACRO Automation Systems &middot; 2025</span>
-    <h1>Redesigning a legacy brand for modern customers.</h1>
-    <p class="lead">ACRO's 29-page website was burying a 90-year manufacturing reputation. A procurement manager landing on it had no fast way to confirm ACRO even served their industry. Most didn't stay long enough to find out.</p>
+    <h1>ACRO has built automation systems for 90 years. It took two clicks and a scroll to find that out.</h1>
+    <p class="lead">ACRO's 29-page site made buyers work for the basics. A procurement manager landing on it couldn't confirm ACRO served their industry without clicking into a landing page and scrolling to find the right item. Analytics showed most left before they got there.</p>
   </section>
 
   <!-- SPEC STRIP -->
@@ -647,9 +653,9 @@
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>Ninety years of expertise, buried in the wrong structure.</h2>
-        <p class="body">ACRO had built something real over 90 years: a reputation for precision manufacturing that larger competitors couldn't match on track record alone. What it hadn't built was a way to communicate that. A procurement lead evaluating ACRO against three competitors had maybe 90 seconds to decide whether they were worth a call. The site gave them no quick answer.</p>
-        <p class="body">Competitors ran sites of 17 and 21 pages. ACRO had 29. The brief was officially a UI refresh, but its stated goals, fewer steps to content and solutions front and center, were structural. I treated it as an information architecture project.</p>
+        <h2>29 pages, and the ones buyers wanted were the hardest to reach.</h2>
+        <p class="body">ACRO competes on track record, which is the one thing a bigger competitor can't buy. The site didn't lead with it. A procurement manager weighing three suppliers at once had no fast way to confirm ACRO even worked in their industry, and the analytics showed most of them leaving rather than digging for it.</p>
+        <p class="body">Competitors ran sites of 17 and 21 pages. ACRO had 29. The brief called it a UI refresh, but the stated goals, fewer steps to content and solutions front and center, were both structural. The work started with the page structure, not the visual design.</p>
       </div>
       <div class="aside reveal">
         <div>
@@ -658,7 +664,7 @@
         </div>
         <div>
           <span class="tag">The Real Problem</span>
-          <p>Pages were nested inside pages, hiding the content customers came for and making the site needlessly hard to navigate.</p>
+          <p>Pages nested inside pages. The content buyers came for sat deepest.</p>
         </div>
         <div>
           <span class="tag">Constraints</span>
@@ -730,7 +736,7 @@
           </ul>
           <span class="tree-note">Reaching a solution: landing page + scroll + click</span>
         </div>
-        <p class="panel-note full-only">A procurement manager landing on the homepage had no fast way to confirm ACRO served their industry. Reaching a solution meant clicking into a landing page, scrolling to find the right item, then clicking again. No dropdown, no shortcuts. Most closed the tab instead.</p>
+        <p class="panel-note full-only">A procurement manager landing on the homepage had no way to confirm ACRO served their industry. Reaching a solution meant a click into a landing page, a scroll to find the right item, then another click. No dropdown, no shortcuts. Analytics showed most left instead.</p>
       </div>
 
       <div>
@@ -767,7 +773,7 @@
           </ul>
           <span class="tree-note">Reaching a solution: zero required clicks</span>
         </div>
-        <p class="panel-note full-only">Solutions are reachable two ways without a single click: browsable on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before committing to anything.</p>
+        <p class="panel-note full-only">Solutions are reachable two ways without a single click: browsable on the homepage at first scroll, or visible immediately in the nav dropdown. The intermediate landing page is gone. A buyer can confirm ACRO works in their space before clicking anything.</p>
       </div>
 
     </div>
@@ -778,10 +784,10 @@
     <div class="sec-head"><span class="sec-num">03</span><span class="tag">The Key Decision</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <blockquote class="pull">Analytics showed me where customers were going. I stopped making them work to get there.</blockquote>
+        <blockquote class="pull">Analytics showed where customers were already going. I stopped making them work to get there.</blockquote>
         <p class="body">Google Analytics showed ACRO's solutions pages were the most visited content on the site. Automated Welding, Robotics, and Automated Assembly all sat in the top five. Customers were seeking them out despite the friction, reading them, and then hitting a dead end: none of those pages had a call to action. I pulled solutions directly onto the homepage as the first scroll after the hero, fully clickable and organized by industry.</p>
         <p class="body dim">It was a deliberate structural break from how the old site was organized, and leadership pushed back initially. I brought the analytics into the room and walked through exactly where customers were going and how many steps stood between them and that content. The data resolved it.</p>
-        <p class="body dim">Throughout the process I ran internal review sessions with engineers and stakeholders who mirror the buyers evaluating ACRO. The question stayed simple: if you landed here trying to figure out whether ACRO can build what you need, does this page get you there? Every structural decision was tested against that lens before it was finalized.</p>
+        <p class="body dim">I ran the layouts past engineers and sales staff at ACRO, the people fielding buyer questions every day. Same question each time: if you landed here trying to find out whether ACRO can build what you need, does this page get you there?</p>
       </div>
       <div class="reveal">
         <div class="opts">
@@ -793,12 +799,12 @@
           <div class="opt">
             <span class="opt-status">Considered</span>
             <span class="opt-title">Lead with a full-page hero video like competitors</span>
-            <span class="opt-reason">Every competitor leads with one. Matching them would have traded ACRO's identity for a pattern that answers no buyer question. I pushed against this in internal reviews.</span>
+            <span class="opt-reason">Every competitor leads with one. It looks expensive and answers nothing a buyer actually asked. I pushed against it in reviews.</span>
           </div>
           <div class="opt chosen">
             <span class="opt-status">Chosen</span>
-            <span class="opt-title">Surface solutions on scroll one of the homepage</span>
-            <span class="opt-reason">Analytics confirmed solutions were the most sought-after content. Removing that friction became the central structural decision of the redesign.</span>
+            <span class="opt-title">Put solutions on the homepage, first scroll</span>
+            <span class="opt-reason">Analytics already said this was the most wanted content on the site. Getting it in front of buyers became the whole structural decision.</span>
           </div>
         </div>
       </div>
@@ -833,16 +839,16 @@
       </figure>
       <div class="annos">
         <div class="anno">
-          <span class="tag">01 &middot; Industry-led entry point</span>
-          <p>Solutions are organized by industry rather than product category, because that is how a buyer frames the problem. Not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that before the customer has to ask.</p>
+          <span class="tag">01 &middot; Sorted by industry, not product</span>
+          <p>Solutions are organized by industry rather than product category, because that's how buyers ask. Not "I need automated assembly" but "I'm in automotive, does ACRO work in my space?" The industry labels answer that before anyone has to ask.</p>
         </div>
         <div class="anno">
-          <span class="tag">02 &middot; Consolidation over elimination</span>
+          <span class="tag">02 &middot; Fewer pages, same content</span>
           <p>Pages artificially split across multiple destinations were merged into single scrollable layouts. The content didn't shrink. The distance to it did.</p>
         </div>
         <div class="anno">
-          <span class="tag">03 &middot; Closing the loop</span>
-          <p>This is the screen where the buried-credibility problem ends: the first view where a customer sees industry relevance, product capability, and a contact path at once. No scroll required.</p>
+          <span class="tag">03 &middot; One screen, all three questions answered</span>
+          <p>The first view where a buyer sees industry fit, what ACRO builds, and how to get in touch. No scroll required.</p>
         </div>
       </div>
     </div>
@@ -873,7 +879,7 @@
         <span class="tag">Source &middot; Google Analytics</span>
         <span class="stat-num">+28%</span>
         <span class="stat-label">Average session duration</span>
-        <p class="stat-desc">Post-launch vs. the prior baseline. Visitors were staying longer and actually reading: learning what ACRO builds and whether it fits their need.</p>
+        <p class="stat-desc">Measured against the pre-launch baseline. Visitors stayed longer, which is what you'd expect once the content they came for is the first thing they hit.</p>
       </div>
       <div class="stat">
         <span class="tag">Source &middot; CRM &middot; 90 days post-launch</span>

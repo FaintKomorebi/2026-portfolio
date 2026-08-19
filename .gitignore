@@ -13,3 +13,6 @@ assets/acro/*-raw.mov
 # Raw/source material - case study not yet built
 assets/lincoln/
 assets/dashboard/
+
+# Personal source photos, superseded by cropped B&W webps in resources/
+assets/about me/

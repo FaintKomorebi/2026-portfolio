@@ -17,6 +17,8 @@ Project instructions and context for Claude Code. Read this at the start of ever
 **Stack:** Static HTML/CSS — no build tools, no frameworks. Everything lives in inline `<style>` blocks.
 **Goal:** 2026 job search portfolio targeting mid-to-senior product design / UX roles. Strategy: apply to senior roles aggressively (fewer applicants, willing to grow into it) as well as mid-level.
 
+**Copy direction:** See `VOICE.md` for how the site sounds. Read it before writing or editing any copy on any page. It is authoritative over any voice habit inferred from existing text.
+
 **Design direction:** See `FABLE_BRIEF.md` — this is the active, authoritative design brief. It is rewritten from scratch each time the direction changes; do not infer design system, colors, or type from git history or old commits.
 
 ---
@@ -48,6 +50,7 @@ resources/          — Images, video, resume
   about-led.webp             — About Me evidence photo, B&W square crop
   Noah_Schilling_Product_Design.pdf
 CLAUDE.md            — this file: workflow, project facts, case study material
+VOICE.md             · copy/voice brief, read before writing any copy
 FABLE_BRIEF.md        — active design brief, read this for direction
 ```
 
@@ -85,6 +88,62 @@ FABLE_BRIEF.md        — active design brief, read this for direction
   cropped to remove all browser chrome and the Framer side panels). Figma
   static exports (desktop/mobile) were discussed but never delivered — if
   Noah produces those later, they'd slot in alongside or replace this figure.
+
+---
+
+### Update · 2026-08-19 · Full voice overhaul APPLIED
+
+Noah read the whole site and judged `cs-acro.html` the weakest copy on it:
+"half claude and half of a buzz word book had a baby." `cs-homelab.html` is the
+voice reference, `about.html` is his verbatim words, `cs-sharepoint.html` mostly
+lands. See `VOICE.md` for the full brief, the rules, and the approved rewrites
+already calibrated with him.
+
+**Scope of the ACRO overhaul:**
+- Full copy rewrite, structure and figures stay as they are. This is a voice
+  problem, not an IA problem. The case study's bones are good.
+- Strip brand-voice sentences (line 657 currently reads like ACRO's own About page).
+- Replace deck subheads in Section 04 ("Industry-led entry point",
+  "Consolidation over elimination", "Closing the loop").
+- Cut "I treated it as an information architecture project", "tested against that
+  lens", "Every structural decision was tested".
+- Keep "The content didn't shrink. The distance to it did." Explicitly approved.
+- Keep "What I'd Do Differently" as the ONLY self-critical moment on the page.
+  Noah's note: "I don't want to admit too much fault here, we already do that in
+  a few other places on ACRO."
+
+**RESOLVED · no absolute dwell figures exist.** The SEO provider's report gives
+April 2024 average session duration as 1 second, a tracking artifact. All three
+unsourced behavioral claims were cut rather than hardened. See `VOICE.md`,
+"The ACRO Dwell-Time Decision", including the open question about what the +28%
+is measured against.
+
+**Original blocker, kept for context.** Lines 615, 657, and 739 make
+behavioral claims with no source and hedge wording ("maybe 90 seconds", "Most
+didn't stay long enough", "Most closed the tab instead"). Noah confirmed these
+came from the same Google Analytics property as the +28% and 1.4x outcome
+figures, so they are real measurements being written as rhetorical guesses. The
+fix is to harden them, not soften them: state the real figures flat and tag them
+`Source · Google Analytics` the way Section 05 already does.
+
+Still needed from Noah:
+- [ ] Pre-launch average time on the solution landing pages
+- [ ] Exit or bounce rate on those pages
+
+Until those land, the rewrite can be drafted with the figures left as explicit
+placeholders. Never fill them with an estimate.
+
+**Also uncommitted in the working tree as of 2026-08-19** (approved in
+conversation, not yet reviewed on screen or pushed):
+- `index.html` intro line shortened to "Product designer in Milwaukee,
+  Wisconsin, open to remote. I redesign the systems people rely on every day."
+  The old trailing list named only 2 of the 4 case studies.
+- Sticky nav on all four interior pages. `.top` was never sticky, but `.mode`
+  (the TL:DR/Full bar) was sticky at `top: 0`, so on scroll the nav vanished and
+  the reading-mode bar took the top edge. `.top` is now sticky at `top: 0`,
+  `z-index: 70`, opaque paper background. `.mode` moved to `top: 62px` to sit
+  under it, and its wide-screen fixed position moved from `top: 60px` to `96px`
+  for header clearance.
 
 ---
 

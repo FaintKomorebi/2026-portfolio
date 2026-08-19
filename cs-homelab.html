@@ -80,7 +80,13 @@
   .tag-ink { color: var(--ink); }
 
   /* ── header ───────────────────────────── */
-  .top { border-bottom: 1px solid var(--hair); }
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
 
   .top-inner {
     display: flex;
@@ -360,7 +366,7 @@
   /* ── reading mode toggle ──────────────── */
   .mode {
     position: sticky;
-    top: 0;
+    top: 62px;
     z-index: 60;
     background: var(--paper);
     border-bottom: 1px solid var(--hair);
@@ -409,7 +415,7 @@
   @media (min-width: 1360px) {
     .mode {
       position: fixed;
-      top: 60px;
+      top: 96px;
       right: calc(50vw + 552px);
       background: none;
       border-bottom: none;

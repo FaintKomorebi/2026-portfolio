@@ -80,7 +80,13 @@
   .tag-ink { color: var(--ink); }
 
   /* ── header ───────────────────────────── */
-  .top { border-bottom: 1px solid var(--hair); }
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
 
   .top-inner {
     display: flex;
@@ -509,7 +515,7 @@
   /* ── reading mode toggle ──────────────── */
   .mode {
     position: sticky;
-    top: 0;
+    top: 62px;
     z-index: 60;
     background: var(--paper);
     border-bottom: 1px solid var(--hair);
@@ -558,7 +564,7 @@
   @media (min-width: 1360px) {
     .mode {
       position: fixed;
-      top: 60px;
+      top: 96px;
       right: calc(50vw + 552px);
       background: none;
       border-bottom: none;
@@ -607,8 +613,8 @@
   <!-- HERO -->
   <section class="hero">
     <span class="tag">Case Study 02 &middot; ACRO SharePoint &middot; 2026 &middot; <span class="status-live">In Progress</span></span>
-    <h1>Replacing a decade of file chaos with one intentional system.</h1>
-    <p class="lead">Eighty employees, ten network drives, no conventions. The mandate was a SharePoint migration. The opportunity was to design the information architecture the company never had.</p>
+    <h1>Ten network drives, eighty people, and no agreement about where anything goes.</h1>
+    <p class="lead">Eighty employees, ten network drives, no conventions. The mandate was a SharePoint migration. Copying ten drives into one didn't fix anything, so the real job was building a structure everyone would actually use and benefit from.</p>
   </section>
 
   <!-- SPEC STRIP -->
@@ -638,7 +644,7 @@
     </div>
     <figcaption>
       <span class="tag tag-ink">Fig. 01</span>
-      <span class="fig-desc">The SharePoint homepage. Company-wide entry point with department navigation.</span>
+      <span class="fig-desc">The SharePoint homepage. Where everyone starts, with department navigation.</span>
     </figcaption>
   </figure>
 
@@ -673,7 +679,7 @@
     <div class="sec-grid full-only">
       <div class="reveal">
         <h2>Survey first. Structure second.</h2>
-        <p class="body">Rather than arriving with a structure, discovery was designed to surface what already existed: how people actually worked, where files actually lived, and what the pain points actually were. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
+        <p class="body">I didn't show up with a structure. Discovery was about finding how people actually worked, where files really lived, and what the mess was costing them. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
       </div>
       <div class="aside reveal">
         <div>
@@ -690,7 +696,7 @@
         </div>
         <div>
           <span class="tag">Sales Finding</span>
-          <p>A request as basic as "our most profitable jobs over the last 5 years" could not be compiled. A business intelligence failure caused directly by disorganization.</p>
+          <p>A request as basic as "our most profitable jobs over the last 5 years" could not be compiled. The data existed. It was spread across drives nobody owned, in formats nobody agreed on.</p>
         </div>
       </div>
     </div>
@@ -774,7 +780,7 @@
           </ul>
           <span class="tree-note">One rule: company-wide = Resources &middot; dept = Team Site</span>
         </div>
-        <p class="panel-note full-only">The rule eliminates ambiguity at the system level. Users don't guess which drive to check. They know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
+        <p class="panel-note full-only">The rule eliminates the guesswork. Users don't guess which drive to check. They know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
       </div>
 
     </div>
@@ -785,9 +791,9 @@
     <div class="sec-head"><span class="sec-num">04</span><span class="tag">The Key Decision</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <blockquote class="pull">A migration is a design opportunity. The mess was the company's latent information architecture, waiting to be made intentional.</blockquote>
-        <p class="body">The biggest failure mode in an enterprise file system is ambiguity: people don't know where to look, files get duplicated, and no version is ever clearly the right one. The two-tier architecture was built on one rule. Company-wide files live in Resources; department-specific files live in Team Sites. That rule makes every file decision obvious. There is no grey area, no "which version is current."</p>
-        <p class="body dim">Departments were not asked to hand their files to someone else to organize. They got the destination structure and the responsibility to clean their own drives before migration. That is change management as design: if a third party organizes it, nobody owns it. Adoption fails when a system is done <em>to</em> people rather than <em>with</em> them.</p>
+        <blockquote class="pull">Nobody set out to build this. Ten drives of habit is still a structure, it just wasn't one anyone chose.</blockquote>
+        <p class="body">The thing that actually broke at ACRO was ambiguity. People didn't know where to look, files got duplicated, and no version was ever clearly the right one. The two-tier architecture was built on one rule. Company-wide files live in Resources; department-specific files live in Team Sites. That rule makes every file decision obvious. There is no grey area, no "which version is current."</p>
+        <p class="body dim">Departments were not asked to hand their files to someone else to organize. They got the destination structure and the responsibility to clean their own drives before migration. If I built the structure for each department, it wouldn't match how they actually work, and it certainly wouldn't persuade anyone to break old habits.</p>
       </div>
       <div class="reveal">
         <div class="opts">
@@ -821,7 +827,7 @@
         </div>
         <figcaption>
           <span class="tag tag-ink">Fig. 02</span>
-          <span class="fig-desc">SharePoint homepage, live April 2026. The company-wide entry point.</span>
+          <span class="fig-desc">SharePoint homepage, live April 2026. Where everyone starts.</span>
         </figcaption>
       </figure>
       <figure class="fig">
