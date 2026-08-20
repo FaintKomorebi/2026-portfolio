@@ -410,3 +410,23 @@ needs updating from a `.docx` source and only that format is available:
 
 **Recommendation:** Start applying now to the first category while building Lincoln. Use applications as research — signal on how the portfolio lands informs what Lincoln needs to say.
 
+
+## The Craft mirrors are part of "done"
+
+`VOICE.md` and `DESIGN.md` are mirrored, read-only, into Craft so Noah can read them on a
+phone without opening git. This repo stays authoritative: both files are working files
+Claude reads while writing copy and building the design, so they never move out of git.
+
+| Source | Craft location | Block ID |
+|---|---|---|
+| `VOICE.md` | Career > Portfolio > Voice | `829ed0e3-dd08-b199-1627-80615ca3e8a6` |
+| `DESIGN.md` | Career > Portfolio > Design | `061e56f6-bbd5-e039-ad13-3a8fdcb4f11e` |
+
+**When either file changes, refreshing its mirror is part of finishing the work.** Nothing
+automated does this. Replace the page's blocks wholesale and rewrite the banner with the
+new commit SHA and date, so staleness stays visible by comparing the banner to `git log`.
+
+Noah does not edit the Craft copies. Changes come through this repo, via Claude.
+
+Mechanics, including the pagination trap when clearing a page's children, are in
+`claude-context/craft/MCP.md`.
