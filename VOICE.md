@@ -1,6 +1,6 @@
 # Voice Brief · Noah Schilling
 
-Copy direction for every word on this site. `FABLE_BRIEF.md` governs how the site
+Copy direction for every word on this site. `DESIGN.md` governs how the site
 looks. This governs how it sounds. Read both before writing or editing any copy.
 
 Established 2026-08-19, from a full read-through of the live pages with Noah.

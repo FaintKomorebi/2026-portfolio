@@ -19,7 +19,7 @@ Project instructions and context for Claude Code. Read this at the start of ever
 
 **Copy direction:** See `VOICE.md` for how the site sounds. Read it before writing or editing any copy on any page. It is authoritative over any voice habit inferred from existing text.
 
-**Design direction:** See `FABLE_BRIEF.md` — this is the active, authoritative design brief. It is rewritten from scratch each time the direction changes; do not infer design system, colors, or type from git history or old commits.
+**Design direction:** See `DESIGN.md` — this is the active, authoritative design brief. It is rewritten from scratch each time the direction changes; do not infer design system, colors, or type from git history or old commits.
 
 ---
 
@@ -56,7 +56,7 @@ resources/          — Images, video, resume
   Noah_Schilling_Product_Design.pdf
 CLAUDE.md            — this file: workflow, project facts, case study material
 VOICE.md             · copy/voice brief, read before writing any copy
-FABLE_BRIEF.md        — active design brief, read this for direction
+DESIGN.md        — active design brief, read this for direction
 ```
 
 ---
@@ -328,7 +328,7 @@ gradients.
 followed by a 2x2 grid of four black-and-white, square-cropped photos, each
 with a plain two-part mono label (no wry/caption-style copy — that tone was
 tried first and explicitly rejected as "not going to fly at all, super
-casual"). B&W treatment follows the standing FABLE_BRIEF.md spec for this page.
+casual"). B&W treatment follows the standing DESIGN.md spec for this page.
 
 **The four photos, in order:**
 1. California coastline · San Diego — Torrey Pines bluffs, camera raised

@@ -53,7 +53,7 @@ editorial calm, 10% engineered precision, applied where it earns its place.
 
 ## References
 
-Live links for Fable to look at directly. These are inspiration for the thesis
+Live links to look at directly. These are inspiration for the thesis
 above, not a checklist to copy from — pull the sensibility, not the components.
 
 - https://www.marathonthegame.com/ — typographic/graphic instrumentation only
@@ -94,7 +94,7 @@ to work with:
   pending. Stub for now; the brief for it exists in the old CLAUDE.md if needed.
 
 **Assets available:** SF Pro Display OTF (Light/Regular/RegularItalic/Medium) in
-assets/fonts — usable but not mandatory, Fable can propose different type if it
+assets/fonts — usable but not mandatory, you can propose different type if it
 serves the thesis better. Resume PDF, ACRO images/video, SharePoint screenshots
 all in resources/.
 
