@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ramyun.Zip · Noah Schilling</title>
+<meta name="description" content="Case study. Nine spreadsheets and an email chain replaced with one live ordering and inventory system for a Korean food distributor and its five franchise locations.">
+<style>
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-RegularItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'SF Pro Display';
+    src: url('assets/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --paper: #ffffff;
+    --ink:   #0b0b0e;
+    --grey:  #54545e;
+    --soft:  #8f8f99;
+    --hair:  #e7e7ec;
+    --panel: #f4f4f6;
+    --accent:#2545e0;
+    --sans: 'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --pad: clamp(20px, 5vw, 64px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+
+  .tag-ink { color: var(--ink); }
+
+  /* ── header ───────────────────────────── */
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .top-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px var(--pad);
+  }
+
+  .top-name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+
+  .top-links { display: flex; gap: 32px; }
+
+  .top-links a { transition: color 0.18s ease; }
+  .top-links a:hover { color: var(--ink); }
+
+  /* ── hero ─────────────────────────────── */
+  .hero { padding: clamp(64px, 11vh, 128px) 0 clamp(44px, 7vh, 72px); }
+
+  .hero .tag { display: block; margin-bottom: clamp(24px, 4vh, 36px); }
+
+  .hero h1 {
+    font-size: clamp(40px, 6.4vw, 88px);
+    font-weight: 300;
+    letter-spacing: -0.028em;
+    line-height: 1.02;
+    max-width: 17ch;
+    margin-bottom: clamp(24px, 4vh, 40px);
+  }
+
+  .hero .lead {
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.6;
+    color: var(--grey);
+    max-width: 56ch;
+  }
+
+  /* live status */
+  .status-live {
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-live::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+
+  /* ── spec strip · signature element ───── */
+  .spec {
+    border-top: 1px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: clamp(48px, 8vh, 96px);
+  }
+
+  .spec > div {
+    border-bottom: 1px solid var(--hair);
+    border-left: 1px solid var(--hair);
+    padding: 16px 20px 20px;
+  }
+
+  .spec > div:first-child { border-left: none; padding-left: 0; }
+
+  .spec .tag { display: block; font-size: 10px; margin-bottom: 9px; }
+
+  .spec-v { font-size: 14px; line-height: 1.55; }
+
+  /* ── figures ──────────────────────────── */
+  .fig { margin-bottom: clamp(48px, 8vh, 96px); }
+
+  .fig-media {
+    background: var(--panel);
+    padding: clamp(28px, 4.5vw, 64px);
+  }
+
+  .fig-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 18px 60px rgba(11, 11, 14, 0.12), 0 4px 16px rgba(11, 11, 14, 0.06);
+  }
+
+  .fig figcaption {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-top: 13px;
+    border-top: 1px solid var(--hair);
+  }
+
+  .fig figcaption .tag { flex-shrink: 0; }
+
+  .fig-desc { font-size: 13px; color: var(--grey); line-height: 1.5; }
+
+  /* ── sections ─────────────────────────── */
+  .sec { padding-top: clamp(72px, 12vh, 144px); }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: clamp(36px, 6vh, 64px);
+  }
+
+  .sec-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink); }
+
+  .sec-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .sec h2 {
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    max-width: 24ch;
+    margin-bottom: clamp(20px, 3.5vh, 32px);
+  }
+
+  .body {
+    font-size: 16.5px;
+    line-height: 1.75;
+    max-width: 62ch;
+  }
+
+  .body + .body { margin-top: 20px; }
+  .body.dim { color: var(--grey); }
+
+  .aside { display: flex; flex-direction: column; gap: 28px; padding-top: 6px; }
+  .aside .tag { display: block; margin-bottom: 8px; }
+  .aside p { font-size: 14px; line-height: 1.65; color: var(--ink); }
+
+  /* ── built so far / shots ─────────────── */
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+  }
+
+  .shots .fig { margin-bottom: 0; }
+  .shots .fig-media { padding: clamp(20px, 3vw, 40px); }
+
+  .shots + .shots { margin-top: clamp(28px, 4vw, 56px); }
+
+  /* ── compare (before/after) ───────────── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .panel-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .panel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--soft);
+    flex-shrink: 0;
+  }
+
+  .panel-dot.after { background: var(--accent); }
+
+  /* ── status checklist ─────────────────── */
+  .checks { padding-top: 4px; }
+
+  .check-group {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    padding-top: 24px;
+    margin-bottom: 6px;
+  }
+
+  .check-group:first-child { padding-top: 0; }
+
+  .check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .check-mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  /* ── next / footer ────────────────────── */
+  .next { margin-top: clamp(80px, 13vh, 160px); border-top: 1px solid var(--ink); }
+
+  .next a { display: block; padding: clamp(32px, 5vh, 48px) 0; }
+
+  .next .tag { display: block; margin-bottom: 14px; }
+
+  .next-title {
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+
+  .next-arrow { font-size: 0.6em; color: var(--soft); transition: transform 0.22s ease, color 0.22s ease; }
+  .next a:hover .next-arrow { transform: translateX(8px); color: var(--ink); }
+
+  footer {
+    border-top: 1px solid var(--hair);
+    padding: 22px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  footer .tag { font-size: 10px; }
+  footer a:hover { color: var(--ink); }
+
+  /* ── reveal ───────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .status-live::before { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 900px) {
+    .sec-grid { grid-template-columns: 1fr; gap: clamp(28px, 5vh, 44px); }
+    .compare, .shots { grid-template-columns: 1fr; gap: clamp(32px, 5vh, 48px); }
+  }
+
+  @media (max-width: 680px) {
+    .spec { grid-template-columns: 1fr 1fr; }
+    .spec > div { border-left: none; padding-left: 0; padding-right: 12px; }
+    .top-links { gap: 20px; }
+  }
+
+  /* ── reading mode toggle ──────────────── */
+  .mode {
+    position: sticky;
+    top: 62px;
+    z-index: 60;
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .mode-inner {
+    display: flex;
+    align-items: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .mode-btns { display: flex; gap: 28px; }
+
+  .mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--soft);
+    padding: 2px 0;
+    transition: color 0.18s ease;
+  }
+
+  .mode-btn::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--soft);
+    flex-shrink: 0;
+    transition: width 0.18s ease, height 0.18s ease, background 0.18s ease;
+  }
+
+  .mode-btn:hover { color: var(--ink); }
+  .mode-btn[aria-pressed="true"] { color: var(--ink); font-weight: 500; }
+  .mode-btn[aria-pressed="true"]::before { width: 9px; height: 9px; background: var(--accent); }
+  .mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  @media (min-width: 1360px) {
+    .mode {
+      position: fixed;
+      top: 96px;
+      right: calc(50vw + 552px);
+      background: none;
+      border-bottom: none;
+    }
+    .mode-inner {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 14px 0 0;
+      border-top: 1px solid var(--ink);
+    }
+    .mode-btns { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+
+  /* mode visibility */
+  body.mode-tldr .full-only { display: none; }
+  body.mode-tldr .sec-num { display: none; }
+
+  /* ── thesis statement ────────────────── */
+  .thesis { padding-top: clamp(4px, 1vh, 10px); margin-bottom: clamp(56px, 9vh, 104px); }
+  .thesis p { font-size: clamp(21px, 2.5vw, 33px); font-weight: 300; letter-spacing: -0.024em; line-height: 1.26; max-width: 30ch; }
+
+  /* ── before / after · afters share one rounded holder ── */
+  .ba {
+    display: grid;
+    grid-template-columns: minmax(112px, 1fr) minmax(0, 2.45fr) minmax(0, 2.45fr);
+    column-gap: clamp(18px, 2.6vw, 40px);
+    row-gap: clamp(10px, 1.4vh, 16px);
+    margin-top: clamp(24px, 4vh, 38px);
+  }
+  .ba-h { padding-bottom: 15px; }
+  .ba-k { padding-top: clamp(21px, 2.7vh, 29px); }
+  .ba-b, .ba-a { font-size: clamp(15.5px, 1.5vw, 17px); line-height: 1.55; }
+  .ba-b { padding: clamp(20px, 2.6vh, 28px) 0; color: var(--grey); }
+  .ba-a { padding: clamp(20px, 2.6vh, 28px) clamp(20px, 2.2vw, 28px); background: var(--panel); color: var(--ink); border-radius: 12px; }
+  .ba-on { color: var(--accent); }
+  .ba-m { display: none; }
+
+  /* ── decision list ───────────────────── */
+  .dec { border-top: 1px solid var(--hair); padding: 17px 0; display: grid; grid-template-columns: 46px 1fr; gap: 8px; }
+  .dec:first-child { border-top: 1px solid var(--hair); }
+  .dec-n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--soft); padding-top: 4px; }
+  .dec b { display: block; font-weight: 500; margin-bottom: 3px; }
+  .dec p { font-size: 15.5px; line-height: 1.55; color: var(--grey); max-width: 60ch; }
+
+  /* ── cost comparison ─────────────────── */
+  .cost { margin-top: clamp(26px, 4.5vh, 40px); max-width: 620px; }
+  .cost-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; border-top: 1px solid var(--hair); padding: 15px 0; }
+  .cost-row:first-child { border-top: 1px solid var(--hair); }
+  .cost-n { font-size: 16px; }
+  .cost-n small { display: block; font-size: 13px; color: var(--grey); margin-top: 3px; }
+  .cost-p { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--grey); white-space: nowrap; }
+  .cost-row.ours { border-top: 1px solid var(--ink); }
+  .cost-row.ours .cost-n { font-weight: 500; }
+  .cost-row.ours .cost-p { color: var(--accent); font-size: 15px; }
+
+  /* ── interface copy ──────────────────── */
+  .uicopy { border-left: 2px solid var(--ink); padding: 2px 0 2px 22px; margin: clamp(26px, 4.5vh, 40px) 0; max-width: 60ch; }
+  .uicopy .tag { display: block; margin-bottom: 11px; }
+  .uicopy p { font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; letter-spacing: -0.012em; }
+  .uicopy .src { display: block; margin-top: 11px; font-size: 13px; color: var(--grey); }
+
+  /* ── detail crops ────────────────────── */
+  .fig-media.detail { padding: clamp(16px, 2.4vw, 30px); }
+  .fig-media.detail img { box-shadow: none; border: 1px solid var(--hair); }
+  .fig-media.detail.narrow { display: flex; justify-content: center; }
+  .fig-media.detail.narrow img { width: auto; max-width: 560px; }
+
+  @media (max-width: 900px) {
+    .ba { grid-template-columns: 1fr; }
+    .ba-h { display: none; }
+    .ba-k { padding-top: clamp(26px, 4vh, 34px); }
+    .ba-b { padding: 8px 0 14px; }
+    .ba-m { display: block; margin-bottom: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="top-name" href="index.html">Noah Schilling</a>
+    <nav class="top-links">
+      <a class="tag" href="index.html">Index</a>
+      <a class="tag" href="about.html">About Me</a>
+      <a class="tag" href="resources/Noah_Schilling_Product_Design.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<!-- READING MODE -->
+<div class="mode" role="group" aria-label="Reading mode">
+  <div class="wrap mode-inner">
+    <div class="mode-btns">
+      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
+      <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="tag">Case Study 04 &middot; The Ramyun.Zip &middot; 2026 &middot; Beta</span>
+    <h1>Five franchises ordered against a stock number that was already wrong by the time they saw it.</h1>
+    <p class="lead">A Korean food distributor running its whole operation on nine Excel files and an email chain. I replaced them with one live system.</p>
+  </section>
+
+  <div class="spec" role="list" aria-label="Project details">
+    <div role="listitem"><span class="tag">Role</span><span class="spec-v">Product Design and Build</span></div>
+    <div role="listitem"><span class="tag">Timeline</span><span class="spec-v">2026 &middot; two weeks of evenings</span></div>
+    <div role="listitem"><span class="tag">Scope</span><span class="spec-v">Store portal &middot; office system</span></div>
+    <div role="listitem"><span class="tag">Status</span><span class="spec-v">Beta &middot; in use</span></div>
+  </div>
+
+  <div class="thesis reveal">
+    <p>This did not change how the company runs. It accelerated it, made it harder to get wrong, and did not take a single person out of the process.</p>
+  </div>
+
+  <section class="sec full-only" style="padding-top:0;">
+    <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <h2>The number was accurate the moment it was copied.</h2>
+        <p class="body">A master file held the catalog, the supplier pricing and the stock count. Every store kept its own inventory sheet. When a store needed to order, someone copy-pasted rows out of the master into another sheet and emailed it out.</p>
+        <p class="body">Every day, by hand, these stock numbers were changed and relayed up the chain. Orders arrived for things that had sold out in between. The count drifted. The answer to any question about an order lived in somebody&rsquo;s inbox.</p>
+        <p class="body">I built it with Claude Code. Getting a working version stopped being the hard part almost immediately, so the job became deciding what it should do, and most of that was deciding what it should not do.</p>
+      </div>
+      <div class="aside reveal">
+        <div><span class="tag">The Constraint</span><p>I could not ask them to change how they work. Five stores, a warehouse and an office already had a rhythm.</p></div>
+        <div><span class="tag">The Research</span><p>My wife handles the orders and deals with the distributors. We worked evenings, after both our workdays. That is why it took two weeks, and why none of it is guesswork.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">02</span><span class="tag">What It Was Costing</span></div>
+    <div class="reveal"><h2>Four things the spreadsheets could not hold.</h2></div>
+
+    <div class="ba reveal">
+      <span class="ba-h"></span>
+      <span class="ba-h tag">Before</span>
+      <span class="ba-h tag ba-on">After</span>
+
+      <span class="ba-k tag tag-ink">Where an order stood</span>
+      <p class="ba-b"><span class="tag ba-m">Before</span>Order status lived in an email chain between the ordering desk, her boss, and his boss.</p>
+      <p class="ba-a"><span class="tag ba-m ba-on">After</span>Any admin signs in and sees it submitted, what was submitted, reviewed, approved and shipped, on one screen.</p>
+
+      <span class="ba-k tag tag-ink">Live stock</span>
+      <p class="ba-b"><span class="tag ba-m">Before</span>Stock was copy-pasted into an email. It was wrong before the order came back.</p>
+      <p class="ba-a"><span class="tag ba-m ba-on">After</span>One live number. The store and the office read the same one.</p>
+
+      <span class="ba-k tag tag-ink">Requested against shipped</span>
+      <p class="ba-b"><span class="tag ba-m">Before</span>No place to record what a store asked for separately from what actually went out.</p>
+      <p class="ba-a"><span class="tag ba-m ba-on">After</span>Both numbers sit on every line, and the invoice bills the confirmed one.</p>
+
+      <span class="ba-k tag tag-ink">Invoicing</span>
+      <p class="ba-b"><span class="tag ba-m">Before</span>Invoices were assembled by hand after the fact, from whatever the final email said.</p>
+      <p class="ba-a"><span class="tag ba-m ba-on">After</span>Confirming an order raises the invoice in QuickBooks and sends it to the store with a pay button.</p>
+    </div>
+
+    <figure class="fig reveal" style="margin-top: clamp(36px, 6vh, 64px);">
+      <div class="fig-media detail">
+        <img src="resources/rz-review-table.webp" alt="The staff order review table. Each line shows quantity requested, current stock, an editable ship quantity, a per-line delivery method and a line total." loading="lazy">
+      </div>
+      <figcaption>
+        <span class="tag tag-ink">Fig. 01</span>
+        <span class="fig-desc">Requested, stock now, and the quantity actually shipping, on every line. Confirming here is the only thing in the system that moves stock, and it is what the invoice is built from.</span>
+      </figcaption>
+    </figure>
+
+    <div class="uicopy reveal full-only">
+      <span class="tag">Written on the store&rsquo;s catalog screen</span>
+      <p>&ldquo;Stock shown here is live. Requesting an item does not reserve it. Final quantities are confirmed by THE TOUCH ON based on stock at the time your order is processed.&rdquo;</p>
+      <span class="src">Live stock only works if the store understands what it is looking at, so it is explained where they order.</span>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">03</span><span class="tag">Decisions</span></div>
+    <div class="reveal"><h2>Most of the work was refusing to design things out.</h2></div>
+    <div class="reveal" style="margin-top: clamp(24px, 4vh, 40px);">
+      <div class="dec"><span class="dec-n">01</span><div><b>Hope orders</b><p>Stores already ordered items showing zero, expecting stock to arrive. Blocking it would have pushed those requests back into email, so the line is recorded and flagged for the office to fill.</p></div></div>
+      <div class="dec"><span class="dec-n">02</span><div><b>A minimum that informs</b><p>Going under a store&rsquo;s minimum is a conversation between the office and the store. The cart says how far under and leaves Submit enabled.</p></div></div>
+      <div class="dec"><span class="dec-n">03</span><div><b>Delivery sits on the line</b><p>Orders split, bulk on a truck and one urgent item by UPS, so the method is chosen per item. The ship date stays on the order.</p></div></div>
+      <div class="dec"><span class="dec-n">04</span><div><b>Corrections carry a name</b><p>Stock is a running total of logged events rather than a typed cell. Every adjustment records who made it, when, and why.</p></div></div>
+      <div class="dec"><span class="dec-n">05</span><div><b>Access is granted, not shared</b><p>A spreadsheet everyone can open has no permission model. Office accounts sign in through the company Google domain, franchise accounts are created and approved from the dashboard, and a store can only ever see its own catalog and its own orders.</p></div></div>
+      <div class="dec"><span class="dec-n">06</span><div><b>Two states on one row</b><p>A row can be price-pinned and out of stock at the same time. It reads as out of stock, and the pin is marked on the price cell.</p></div></div>
+    </div>
+
+    <div class="shots reveal" style="margin-top: clamp(36px, 6vh, 64px);">
+      <figure class="fig">
+        <div class="fig-media detail">
+          <img src="resources/rz-hope-row.webp" alt="Three rows of the store catalog. The middle row is tinted red and, in place of a stock number, carries a pill reading Out of stock, hope orders welcome. Its quantity field is still editable." loading="lazy">
+        </div>
+        <figcaption><span class="tag tag-ink">Fig. 02</span><span class="fig-desc">The out-of-stock row keeps its quantity field, and the pill uses the store&rsquo;s own word.</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-media detail">
+          <img src="resources/rz-master-rows.webp" alt="Four rows of the product master showing category, manufacturer, spice level, units per case, cost, both channel prices, stock and a status pill. The bottom row is tinted red with a stock count of zero." loading="lazy">
+        </div>
+        <figcaption><span class="tag tag-ink">Fig. 03</span><span class="fig-desc">The office view. Cost is the only price anyone types, and stock is corrected in the row.</span></figcaption>
+      </figure>
+    </div>
+
+    <figure class="fig reveal" style="margin-top: clamp(36px, 6vh, 64px);">
+      <div class="fig-media detail narrow">
+        <img src="resources/rz-under-min.webp" alt="A note above the submit buttons reading that the order is 1,439.50 dollars below the 2,000 dollar minimum for this location, followed by You can still submit it. The Submit Order button is enabled." loading="lazy">
+      </div>
+      <figcaption><span class="tag tag-ink">Fig. 04</span><span class="fig-desc">Under the minimum. It says how far under, and Submit stays enabled.</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">04</span><span class="tag">What It Replaced</span></div>
+    <div class="reveal">
+      <h2>They were already in demos with a $249 a month vendor.</h2>
+      <p class="body">The company had started shopping for an inventory platform. They cancelled further contact with MarketMan after seeing this do what they needed.</p>
+    </div>
+
+    <div class="cost reveal">
+      <div class="cost-row"><span class="cost-n">Odoo Inventory</span><span class="cost-p">from $10 / mo</span></div>
+      <div class="cost-row"><span class="cost-n">Zoho Inventory</span><span class="cost-p">from $39 / mo</span></div>
+      <div class="cost-row"><span class="cost-n">Backbar</span><span class="cost-p">from $99 / mo</span></div>
+      <div class="cost-row"><span class="cost-n">MarketMan<small>Demo calls held. Contact cancelled.</small></span><span class="cost-p">from $249 / mo</span></div>
+      <div class="cost-row ours"><span class="cost-n">The Ramyun.Zip<small>Firebase and GitHub free tiers.</small></span><span class="cost-p">$0 / mo</span></div>
+    </div>
+
+    <div class="reveal full-only" style="margin-top: clamp(28px, 4.5vh, 44px);">
+      <p class="body">It was built with Claude Code and it does not need Claude Code. There is no subscription, no vendor, and nothing to renew. If the tooling I used to build it changed tomorrow, the company would not notice. They own it outright, which is the part I am most pleased with.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">05</span><span class="tag">Where It Stands</span></div>
+    <div class="sec-grid">
+      <div class="reveal">
+        <h2>In beta, in use.</h2>
+        <p class="body">Everyone who will use it is using it. The warehouse and the IT contact have both signed off. I have not called it finished, because it is still collecting the kind of feedback you only get from real weeks of real orders.</p>
+      </div>
+      <div class="checks reveal">
+        <div class="check-group">Built</div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Nine spreadsheets and an email chain replaced with one live system</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Separate store and office interfaces from a single sign-in</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>QuickBooks invoicing on order confirmation</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Every stock change logged with who, when and why</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="next reveal">
+    <a href="cs-sharepoint.html">
+      <span class="tag">Next Case Study</span>
+      <span class="next-title">SharePoint Information Architecture <span class="next-arrow" aria-hidden="true">&rarr;</span></span>
+    </a>
+  </div>
+
+  <footer>
+    <span class="tag">&copy; 2026 Noah Schilling</span>
+    <a class="tag" href="index.html">Back to index</a>
+  </footer>
+
+</main>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => obs.observe(el));
+
+  // Reading mode toggle
+  const modeBtns = document.querySelectorAll('.mode-btn');
+  function applyMode(mode) {
+    document.body.classList.toggle('mode-tldr', mode === 'tldr');
+    modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  }
+  modeBtns.forEach(b => b.addEventListener('click', () => {
+    applyMode(b.dataset.mode);
+    try { sessionStorage.setItem('readingMode', b.dataset.mode); } catch (err) {}
+    // Sections re-entering the flow shouldn't sit invisible waiting for a scroll they already got.
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }));
+  try {
+    if (sessionStorage.getItem('readingMode') === 'tldr') applyMode('tldr');
+  } catch (err) {}
+
+  // Desktop rail: track the spec strip's top hairline until that position
+  // would scroll above a 60px pin point, then hold there for the rest of the read.
+  const modeRail = document.querySelector('.mode');
+  const specStrip = document.querySelector('.spec');
+  const railMQ = window.matchMedia('(min-width: 1360px)');
+  function positionRail() {
+    if (!modeRail || !specStrip || !railMQ.matches) { if (modeRail) modeRail.style.top = ''; return; }
+    const specTop = specStrip.getBoundingClientRect().top;
+    modeRail.style.top = Math.max(60, specTop) + 'px';
+  }
+  window.addEventListener('scroll', positionRail, { passive: true });
+  window.addEventListener('resize', positionRail);
+  positionRail();
+  // Web fonts swap in after first paint and can reflow the hero text above
+  // the spec strip; re-measure once fonts are actually loaded.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionRail);
+  }
+</script>
+
+</body>
+</html>
