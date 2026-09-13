@@ -218,6 +218,27 @@ Source screenshots currently show identifying info: contact name/photo on the ph
 - [ ] Redact identifying info from source images/video before use
 - [ ] Confirm final selection of which photos/video clips make the cut
 - [ ] Check whether Lincoln updated the UI for 2025/2026 model years — if so, frame explicitly as a 2024-2025 audit
+- [ ] **Rebuild it in the v2 design language.** Verified 2026-09-12: `cs-lincoln.html` is the only
+      case study still on the old token set (`--bg --dim-bg --faint --ink --mid --mono`, 9 custom
+      properties). `cs-acro`, `cs-sharepoint`, `cs-homelab` and `cs-ramyunzip` all share an
+      identical 10-property v2 set (`--accent --grey --hair --ink --mono --pad` …). It is also the
+      only case study file untouched since 2026-03-18, when it was committed as a stub.
+      Reproduce with: `for f in cs-*.html; do echo "$f $(grep -o '\-\-[a-z-]*:' $f | sort -u | wc -l)"; done`
+- [ ] **Replace the 2 placeholder `href="#"` links in `cs-lincoln.html`.** It is the only file in the
+      repo that still has any; every other page has zero.
+- [ ] **Gated on Noah's sister visiting** — she owns the Nautilus, and the documentation session
+      needs the car. This is the actual blocker, not the drafting.
+
+> **Scope reminder, carried over from `claude-context/todo.md` on 2026-09-12:** this must be a
+> systems story (why the UI breaks at the component and flow level, and how to fix it), not a
+> visual redesign.
+
+> **Open portfolio items live here now, not in `claude-context/todo.md`.** Moved 2026-09-12. That
+> file had four portfolio entries and **all four were wrong**: it listed `cs-acro` and
+> `cs-sharepoint` as un-rebuilt v1 (both are v2), `cs-homelab` as "stub, not started" (complete and
+> live since 2026-07-25), and a `cs-acro` "Next project" link stuck on `href="#"` (it points at
+> `cs-sharepoint.html`, and `cs-acro.html` contains no `href="#"` at all). They were wrong because
+> they sat in a repo that never sees this one. Keep portfolio open items in this file.
 
 ---
 
