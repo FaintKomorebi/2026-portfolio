@@ -41,7 +41,8 @@ resources/          — Images, video, resume
   acro-solutions.webp
   acro-services.webp
   acro-aboutus.webp
-  sp-homepage.webp
+  sp-homepage.webp           — Fig. 01 hero in cs-sharepoint.html
+  sp-resources.webp          — Fig. 02, the Resources site, cropped to match Fig. 03
   sp-it-site.webp
   hl-home-final.webp         — Fig. 01 hero in cs-homelab.html, the live Home tab
   hl-vm-control.webp         — Fig. 03, Telegram bot thread, capped at 320px wide
