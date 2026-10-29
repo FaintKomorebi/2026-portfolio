@@ -110,8 +110,8 @@ How misses were fixed:
 
 | Page | Status |
 |---|---|
-| `index.html` | Scrub pending |
-| `about.html` | Noah's own words. Scrub for typos only. |
+| `index.html` | Done. |
+| `about.html` | Done. Noah's own words, typo fixes only. |
 | `cs-sharepoint.html` | Done. |
 | `cs-acro.html` | Done. |
 | `cs-ramyunzip.html` | Done. |
