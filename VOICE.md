@@ -116,7 +116,6 @@ How misses were fixed:
 | `cs-acro.html` | Scrub pending |
 | `cs-ramyunzip.html` | Scrub pending |
 | `cs-homelab.html` | Scrub pending. Its spoken rhythm is the model for sentences. |
-| `cs-lincoln.html` | Unbuilt template. No copy to scrub. |
 
 ## How a Rewrite Runs
 

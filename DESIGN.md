@@ -89,9 +89,6 @@ to work with:
 - **SharePoint IA** (cs-sharepoint.html) — active/in-progress, ~80-person
   company information architecture project. Has screenshots (sp-homepage.png,
   sp-it-site.png).
-- **Lincoln Nautilus UX critique** (cs-lincoln.html) — not started. Real,
-  personal frustration with the car's infotainment UI, documentation session
-  pending. Stub for now; the brief for it exists in the old CLAUDE.md if needed.
 
 **Assets available:** SF Pro Display OTF (Light/Regular/RegularItalic/Medium) in
 assets/fonts — usable but not mandatory, you can propose different type if it
@@ -124,8 +121,7 @@ behind cleverness.
   may come back as a system-level pattern (applied consistently across case studies, not
   a one-off) if the loss of a fast-skim path becomes a real problem in review.
 - **Reviewed in browser, reaction positive.** Confirmed and closed, no action needed:
-  survey quotes attributed by department not name, Lincoln shown as a muted unlinked
-  homepage stub, contact links shown plainly instead of behind the old popup.
+  survey quotes attributed by department not name, contact links shown plainly instead of behind the old popup.
 - **Not yet committed or pushed.** Round one exists only as uncommitted working tree
   changes. Needs explicit approval before `git commit && git push` per the workflow
   rule in CLAUDE.md.

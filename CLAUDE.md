@@ -30,7 +30,6 @@ index.html          — Portfolio homepage
 about.html          — About Me page (complete, live 2026-07-27)
 cs-acro.html        — ACRO case study (complete, richest material)
 cs-sharepoint.html  — SharePoint IA case study (active, in progress)
-cs-lincoln.html     — Lincoln case study (generic unbuilt template stub, not linked from index with a real href yet)
 cs-homelab.html     — Command Center case study (complete, live)
 assets/fonts/       — SF Pro Display OTF (Light, Regular, RegularItalic, Medium)
 resources/          — Images, video, resume
@@ -152,87 +151,6 @@ conversation, not yet reviewed on screen or pushed):
 
 ---
 
-## cs-lincoln.html — Lincoln Nautilus (Documentation Done, Ready to Draft)
-
-### The Car
-Confirmed: 2024+ Lincoln Nautilus, "Lincoln Digital Experience" — a 48" panoramic display replaces the gauge cluster/speedometer/fuel entirely, plus a separate lower touchscreen handles climate/media/nav. Sister's car, her daily driver.
-
-### Method
-Had sister (real owner, real daily use) list grievances while driving on 2026-07-05, filmed the specific screens and interactions as she hit them. Real-world usability testing, not a staged redesign exercise — that's the credibility of this piece.
-
-### The Thesis
-One argument ties all three problems together: physical controls survived a century of car design because they're operable blind. Every failure here is the same failure — a blind-operable analog control replaced by a touch/gesture interface that demands visual confirmation before it works.
-
-### Three Problems (real evidence, independently confirmed by press/CR)
-1. **Vents** — changing airflow direction takes 3 taps into a sub-menu, landing on a screen that also controls vent mode (face/feet), recirculate, on/off, sync temp, and Max AC; direction itself is set by a touch-and-hold-drag per vent on a small target. Previously a one-hand flick, done blind, mid-drive. Separately, temp (driver/passenger), heated/cooled seat and wheel, fan speed, and AC on/off live in a "persistent" bar elsewhere in the UI — still touchscreen, not physical. Consumer Reports flags the identical issue almost verbatim: "the automaker forcing the driver to adjust the direction of the air vents by way of the infotainment screen."
-2. **Media/options menu** — a flat, undifferentiated grid mixes Google Maps, Play Store, texts, CarPlay, AM/FM, SiriusXM, Bluetooth with no hierarchy. Sister found it confusing to parse at a glance while driving.
-3. **Steering wheel touchpads** — capacitive swipe pads, no labels, noticeable input lag, no tactile feedback. The dynamic-mapping concept (left = cruise/speed, right = media/volume) is undermined by having no confirmation you've hit the right zone without looking down. Consumer Reports calls this out by name and notes Lincoln carried over the same approach from recent Lexus models, where it was also disliked.
-
-Bonus data point: a CR test unit had a 36-hour touchscreen failure where the *only* function that kept working was climate temperature — everything else, including the vents, went dark. Good illustration of the risk in centralizing every control into one screen with no physical fallback.
-
-### Industry Context (why this lands now, not just "personal opinion")
-- 97% of new cars sold since 2023 ship with at least one touchscreen. A federal bill (Driver Technology and Pedestrian Safety Act, Rep. Kevin Mullin, introduced Feb 2026) calls for an official study on touchscreen-driven distraction.
-- Euro NCAP's 2026 protocol denies a 5-star safety rating to any car that puts turn signals, hazard lights, horn, wipers, or eCall behind a touchscreen instead of a physical control — citing research that 2 seconds of visual diversion doubles crash risk.
-- VW's design chief announced in 2025 that buttons are returning to every future VW: "It's not a phone, it's a car." Broad trade coverage (Autoblog, CarsGuide, DesignNews) frames this as an industry-wide reversal already underway.
-- Framing payoff: Lincoln built this exact interior at the moment the rest of the industry started walking this back.
-
-### Structure Plan
-1. Hook/method — real user, real drive, grievances logged live, not staged.
-2. Industry context — establishes this as a systemic reckoning, not a nitpick.
-3. The thesis — blind-operability as the constraint that got dropped.
-4. Three problem/fix pairs, each: evidence photo → grievance in her words → why it fails (+ CR/journalist corroboration) → one focused high-fidelity redesign mockup of just that screen. Deliberately NOT a full ground-up OS redesign — a full rebuild risks reading as a generic concept-car Dribbble piece and dilutes the sharper point. Three precise fixes read as stronger design judgment.
-   - Vents → physical control cluster (dial or buttons, tactile detents) for vent mode + direction, paired with a small status display. See Design Decisions below — this replaced the earlier "flatten the touchscreen menu" idea.
-   - Media menu → grouped top-level categories (cite Hick's Law: more structure beats fewer taps when the choice set is this mixed)
-   - Steering wheel → fixed, non-dynamic mapping + tactile detents + audio/haptic confirmation, no lag
-5. Close — tie back to Euro NCAP/VW: this isn't nostalgia for buttons, it's re-applying the constraint touchscreens forgot.
-
-### Design Decisions — Working Notes
-Talked through problem framing and fix direction with Claude before touching Figma, one problem at a time. Status per problem:
-
-- **Vents — decided (2026-07-16).** Rejected the original plan's fix ("keep it digital, just surface vent controls without the sub-menu") — a touch-and-hold-drag to aim airflow still requires visual confirmation no matter how few taps it takes to reach it, so flattening the menu doesn't solve blind-operability, only menu depth. Fix direction: physical control cluster with tactile detents for vent mode/direction (dial or buttons, TBD in Figma), paired with a small status display — same pattern as the Genesis G70 comparison (buttons for anything you'd want to operate blind, a small screen for status/discovery only). Also referenced: Dodge vehicles have the same 1-2 screen climate-control complaint, so this isn't Lincoln-specific. Open question before Figma: dial vs. individual buttons for vent mode/direction.
-- **Media menu — not yet discussed.**
-- **Steering wheel touchpads — not yet discussed.**
-
-### What This Case Study Needs to Show (that ACRO doesn't)
-- **Product complexity** — multi-state interfaces, edge cases, error states
-- **Design systems thinking** — components, states, scalability
-- **Safety/constraint reasoning** — physical hardware limitations, eyes-off-road cost
-- **User-centered framing** — real frustrated user (sister), real task flows, corroborated by independent professional reviews
-
-### Before Publishing — Redaction Needed
-Source screenshots currently show identifying info: contact name/photo on the phone-pairing screen, a specific street-level map location. Crop/blur before any of these go into the live case study.
-
-### Sources
-- [Vehicle touchscreen frustration & safety concerns — Rep. Kevin Mullin](https://kevinmullin.house.gov/2026/02/03/vehicle-touchscreen-frustration-safety-concerns/)
-- [Euro NCAP brings back car buttons by 2026 — Euro Weekly News](https://euroweeklynews.com/2025/11/14/europes-war-on-touchscreens-new-2026-rules-will-force-carmakers-to-bring-back-buttons/)
-- [Cars will need buttons not just touchscreens for 5-star Euro NCAP rating — ETSC](https://etsc.eu/cars-will-need-buttons-not-just-touchscreens-to-get-a-5-star-euro-ncap-safety-rating/)
-- [VW Design Boss Confirms Buttons Coming Back — InsideEVs](https://insideevs.com/news/752840/vw-brings-back-buttons-switches/)
-- [2024 Lincoln Nautilus Road Test Report — Consumer Reports](https://www.consumerreports.org/cars/lincoln/nautilus/2024/road-test-report/)
-- [2024 Lincoln Nautilus First Drive Review — The Drive](https://www.thedrive.com/car-reviews/2024-lincoln-nautilus-first-drive-review)
-- [2024 Lincoln Nautilus First Drive Review — Autoblog](https://www.autoblog.com/reviews/2024-lincoln-nautilus-first-drive)
-- [The Lincoln Nautilus Changed My Mind About Screens And Touch Controls — TopSpeed](https://www.topspeed.com/lincoln-nautilus-changed-my-mind-screens-touch-controls/)
-
-### Next Steps
-- [ ] Draft actual case study copy for cs-lincoln.html from this plan
-- [ ] Produce the 3 high-fidelity redesign mockups (vents, media menu, steering wheel)
-- [ ] Redact identifying info from source images/video before use
-- [ ] Confirm final selection of which photos/video clips make the cut
-- [ ] Check whether Lincoln updated the UI for 2025/2026 model years — if so, frame explicitly as a 2024-2025 audit
-- [ ] **Rebuild it in the v2 design language.** Verified 2026-09-12: `cs-lincoln.html` is the only
-      case study still on the old token set (`--bg --dim-bg --faint --ink --mid --mono`, 9 custom
-      properties). `cs-acro`, `cs-sharepoint`, `cs-homelab` and `cs-ramyunzip` all share an
-      identical 10-property v2 set (`--accent --grey --hair --ink --mono --pad` …). It is also the
-      only case study file untouched since 2026-03-18, when it was committed as a stub.
-      Reproduce with: `for f in cs-*.html; do echo "$f $(grep -o '\-\-[a-z-]*:' $f | sort -u | wc -l)"; done`
-- [ ] **Replace the 2 placeholder `href="#"` links in `cs-lincoln.html`.** It is the only file in the
-      repo that still has any; every other page has zero.
-- [ ] **Gated on Noah's sister visiting** — she owns the Nautilus, and the documentation session
-      needs the car. This is the actual blocker, not the drafting.
-
-> **Scope reminder, carried over from `claude-context/todo.md` on 2026-09-12:** this must be a
-> systems story (why the UI breaks at the component and flow level, and how to fix it), not a
-> visual redesign.
-
 > **Open portfolio items live here now, not in `claude-context/todo.md`.** Moved 2026-09-12. That
 > file had four portfolio entries and **all four were wrong**: it listed `cs-acro` and
 > `cs-sharepoint` as un-rebuilt v1 (both are v2), `cs-homelab` as "stub, not started" (complete and
@@ -324,7 +242,7 @@ the seven converted files went 5203K to 886K. Keep this split when adding a
 new figure: lossless for flat UI, lossy for anything with photos or
 gradients.
 
-### What This Case Study Needs to Show (that ACRO and Lincoln don't)
+### What This Case Study Needs to Show (that ACRO doesn't)
 - Real product taste and direction, evaluating what already exists before
   deciding to build something better, not just visual design in isolation.
 - Real, verifiable iteration with a genuine before/after moment (the
@@ -375,9 +293,6 @@ casual"). B&W treatment follows the standing DESIGN.md spec for this page.
 - Homepage (`index.html`) contact row: email · LinkedIn · Resume · About Me
 - Top nav of `cs-acro.html`, `cs-sharepoint.html`, `cs-homelab.html`: now
   Index · About Me · Resume
-- **`cs-lincoln.html` was deliberately skipped** — it's still the generic
-  unbuilt template stub (different fonts/colors entirely, not even reachable
-  from the homepage with a real link), so there was no real nav to add to.
 - The About Me page's own nav is Index · Resume only (no self-link), per
   explicit instruction, matching how case studies never link to themselves.
 
@@ -425,11 +340,11 @@ needs updating from a `.docx` source and only that format is available:
 - Small to mid-size companies hiring first or second designer
 - Industrial, manufacturing, B2B SaaS companies
 
-**Where ACRO needs backup (Lincoln's job):**
+**Where ACRO needs backup:**
 - Big tech or growth-stage product companies
 - Senior roles expecting product complexity, systems thinking, multi-case breadth
 
-**Recommendation:** Start applying now to the first category while building Lincoln. Use applications as research — signal on how the portfolio lands informs what Lincoln needs to say.
+**Recommendation:** Start applying now to the first category. Use applications as research: how the portfolio lands shows what the next case study needs to say.
 
 
 ## The Craft mirrors are part of "done"
