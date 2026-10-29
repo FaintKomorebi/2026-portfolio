@@ -464,8 +464,8 @@
   <!-- HERO -->
   <section class="hero">
     <span class="tag">Case Study 03 &middot; Homelab Command Center &middot; 2026 &middot; <span class="status-live">Live</span></span>
-    <h1>I ran the homelab dashboards worth running. None of them would ever be mine, so I built the one that was.</h1>
-    <p class="lead">A weekend build, directed end to end, in my own design language, nothing extra. It doesn't just show status, it tells me in plain English what actually needs my attention.</p>
+    <h1>I tried every homelab dashboard worth running, then built my own.</h1>
+    <p class="lead">I built it over a weekend, start to finish, in my own design language. It doesn't just show status, it tells me in plain English what actually needs my attention.</p>
   </section>
 
   <!-- SPEC STRIP -->
@@ -504,7 +504,7 @@
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>The dashboard I had worked. It just wasn't mine.</h2>
+        <h2>I tried the popular ones first</h2>
         <p class="body">I was already running a full homelab dashboard, a clean bookmark grid with a few basic status widgets. It worked fine. Before touching a single line, I actually ran the popular alternatives myself and lived with them for a while, trying to find one worth switching to instead of building anything. What kept nagging at me was the same thing every time: these are built to run on thousands of setups they've never seen, so they're built to whatever works everywhere, not to what works for me specifically. None of them could start or stop a specific VM because I texted it to. None of them could text me when something actually broke, or tell me a container had quietly fallen behind on updates. I don't think anyone forgot to build that in, I think it's just not really an option when you're shipping to a stranger's homelab instead of your own. Once that clicked, the choice got a lot simpler: keep adapting someone else's generic tool, or just build the thing for exactly what I run and how I actually want to be told about it.</p>
       </div>
       <div class="aside reveal">
@@ -524,8 +524,8 @@
   <section class="sec">
     <div class="sec-head"><span class="sec-num">02</span><span class="tag">What Makes It Different</span></div>
     <div class="reveal">
-      <h2>Most dashboards show you data. Mine manages it.</h2>
-      <p class="body full-only">Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's a real accessibility call, not a style choice, nothing important here is readable by color vision alone. It's a permanent feature of the finished dashboard, running every day, not a build tool that disappears after launch, and it's the one thing none of the off-the-shelf options ship with.</p>
+      <h2>It tells me what needs a look</h2>
+      <p class="body full-only">Every homelab dashboard shows status: a green light, a red light, a wall of numbers. Mine watches everything running underneath it, servers, backups, containers, storage, and writes a plain-English verdict: calm, or exactly what needs a look and why. When everything's fine, it says so quietly and gets out of the way. Color only shows up when a problem has actually earned it, and the verdict is never color alone, always plain language too. That's an accessibility call: nothing important depends on seeing color. It runs every day as part of the dashboard, and it's the one thing none of the off-the-shelf options ship with.</p>
     </div>
 
     <figure class="fig reveal" style="margin-top: clamp(28px, 5vh, 48px);">
@@ -539,7 +539,7 @@
     </figure>
 
     <div class="reveal full-only">
-      <p class="body full-only">It doesn't stop at watching, either. I wanted it to start or stop a specific VM because I texted it to, page me the moment a backup job or container actually needs attention instead of me remembering to check, and flag when something in the fleet has an update just sitting there. That's not a plugin idea I bolted onto someone else's dashboard, it's honestly just what I wanted for myself, and building it myself was the only way to actually get it.</p>
+      <p class="body full-only">It doesn't stop at watching, either. I wanted it to start or stop a specific VM because I texted it to, page me the moment a backup job or container actually needs attention instead of me remembering to check, and flag when something in the fleet has an update just sitting there. I couldn't get any of that from someone else's dashboard, so building it myself was the only way.</p>
     </div>
 
     <figure class="fig reveal" style="margin-top: clamp(28px, 5vh, 48px);">
@@ -555,11 +555,11 @@
 
   <!-- 03 PROOF, NOT JUST PROCESS (headline survives TL;DR on purpose) -->
   <section class="sec">
-    <div class="sec-head"><span class="sec-num">03</span><span class="tag">Proof, Not Just Process</span></div>
+    <div class="sec-head"><span class="sec-num">03</span><span class="tag">Testing it</span></div>
     <div class="reveal">
-      <h2>I asked for a second opinion. Reviewers made real upgrades.</h2>
+      <h2>I had two reviewers pick it apart</h2>
       <p class="body full-only">Partway through, I had two AI reviewers critique the live dashboard under different lenses: one purely visual, one purely how I actually use it day to day. Both had to actually go look at the running app, not just reason abstractly. Both came back with specific, uncomfortable findings, including one that caught the dashboard quietly breaking its own rule that color only shows up when it's earned. I didn't act on any of it automatically. Every recommendation went through the same question as everything else in this build: does this actually serve how I use it, or is it just noise.</p>
-      <p class="body full-only">Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. Caught on a live look, not a report, and fixed before anyone but me ever saw it.</p>
+      <p class="body full-only">Same standard applied to the build itself. An early layout that looked clean in a screenshot was actually hiding real dead space, a grid stretching every panel to match its tallest neighbor. I caught it by looking at the live page, and fixed it before anyone else saw it.</p>
     </div>
 
     <div class="compare reveal" style="margin-top: clamp(28px, 5vh, 48px);">
@@ -597,7 +597,7 @@
       <div class="checks reveal">
         <div class="check-group">Shipped</div>
         <div class="check"><span class="check-mark">&#10003;</span><span>Full custom rebuild, replacing the old dashboard entirely</span></div>
-        <div class="check"><span class="check-mark">&#10003;</span><span>Built-in AI status layer, live every day, not just at build time</span></div>
+        <div class="check"><span class="check-mark">&#10003;</span><span>Built-in AI status layer that runs every day</span></div>
         <div class="check"><span class="check-mark">&#10003;</span><span>Own visual design language, light and dark</span></div>
         <div class="check"><span class="check-mark">&#10003;</span><span>Installable as a real app over HTTPS</span></div>
       </div>

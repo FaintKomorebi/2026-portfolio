@@ -115,7 +115,7 @@ How misses were fixed:
 | `cs-sharepoint.html` | Done. |
 | `cs-acro.html` | Done. |
 | `cs-ramyunzip.html` | Done. |
-| `cs-homelab.html` | Scrub pending. Its spoken rhythm is the model for sentences. |
+| `cs-homelab.html` | Done. Its spoken rhythm is the model for sentences. |
 
 ## How a Rewrite Runs
 
