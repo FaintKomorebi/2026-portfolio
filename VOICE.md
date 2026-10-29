@@ -113,7 +113,7 @@ How misses were fixed:
 | `index.html` | Scrub pending |
 | `about.html` | Noah's own words. Scrub for typos only. |
 | `cs-sharepoint.html` | Done. |
-| `cs-acro.html` | Scrub pending |
+| `cs-acro.html` | Done. |
 | `cs-ramyunzip.html` | Scrub pending |
 | `cs-homelab.html` | Scrub pending. Its spoken rhythm is the model for sentences. |
 
