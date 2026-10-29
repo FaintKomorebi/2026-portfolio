@@ -602,7 +602,7 @@
 <div class="mode" role="group" aria-label="Reading mode">
   <div class="wrap mode-inner">
     <div class="mode-btns">
-      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL:DR</button>
+      <button type="button" class="mode-btn" data-mode="tldr" aria-pressed="false">TL;DR</button>
       <button type="button" class="mode-btn" data-mode="full" aria-pressed="true">Full</button>
     </div>
   </div>
@@ -614,7 +614,7 @@
   <section class="hero">
     <span class="tag">Case Study 02 &middot; ACRO SharePoint &middot; 2026 &middot; <span class="status-live">In Progress</span></span>
     <h1>Ten network drives, eighty people, and no agreement about where anything goes.</h1>
-    <p class="lead">Eighty employees, ten network drives, no conventions. The mandate was a SharePoint migration. Copying ten drives into one didn't fix anything, so the real job was building a structure everyone would actually use and benefit from.</p>
+    <p class="lead">I was asked to move ACRO's files off its old network drives and into SharePoint. Copying them over as-is would have just moved the mess, so the real job was building a structure everyone would actually use and benefit from.</p>
   </section>
 
   <!-- SPEC STRIP -->
@@ -653,8 +653,8 @@
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>An 80-person company with no shared idea of where anything lives.</h2>
-        <p class="body">ACRO ran on more than ten mapped network drives. G, I, J, K, L, Q, T, X, Z, each evolved independently, without structure or ownership. Departments had their own drives but also saved to shared ones. Personal folders lived next to company-wide resources with no separation. Nobody had a clear mental model of where to look, and nobody was wrong to be confused.</p>
+        <h2>What I walked into</h2>
+        <p class="body">ACRO ran on more than ten mapped network drives, each one evolved independently, without structure or ownership. Everyone had department drives, personal folders and various shared spaces. Nobody had a clear picture of where to look.</p>
       </div>
       <div class="aside reveal">
         <div>
@@ -663,7 +663,7 @@
         </div>
         <div>
           <span class="tag">The Real Problem</span>
-          <p>No information architecture existed to migrate into. A direct copy would relocate the chaos, not fix it.</p>
+          <p>No information architecture existed to migrate into.</p>
         </div>
         <div>
           <span class="tag">Constraints</span>
@@ -678,8 +678,8 @@
     <div class="sec-head"><span class="sec-num">02</span><span class="tag">Discovery</span></div>
     <div class="sec-grid full-only">
       <div class="reveal">
-        <h2>Survey first. Structure second.</h2>
-        <p class="body">I didn't show up with a structure. Discovery was about finding how people actually worked, where files really lived, and what the mess was costing them. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
+        <h2>I started by asking people how they actually find things.</h2>
+        <p class="body">I didn't show up with a structure. I wanted to know how people actually worked, where files really lived, and what the mess was costing them. A 14-person survey went across Engineering, Sales, Admin, Machining, and Shop. Stakeholder meetings with department leads followed. Every mapped drive was inventoried: file types, ownership, and SharePoint readiness.</p>
       </div>
       <div class="aside reveal">
         <div>
@@ -732,7 +732,6 @@
             <li><span>K: &middot; shared + personal folders<span class="t-flag">anti-pattern</span></span>
               <ul>
                 <li><span>K:\nschilling &middot; personal files in shared space</span></li>
-                <li><span>K:\LHeggernes</span></li>
                 <li><span class="t-dim">...a personal folder for nearly every employee</span></li>
               </ul>
             </li>
@@ -742,9 +741,9 @@
             <li><span class="t-dim">Personal OneDrives &middot; unmanaged</span></li>
             <li><span class="t-dim">Local drives &amp; desktops</span></li>
           </ul>
-          <span class="tree-note">No root. No model. Every department its own island.</span>
+          <span class="tree-note">Ten drives, no single starting point.</span>
         </div>
-        <p class="panel-note full-only">When a new employee asked where to save a file, they got a different answer from every person they asked. Nobody was lying. Everyone had built their own working model of a system that had no real structure.</p>
+        <p class="panel-note full-only">When a new employee asked where to save a file, every person gave a different answer, because everyone had worked out their own system.</p>
       </div>
 
       <div>
@@ -780,7 +779,7 @@
           </ul>
           <span class="tree-note">One rule: company-wide = Resources &middot; dept = Team Site</span>
         </div>
-        <p class="panel-note full-only">The rule eliminates the guesswork. Users don't guess which drive to check. They know whether they need a company form (Resources) or a department document (Team Site), and that answer is always the same.</p>
+        <p class="panel-note full-only">Nobody has to guess which drive to check. If it's for the whole company, it's in Resources. If it's for one department, it's in that department's Team Site.</p>
       </div>
 
     </div>
@@ -791,8 +790,8 @@
     <div class="sec-head"><span class="sec-num">04</span><span class="tag">The Key Decision</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <blockquote class="pull">Nobody set out to build this. Ten drives of habit is still a structure, it just wasn't one anyone chose.</blockquote>
-        <p class="body">The thing that actually broke at ACRO was ambiguity. People didn't know where to look, files got duplicated, and no version was ever clearly the right one. The two-tier architecture was built on one rule. Company-wide files live in Resources; department-specific files live in Team Sites. That rule makes every file decision obvious. There is no grey area, no "which version is current."</p>
+        <h2>I kept it to one rule everyone could follow.</h2>
+        <p class="body">The real cost was ambiguity: people didn't know where to look, files got duplicated, and nobody could tell which version was current. So the structure is built on one rule. Company-wide files live in Resources. Department files live in that department's Team Site.</p>
         <p class="body dim">Departments were not asked to hand their files to someone else to organize. They got the destination structure and the responsibility to clean their own drives before migration. If I built the structure for each department, it wouldn't match how they actually work, and it certainly wouldn't persuade anyone to break old habits.</p>
       </div>
       <div class="reveal">
@@ -847,7 +846,7 @@
     <div class="sec-head"><span class="sec-num">06</span><span class="tag">Where This Stands</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>Active project. Outcomes being tracked.</h2>
+        <h2>Live, and moving over one department at a time.</h2>
         <p class="body dim full-only">This case study is being written in real time. The architecture is designed and deployed, and department migrations are rolling out in phases. Adoption rates, time-to-find improvement, and the volume of "where is X?" requests will be logged here as the migration moves through the remaining departments.</p>
       </div>
       <div class="checks reveal">
