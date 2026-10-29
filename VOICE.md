@@ -114,7 +114,7 @@ How misses were fixed:
 | `about.html` | Noah's own words. Scrub for typos only. |
 | `cs-sharepoint.html` | Done. |
 | `cs-acro.html` | Done. |
-| `cs-ramyunzip.html` | Scrub pending |
+| `cs-ramyunzip.html` | Done. |
 | `cs-homelab.html` | Scrub pending. Its spoken rhythm is the model for sentences. |
 
 ## How a Rewrite Runs

@@ -522,7 +522,7 @@
   <section class="hero">
     <span class="tag">Case Study 04 &middot; The Ramyun.Zip &middot; 2026 &middot; Beta</span>
     <h1>Five franchises ordered against a stock number that was already wrong by the time they saw it.</h1>
-    <p class="lead">A Korean food distributor running its whole operation on nine Excel files and an email chain. I replaced them with one live system.</p>
+    <p class="lead">A Korean food distributor was running its whole operation on nine Excel files and an email chain. I replaced them with one live system.</p>
   </section>
 
   <div class="spec" role="list" aria-label="Project details">
@@ -533,7 +533,7 @@
   </div>
 
   <div class="thesis reveal">
-    <p>This did not change how the company runs. It accelerated it, made it harder to get wrong, and did not take a single person out of the process.</p>
+    <p>It didn't change how the company runs. It made it faster and harder to get wrong, and no one's job was replaced.</p>
   </div>
 
   <figure class="fig reveal">
@@ -550,21 +550,21 @@
     <div class="sec-head"><span class="sec-num">01</span><span class="tag">Context</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>The number was accurate the moment it was copied.</h2>
+        <h2>How ordering worked before</h2>
         <p class="body">A master file held the catalog, the supplier pricing and the stock count. Every store kept its own inventory sheet. When a store needed to order, someone copy-pasted rows out of the master into another sheet and emailed it out.</p>
-        <p class="body">Every day, by hand, these stock numbers were changed and relayed up the chain. Orders arrived for things that had sold out in between. The count drifted. The answer to any question about an order lived in somebody&rsquo;s inbox.</p>
-        <p class="body">I built it with Claude Code. Getting a working version stopped being the hard part almost immediately, so the job became deciding what it should do, and most of that was deciding what it should not do.</p>
+        <p class="body">Every day, someone updated these stock numbers by hand and passed them up the chain. Orders came in for things that had sold out in between, and if anyone had a question about an order, the answer was in somebody&rsquo;s inbox.</p>
+        <p class="body">I designed and built it, and used Claude Code to help build the backend: the Firestore database and the logic around it. Getting a working version stopped being the hard part fast, so the job became deciding what it should do, and most of that was deciding what it shouldn&rsquo;t do.</p>
       </div>
       <div class="aside reveal">
-        <div><span class="tag">The Constraint</span><p>I could not ask them to change how they work. Five stores, a warehouse and an office already had a rhythm.</p></div>
-        <div><span class="tag">The Research</span><p>My wife handles the orders and deals with the distributors. We worked evenings, after both our workdays. That is why it took two weeks, and why none of it is guesswork.</p></div>
+        <div><span class="tag">The Constraint</span><p>I couldn&rsquo;t ask them to change how they work. Five stores, a warehouse and an office already had a rhythm.</p></div>
+        <div><span class="tag">The Research</span><p>My wife handles the orders and deals with the distributors. We worked evenings, after both our workdays. That&rsquo;s why it took two weeks, and why none of it is guesswork.</p></div>
       </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="sec-head"><span class="sec-num">02</span><span class="tag">What It Was Costing</span></div>
-    <div class="reveal"><h2>Four things the spreadsheets could not hold.</h2></div>
+    <div class="reveal"><h2>Four things the spreadsheets couldn&rsquo;t track</h2></div>
 
     <div class="ba reveal">
       <span class="ba-h"></span>
@@ -594,26 +594,26 @@
       </div>
       <figcaption>
         <span class="tag tag-ink">Fig. 02</span>
-        <span class="fig-desc">Requested, stock now, and the quantity actually shipping, on every line. Confirming here is the only thing in the system that moves stock, and it is what the invoice is built from.</span>
+        <span class="fig-desc">Requested, stock now, and the quantity actually shipping, on every line. Confirming here is the only thing in the system that moves stock, and it&rsquo;s what the invoice is built from.</span>
       </figcaption>
     </figure>
 
     <div class="uicopy reveal full-only">
       <span class="tag">Written on the store&rsquo;s catalog screen</span>
       <p>&ldquo;Stock shown here is live. Requesting an item does not reserve it. Final quantities are confirmed by THE TOUCH ON based on stock at the time your order is processed.&rdquo;</p>
-      <span class="src">Live stock only works if the store understands what it is looking at, so it is explained where they order.</span>
+      <span class="src">Live stock only works if the store understands what it&rsquo;s looking at, so I explained it right where they order.</span>
     </div>
   </section>
 
   <section class="sec">
     <div class="sec-head"><span class="sec-num">03</span><span class="tag">Decisions</span></div>
-    <div class="reveal"><h2>Most of the work was refusing to design things out.</h2></div>
+    <div class="reveal"><h2>Six calls I had to make</h2></div>
     <div class="reveal" style="margin-top: clamp(24px, 4vh, 40px);">
       <div class="dec"><span class="dec-n">01</span><div><b>Hope orders</b><p>Stores already ordered items showing zero, expecting stock to arrive. Blocking it would have pushed those requests back into email, so the line is recorded and flagged for the office to fill.</p></div></div>
       <div class="dec"><span class="dec-n">02</span><div><b>A minimum that informs</b><p>Going under a store&rsquo;s minimum is a conversation between the office and the store. The cart says how far under and leaves Submit enabled.</p></div></div>
       <div class="dec"><span class="dec-n">03</span><div><b>Delivery sits on the line</b><p>Orders split, bulk on a truck and one urgent item by UPS, so the method is chosen per item. The ship date stays on the order.</p></div></div>
       <div class="dec"><span class="dec-n">04</span><div><b>Corrections carry a name</b><p>Stock is a running total of logged events rather than a typed cell. Every adjustment records who made it, when, and why.</p></div></div>
-      <div class="dec"><span class="dec-n">05</span><div><b>Access is granted, not shared</b><p>A spreadsheet everyone can open has no permission model. Office accounts sign in through the company Google domain, franchise accounts are created and approved from the dashboard, and a store can only ever see its own catalog and its own orders.</p></div></div>
+      <div class="dec"><span class="dec-n">05</span><div><b>Everyone gets their own login</b><p>A spreadsheet everyone can open has no permission model. Office accounts sign in through the company Google domain, franchise accounts are created and approved from the dashboard, and a store can only ever see its own catalog and its own orders.</p></div></div>
       <div class="dec"><span class="dec-n">06</span><div><b>Two states on one row</b><p>A row can be price-pinned and out of stock at the same time. It reads as out of stock, and the pin is marked on the price cell.</p></div></div>
     </div>
 
@@ -639,7 +639,7 @@
     <div class="sec-head"><span class="sec-num">04</span><span class="tag">What It Replaced</span></div>
     <div class="reveal">
       <h2>They were already in demos with a $249 a month vendor.</h2>
-      <p class="body">The company had started shopping for an inventory platform. They cancelled further contact with MarketMan after seeing this do what they needed.</p>
+      <p class="body">The company had started shopping for an inventory platform. They stopped talking to MarketMan once they saw our live site.</p>
     </div>
 
     <div class="cost reveal">
@@ -651,7 +651,7 @@
     </div>
 
     <div class="reveal full-only" style="margin-top: clamp(28px, 4.5vh, 44px);">
-      <p class="body">It was built with Claude Code and it does not need Claude Code. There is no subscription, no vendor, and nothing to renew. If the tooling I used to build it changed tomorrow, the company would not notice. They own it outright, which is the part I am most pleased with.</p>
+      <p class="body">It doesn&rsquo;t depend on any AI tool to keep running. There&rsquo;s no subscription, no vendor and nothing to renew, so if the tools I used changed tomorrow, the company wouldn&rsquo;t notice. They own it outright, and that&rsquo;s the part I&rsquo;m happiest about.</p>
     </div>
   </section>
 
@@ -659,8 +659,8 @@
     <div class="sec-head"><span class="sec-num">05</span><span class="tag">Where It Stands</span></div>
     <div class="sec-grid">
       <div class="reveal">
-        <h2>In beta, in use.</h2>
-        <p class="body">Everyone who will use it is using it. The warehouse and the IT contact both reviewed it and signed off without asking for changes. I have not called it finished, because it is still collecting the kind of feedback you only get from real weeks of real orders.</p>
+        <h2>In beta, and in use every day.</h2>
+        <p class="body">Everyone who will use it is using it. The warehouse and the IT contact both reviewed it and signed off without asking for changes. I haven&rsquo;t called it finished, because it&rsquo;s still collecting the kind of feedback you only get from real weeks of real orders.</p>
       </div>
       <div class="checks reveal">
         <div class="check-group">Built</div>
